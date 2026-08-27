@@ -1,0 +1,41 @@
+
+/* GENERALS STYLES */
+.alert__{
+    font-style: italic;
+    font-size: 0.9rem;
+    color : var(--alert-color);
+}
+button[data-primary="true"]:hover{
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border-color :var(--primary-color);
+    border-radius: 5px;
+}
+button[data-secondary="true"]:hover{
+    background-color : var(--secondary-background-color);
+    color : var(--secondary-color);
+    border-color: var(--secondary-color);
+    border-radius: 5px;
+}
+.section__{
+    background-color: var(--tercery-background-color);
+    padding: 20px 0px 20px 0px;
+    margin: 30px 0px 30px 0px;
+}
+
+
+/* 
+Responsive tablets
+@media (max-width: 1024px){
+
+}
+
+Responsive tablets pequeñas
+ @media (max-width: 768px){
+
+}
+ 
+Responsive telefonos
+@media (max-width: 480px){
+    
+}  */

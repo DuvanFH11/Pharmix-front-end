@@ -1,0 +1,39 @@
+@keyframes aparecer {
+    0% {
+        opacity: 0;
+        transform: translateX(200px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0px)
+    }
+}
+
+@keyframes desaparecer {
+    100% {
+        opacity: 0;
+        transform: translateX(200px);
+    }
+
+    0% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+.alertMessage{
+    top: 50px;
+    position: fixed;
+    padding: 20px;
+    color: var(--secondary-color);
+    z-index: 1;
+    right: 0px;
+}
+
+.alertMessage[data-open="target-on"]{
+    animation: aparecer 1s ease-in-out 0s forwards;
+}
+
+.alertMessage[data-open="target-off"]{
+    animation: desaparecer 1s ease-in-out 0s forwards;
+}

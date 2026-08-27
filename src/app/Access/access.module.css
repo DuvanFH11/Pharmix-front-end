@@ -1,0 +1,24 @@
+.access{
+    padding: 50px;
+    margin : 20px;
+}
+.accessContainer{
+    padding: 10px;
+    margin: 10px;
+}
+.accessContainer[data-container-btn="true"]{
+    display: flex;
+    flex-direction: column;
+}
+
+@media(max-width:480px){
+    .access{
+        border: none;
+        margin:10px;
+        padding:20px;
+        width: 250px;
+    }
+    .accessContainer{
+        margin: 5px;
+    }
+}

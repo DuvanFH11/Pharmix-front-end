@@ -1,0 +1,26 @@
+/*FOOTER*/
+.footer{
+    background-color: var(--secondary-background-color);
+    color : var(--secondary-color);
+    display : flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 30px;
+}
+.footerContent{
+    display:flex; 
+    flex-direction: row;
+    justify-content: space-around;
+}
+.footerContainer{
+    text-align: center;
+}
+.footerContainer[data-credits='true']{
+    font-family: var(--header-font-family);
+}
+
+@media(max-width:480px){
+    .footerContent{
+        flex-direction: column;
+    }
+}

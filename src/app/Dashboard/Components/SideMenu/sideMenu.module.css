@@ -1,0 +1,41 @@
+.sideMenu{
+    position : fixed;
+    top:0;
+    left:0;
+    width: 25%;    
+    height: 100vh;
+    background-color:var(--primary-color);
+    color: var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    justify-content:  space-between;
+    padding : 30px;
+    text-align: left;
+    transform: translateX(-400px);
+    transition: transform 0.3s ease-in-out;
+    z-index:4;
+
+}
+.sideMenu[data-open="is-open"]{
+    transform: translateX(0);
+}
+.menuContainer{
+    color : var(--secondary-color);
+    font-size:small;
+}
+.btnLogout{
+    width: 100%;
+    color : var(--tercery-color);
+    text-align:center;
+}
+.subtitle{
+    color : var(--secondary-background-color);
+    text-align: left;
+    margin: 0px;
+}
+
+@media(max-width: 480px){
+    .sideMenu{
+        width: 50%;
+    }
+}
