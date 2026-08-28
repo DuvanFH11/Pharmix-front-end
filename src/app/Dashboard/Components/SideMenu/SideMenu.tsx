@@ -5,11 +5,17 @@ import LoadingComponent from "../../../../components/LoadingComponent/LoadingCom
 import style from './sideMenu.module.css';
 import { logout } from "../../../../services/user.service";
 import { Link } from "react-router-dom";
-import { categories } from "../../../../constants/categories";
 import { AuthContext } from "../../../../context/authContext";
+import { index } from "../../../../services/category.service";
 
 export interface SideMenuProps {
     isOpen: boolean | null;
+};
+interface CategoryInterfaces {
+    id: number;
+    name: string;
+    path: string;
+    table_name: string;
 }
 
 
@@ -17,11 +23,14 @@ const SideMenu = ({ isOpen }: SideMenuProps) => {
 
     const { handleLogout, isLoading, alertMessage } = useHandleForm();
     const [showMenu, setShowMenu] = useState<string>('');
+    const [categories, setCategories] = useState<CategoryInterfaces[] | null>(null);
     const { user } = use(AuthContext);
+
     useEffect(() => {
-        const handleShowMenu = () => {
+        const handleShowMenu = async () => {
             if (isOpen) {
-                setShowMenu('is-open')
+                setCategories(await index());
+                setShowMenu('is-open');
             } else if (isOpen === null) {
                 setShowMenu('');
             }
@@ -44,7 +53,7 @@ const SideMenu = ({ isOpen }: SideMenuProps) => {
                     <h4 className={style.subtitle}>Gestionar</h4>
                     <ul className={style.listActions}>
                         {
-                            categories.map((category) => (
+                            categories && categories.map((category) => (
                                 <Link key={category.id} to={`${category.path}_page`}><h6 className={style.actionItems}>{category.name}</h6></Link>
                             ))
                         }
