@@ -32,10 +32,43 @@
     color : var(--secondary-background-color);
     text-align: left;
     margin: 0px;
+    font-weight: 600;
+}
+.userInformation{
+    border-radius: 10px;
+    background-color : var(--secondary-background-color);
+    padding: 5px 15px 5px 15px;
+    text-align: center;
+    font-weight:800;
+    font-family: var(--header-font-family);
+    text-transform: uppercase;
+    color: var(--primary-color);
+    
+}
+.listActions{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0px 15px 0px 15px;
+    color: var(--secondary-color);
+}
+.actionItems{
+    color : var(--secondary-color);
+    text-align: left;
+    transition: transform 300ms ease-out;
+    transform: translateX(0);
+}
+.actionItems:hover{
+    transform: translateX(15px);
 }
 
 @media(max-width: 480px){
     .sideMenu{
         width: 50%;
+        padding : 10px;
     }
+    .listActions{
+        flex-direction: column;
+    }
+
 }
