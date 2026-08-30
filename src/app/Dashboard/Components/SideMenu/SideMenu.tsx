@@ -1,12 +1,11 @@
 import { use, useEffect, useState } from "react";
-import { useHandleForm } from "../../../../hooks/useHandleForms";
 import AlertMessage from "../../../../components/AlertMessage/AlertMessage";
 import LoadingComponent from "../../../../components/LoadingComponent/LoadingComponent";
 import style from './sideMenu.module.css';
-import { logout } from "../../../../services/user.service";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../../context/authContext";
 import { index } from "../../../../services/category.service";
+import { useHandleFormAccess } from "../../../../hooks/useHandleFormsAccess";
 
 export interface SideMenuProps {
     isOpen: boolean | null;
@@ -21,7 +20,7 @@ interface CategoryInterfaces {
 
 const SideMenu = ({ isOpen }: SideMenuProps) => {
 
-    const { handleLogout, isLoading, alertMessage } = useHandleForm();
+    const { handleLogout, isLoading, alertMessage } = useHandleFormAccess();
     const [showMenu, setShowMenu] = useState<string>('');
     const [categories, setCategories] = useState<CategoryInterfaces[] | null>(null);
     const { user } = use(AuthContext);
@@ -49,7 +48,7 @@ const SideMenu = ({ isOpen }: SideMenuProps) => {
     return (
         <>
             {isLoading && <LoadingComponent />}
-            {alertMessage && <AlertMessage message={alertMessage.message} state={alertMessage.state} time={alertMessage.time} />}
+            {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
 
             <nav className={style.sideMenu} data-open={showMenu}>
                 <div className={style.menuContainer}>
@@ -80,7 +79,7 @@ const SideMenu = ({ isOpen }: SideMenuProps) => {
                     </ul>
                 </div>
                 <div className={style.menuContainer}>
-                    <button data-secondary="true" className={style.btnLogout} onClick={() => { handleLogout(logout) }}>Cerrar Sesión</button>
+                    <button data-secondary="true" className={style.btnLogout} onClick={handleLogout}>Cerrar Sesión</button>
                 </div>
             </nav >
         </>

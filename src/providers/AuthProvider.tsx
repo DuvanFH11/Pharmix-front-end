@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import api, { tokenCSRF } from "../plugins/axios";
-import { AuthContext, type UserType } from "../context/authContext";
+import { AuthContext } from "../context/authContext";
+import type { UserInterface } from "../interfaces/UserInterface";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const [user, setUser] = useState<UserType | null>(null);
+    const [user, setUser] = useState<UserInterface | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
     const checkAuth = async () => {

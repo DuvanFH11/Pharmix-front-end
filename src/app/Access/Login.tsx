@@ -1,26 +1,29 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import style from './access.module.css';
-import { login } from "../../services/user.service";
 import LoadingComponent from "../../components/LoadingComponent/LoadingComponent";
 import AlertMessage from "../../components/AlertMessage/AlertMessage";
-import { useHandleForm } from "../../hooks/useHandleForms";
 import loginSchema, { type LoginSchema } from "../../schemas/user.schema";
+import { useHandleFormAccess } from "../../hooks/useHandleFormsAccess";
+import { useEffect } from "react";
 
 const Login = () => {
+    const { submitFormLogin, alertMessage, isLoading } = useHandleFormAccess();
     const { register, handleSubmit, formState: { errors } } = useForm<LoginSchema>({
         resolver: zodResolver(loginSchema)
     });
 
-    const { submitFormLogin, alertMessage, isLoading } = useHandleForm();
+    useEffect(() => {
+        console.log("Se cerró la sesión");
+    }, [])
 
     return (
         <>
             {isLoading && <LoadingComponent />}
-            {alertMessage && <AlertMessage message={alertMessage.message} state={alertMessage.state} time={alertMessage.time} />}
+            {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
 
             <div className="d-flex  flex-column align-items-center justify-content-center vh-100 ">
-                <form className={style.access} onSubmit={handleSubmit((data) => { submitFormLogin(login, data) })}>
+                <form className={style.access} onSubmit={handleSubmit((data) => { submitFormLogin(data) })}>
                     <div className={style.accessContainer}>
                         <h1>INICIO DE SESIÓN</h1>
                     </div>
