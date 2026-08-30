@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { ProtectedRoute } from "../components/protectedRoute";
 import Login from "../app/Access/Login";
-import Register from "../app/Access/Register";
 import Dashboard from "../app/Dashboard/Dashboard";
 import DashboardPage from "../app/Dashboard/Components/Pages/Dashboard/DashboardPage";
 import UsersPages from "../app/Dashboard/Components/Pages/Users/UsersPage";
@@ -11,7 +10,6 @@ const AppRoutes = () => {
         <>
             <Routes>
                 <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
 
                 <Route element={<ProtectedRoute />}>
                     <Route path="/dashboard" element={<Dashboard />} >
