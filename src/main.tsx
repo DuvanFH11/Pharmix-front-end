@@ -6,13 +6,17 @@ import './App.css'
 import { BrowserRouter } from 'react-router-dom';
 import MyApp from './MyApp.tsx';
 import { AuthProvider } from './providers/AuthProvider.tsx';
+import { ThemeProvider } from '@emotion/react';
+import themes from './utils/themes.tsx';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <AuthProvider>
-            <BrowserRouter>
-                <MyApp />
-            </BrowserRouter>
+            <ThemeProvider theme={themes}>
+                <BrowserRouter>
+                    <MyApp />
+                </BrowserRouter>
+            </ThemeProvider>
         </AuthProvider>
     </StrictMode >
 )

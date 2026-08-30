@@ -26,6 +26,7 @@ const SideMenu = ({ isOpen }: SideMenuProps) => {
     const [categories, setCategories] = useState<CategoryInterfaces[] | null>(null);
     const { user } = use(AuthContext);
 
+
     useEffect(() => {
         const handleShowMenu = () => {
             if (isOpen) {
@@ -38,11 +39,11 @@ const SideMenu = ({ isOpen }: SideMenuProps) => {
     }, [isOpen]);
 
     useEffect(() => {
-        const chargeCategories = async () => {
+        const loadCategories = async () => {
             const { data } = await index();
             setCategories(data);
         }
-        chargeCategories();
+        loadCategories();
     }, [])
 
     return (
@@ -57,13 +58,25 @@ const SideMenu = ({ isOpen }: SideMenuProps) => {
                     </div>
                 </div>
                 <div className={style.menuContainer}>
+                    <h4 className={style.subtitle}>Incio</h4>
+                    <ul className={style.listActions}>
+                        <Link to='/dashboard'><h6 className={style.actionItems}>Dashboard</h6></Link>
+                    </ul>
+                </div>
+                <div className={style.menuContainer}>
                     <h4 className={style.subtitle}>Gestionar</h4>
                     <ul className={style.listActions}>
                         {
-                            categories && categories.map((category) => (
+                            categories ? categories.map((category) => (
                                 <Link key={category.id} to={`${category.path}`}><h6 className={style.actionItems}>{category.name}</h6></Link>
                             ))
+                                : <span>No hay categorías para mostrar</span>
                         }
+                    </ul>
+                </div >
+                <div className={style.menuContainer}>
+                    <h4 className={style.subtitle}>Contáctanos</h4>
+                    <ul className={style.listActions}>
                     </ul>
                 </div>
                 <div className={style.menuContainer}>
