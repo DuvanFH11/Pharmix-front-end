@@ -8,7 +8,7 @@
     color: var(--secondary-color);
     display: flex;
     flex-direction: column;
-    justify-content:  space-between;
+    justify-content:  space-around;
     padding : 30px;
     text-align: left;
     transform: translateX(-400px);
