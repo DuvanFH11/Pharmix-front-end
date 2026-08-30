@@ -23,17 +23,6 @@
     color : var(--secondary-color);
     font-size:small;
 }
-.btnLogout{
-    width: 100%;
-    color : var(--tercery-color);
-    text-align:center;
-}
-.subtitle{
-    color : var(--secondary-background-color);
-    text-align: left;
-    margin: 0px;
-    font-weight: 600;
-}
 .userInformation{
     border-radius: 10px;
     background-color : var(--secondary-background-color);
@@ -44,6 +33,12 @@
     text-transform: uppercase;
     color: var(--primary-color);
     
+}
+.subtitle{
+    color : var(--secondary-background-color);
+    text-align: left;
+    margin: 0px;
+    font-weight: 600;
 }
 .listActions{
     display: flex;
@@ -61,6 +56,11 @@
 .actionItems:hover{
     transform: translateX(15px);
 }
+.btnLogout{
+    width: 100%;
+    color : var(--tercery-color);
+    text-align:center;
+}
 
 @media(max-width: 480px){
     .sideMenu{
@@ -70,5 +70,5 @@
     .listActions{
         flex-direction: column;
     }
-
+    
 }
