@@ -1,8 +1,9 @@
 export interface AxiosErrorResponse {
     response?: {
         data?: {
-            error?: string;
-            state?: number
+            message: string;
+            success: boolean;
+            exception: string;
         }
     }
 }

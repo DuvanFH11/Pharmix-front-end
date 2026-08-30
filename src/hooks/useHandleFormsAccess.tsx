@@ -1,24 +1,23 @@
 import { use, useState } from "react"
-import type { LoginSchema } from "../schemas/user.schema"
-import type { AxiosResponse } from "axios";
 import { useNavigate } from "react-router-dom";
 import type { UserLoginInterface } from "../interfaces/UserInterface";
 import { AuthContext } from "../context/authContext";
 import type { AxiosErrorResponse } from "../interfaces/AxiosErrorResponse";
+import { login, logout } from "../services/user.service";
 
-export const useHandleForm = () => {
+export const useHandleFormAccess = () => {
     const [isLoading, setLoading] = useState<boolean>(false);
-    const [alertMessage, setAlertMessage] = useState<{ message: string, state: number, time: number } | null>(null);
+    const [alertMessage, setAlertMessage] = useState<{ message: string, success: boolean, time: number } | null>(null);
     const navigate = useNavigate();
     const { checkAuth } = use(AuthContext);
 
-    const submitFormLogin = async (service: (data: LoginSchema) => Promise<AxiosResponse>, data: UserLoginInterface) => {
+    const submitFormLogin = async (data: UserLoginInterface) => {
         setLoading(true);
         try {
-            const response = await service(data);
-            const { message, state } = response.data;
+            const response = await login(data);
+            const { message, success } = response.data;
             //componente para mostrar mensaje
-            setAlertMessage({ message, state, time: Date.now() });
+            setAlertMessage({ message, success, time: Date.now() });
             if (checkAuth) await checkAuth();
 
             setTimeout(() => {
@@ -29,10 +28,12 @@ export const useHandleForm = () => {
 
             const err = error as AxiosErrorResponse;
 
-            const message = err.response?.data?.error || "Error en el inicio de sesión";
-            const state = err.response?.data?.state || 500;
+            const message = err.response?.data?.message || "Error en el inicio de sesión";
+            const success = err.response?.data?.success || false;
+            const exception = err.response?.data?.exception || 'Error al inicio de sesión';
 
-            setAlertMessage({ message, state, time: Date.now() });
+            console.log({ exception });
+            setAlertMessage({ message, success, time: Date.now() });
 
         } finally {
             setLoading(false);
@@ -63,27 +64,25 @@ export const useHandleForm = () => {
     //     }
     // }
 
-    const handleLogout = async (service: () => Promise<AxiosResponse>) => {
+    const handleLogout = async () => {
         setLoading(true);
         try {
-            const response = await service();
+            await logout();
 
-            const { message, state } = response.data;
+            // const { message, success } = response.data;
 
-            setAlertMessage({ message, state, time: Date.now() });
+            // setAlertMessage({ message, success, time: Date.now() });
             if (checkAuth) await checkAuth();
-
-            setTimeout(() => {
-                navigate('/login', { replace: true });
-            }, 3000);
 
         } catch (error) {
             const err = error as AxiosErrorResponse;
 
-            const message = err.response?.data?.error || 'Error al cerrar sesión';
-            const state = err.response?.data?.state || 500;
+            const message = err.response?.data?.message || 'Error al cerrar sesión';
+            const success = err.response?.data?.success || false;
+            const exception = err.response?.data?.exception || '';
 
-            setAlertMessage({ message, state, time: Date.now() });
+            console.log({ exception });
+            setAlertMessage({ message, success, time: Date.now() });
         } finally {
             setLoading(false);
         }
@@ -92,7 +91,6 @@ export const useHandleForm = () => {
     return ({
         submitFormLogin,
         isLoading,
-        // submitFormRegister,
         alertMessage,
         handleLogout
     })
