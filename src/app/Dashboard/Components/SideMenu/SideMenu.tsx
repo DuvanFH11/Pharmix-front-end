@@ -27,9 +27,8 @@ const SideMenu = ({ isOpen }: SideMenuProps) => {
     const { user } = use(AuthContext);
 
     useEffect(() => {
-        const handleShowMenu = async () => {
+        const handleShowMenu = () => {
             if (isOpen) {
-                setCategories(await index());
                 setShowMenu('is-open');
             } else if (isOpen === null) {
                 setShowMenu('');
@@ -37,6 +36,14 @@ const SideMenu = ({ isOpen }: SideMenuProps) => {
         }
         handleShowMenu();
     }, [isOpen]);
+
+    useEffect(() => {
+        const chargeCategories = async () => {
+            const { data } = await index();
+            setCategories(data);
+        }
+        chargeCategories();
+    }, [])
 
     return (
         <>
@@ -54,25 +61,11 @@ const SideMenu = ({ isOpen }: SideMenuProps) => {
                     <ul className={style.listActions}>
                         {
                             categories && categories.map((category) => (
-                                <Link key={category.id} to={`${category.path}_page`}><h6 className={style.actionItems}>{category.name}</h6></Link>
+                                <Link key={category.id} to={`${category.path}`}><h6 className={style.actionItems}>{category.name}</h6></Link>
                             ))
                         }
                     </ul>
                 </div>
-                {/* {
-                    categories.map((category) => (
-                        <div key={category.id} className={style.menuContainer}>
-                            <h6 className={style.subtitle}>{category.name}</h6>
-                            <ul className={style.listActions}>
-                                <Link to={`/store_${category.path}`}><li>Crear {category.name}</li></Link>
-                                <Link to={`/index_${category.path}`}><li>Lista {category.name}</li></Link>
-                                <Link to={`/get_${category.path}`}><li>Buscar {category.name}</li></Link>
-                                <Link to={`/destroy_${category.path}`}><li>Eliminar {category.name}</li></Link>
-                            </ul>
-                        </div>
-                    ))
-                } */}
-
                 <div className={style.menuContainer}>
                     <button data-secondary="true" className={style.btnLogout} onClick={() => { handleLogout(logout) }}>Cerrar Sesión</button>
                 </div>
