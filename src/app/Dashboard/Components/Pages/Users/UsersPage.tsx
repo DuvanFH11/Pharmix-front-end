@@ -33,10 +33,11 @@ const UsersPages = () => {
                                     {
                                         users ? users.map((user) => (
                                             <TableRow key={user.id}>
+                                                <TableCell>{user.id}</TableCell>
                                                 <TableCell>{user.name}</TableCell>
                                                 <TableCell>{user.email}</TableCell>
-                                                <TableCell>{user.user_appointment}</TableCell>
-                                                <TableCell>{user.user_role}</TableCell>
+                                                <TableCell>{user.user_appointment.name}</TableCell>
+                                                <TableCell>{user.user_role.name}</TableCell>
                                                 <TableCell><button data-secondary="true">Editar</button></TableCell>
                                             </TableRow>
                                         )) :

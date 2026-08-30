@@ -18,10 +18,12 @@ const themes = createTheme({
             styleOverrides: {
                 head: {
                     color: '#041f50',
-                    fontFamily: 'Cinzel'
+                    fontFamily: 'Cinzel',
+                    textAlign: 'center'
                 },
                 body: {
-                    color: '#605e5e'
+                    color: '#605e5e',
+                    textAlign: 'center'
                 },
                 footer: {
                     color: '#041f50',

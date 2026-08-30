@@ -8,8 +8,15 @@ export interface UserInterface {
     created_at: string,
     updated_at: string,
     user_creator: string | null,
-    user_role: number,
-    user_appointment: number,
+    user_role: {
+        id: number;
+        name: string;
+    },
+    user_appointment: {
+        id: number;
+        name: string;
+    };
+
 }
 
 export interface UserLoginInterface {
