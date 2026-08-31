@@ -3,17 +3,24 @@ import style from "./users.module.css";
 import type { UserInterface } from "../../../../../interfaces/UserInterface";
 import { index } from "../../../../../services/user.service";
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
+import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
+import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
 const UsersPages = () => {
     const [users, setUsers] = useState<UserInterface[] | null>(null);
+    const { isLoading, alertMessage, handleIndex } = useHandleFormsPages();
+
     useEffect(() => {
         const loadUsers = async () => {
-            const { data } = await index();
-            setUsers(data);
+            setUsers(await handleIndex(index));
         }
         loadUsers();
     }, [])
     return (
         <>
+            {isLoading && <LoadingComponent />}
+            {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
+
             <section className="section__">
                 <div className={style.usersContentTable}>
                     <div className={style.usersContainer}>
