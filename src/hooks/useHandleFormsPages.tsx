@@ -15,7 +15,8 @@ const useHandleFormsPages = () => {
         try {
             const response = await service();
             const { data } = response;
-            return data;
+            return data.length > 0 ? data : null;
+
         } catch (error: unknown) {
             const err = error as AxiosErrorResponse;
 
