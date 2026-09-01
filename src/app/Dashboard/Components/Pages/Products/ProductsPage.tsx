@@ -37,24 +37,24 @@ const ProductsPage = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {products ? products.map((product) => (
-                                <TableRow key={product.id}>
-                                    <TableCell>{product.id}</TableCell>
-                                    <TableCell>{product.name}</TableCell>
-                                    <TableCell>{product.brand}</TableCell>
-                                    <TableCell>{product.unit_price}</TableCell>
-                                    <TableCell>{product.package_price}</TableCell>
-                                    <TableCell>{product.invima_registration}</TableCell>
-                                    <TableCell>{product.strength}</TableCell>
-                                    <TableCell>{product.unit}</TableCell>
-                                </TableRow>
-                            )) : (
-                                <TableRow key="no-products-row">
-                                    <TableCell colSpan={8}>No hay productos</TableCell>
-                                </TableRow>
-                            )}
+                            {
+                                products ? products.map((product) => (
+                                    <TableRow key={product.id}>
+                                        <TableCell>{product.id}</TableCell>
+                                        <TableCell>{product.name}</TableCell>
+                                        <TableCell>{product.brand}</TableCell>
+                                        <TableCell>{product.unit_price}</TableCell>
+                                        <TableCell>{product.package_price}</TableCell>
+                                        <TableCell>{product.invima_registration}</TableCell>
+                                        <TableCell>{product.strength}</TableCell>
+                                        <TableCell>{product.unit}</TableCell>
+                                    </TableRow>
+                                )) :
+                                    <TableRow key="no-products-row">
+                                        <TableCell colSpan={8} className="text-center"><h6>No hay productos</h6></TableCell>
+                                    </TableRow>
+                            }
                         </TableBody>
-
                     </Table>
                 </TableContainer>
             </section >
