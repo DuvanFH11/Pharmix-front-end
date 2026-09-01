@@ -1,8 +1,9 @@
 import { createContext } from "react";
-import type { UserInterface } from "../interfaces/UserInterface";
+import type { UserType } from "../interfaces/UserInterface";
+
 
 interface AuthContextProps {
-    user: UserInterface | null;
+    user: UserType | null;
     loading: boolean | null;
     checkAuth?: () => Promise<void>;
 }

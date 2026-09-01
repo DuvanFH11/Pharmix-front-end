@@ -11,14 +11,11 @@ const CustomHeader = () => {
 
     return (
         <>
-            {showMenu === true ? <SideMenu isOpen={showMenu} /> : <SideMenu isOpen={null} />}
+            {<SideMenu isOpen={showMenu} handleClose={() => setShowMenu(false)} />}
             <header className={style.header}>
                 <div className={style.headerContainer}>
                     <h1>DISTRIBUIDORA Tleyn</h1>
                 </div>
-                {/* <div className={style.headerContainer}>
-                    <input type="search" placeholder="Buscar Elemento" />
-                </div> */}
                 <div className={style.headerContainer}>
                     <button data-primary="true" onClick={() => { handleShowMenu() }}>|||</button>
                 </div>
