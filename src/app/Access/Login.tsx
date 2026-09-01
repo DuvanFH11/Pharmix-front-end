@@ -3,14 +3,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import style from './access.module.css';
 import LoadingComponent from "../../components/LoadingComponent/LoadingComponent";
 import AlertMessage from "../../components/AlertMessage/AlertMessage";
-import loginSchema, { type LoginSchema } from "../../schemas/user.schema";
 import { useHandleFormAccess } from "../../hooks/useHandleFormsAccess";
 import { useEffect } from "react";
+import type { UserLoginSchema } from "../../schemas/user.schema";
+import userLoginSchema from "../../schemas/user.schema";
 
 const Login = () => {
     const { submitFormLogin, alertMessage, isLoading } = useHandleFormAccess();
-    const { register, handleSubmit, formState: { errors } } = useForm<LoginSchema>({
-        resolver: zodResolver(loginSchema)
+    const { register, handleSubmit, formState: { errors } } = useForm<UserLoginSchema>({
+        resolver: zodResolver(userLoginSchema)
     });
 
     useEffect(() => {
