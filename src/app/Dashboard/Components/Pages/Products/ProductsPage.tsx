@@ -5,6 +5,11 @@ import type { ProductInterface } from "../../../../../interfaces/ProductInterfac
 import { useEffect, useState } from "react";
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { index } from "../../../../../services/product.service";
+import style from "./products.module.css";
+import NoteAdd from '@mui/icons-material/NoteAdd';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
+import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 
 const ProductsPage = () => {
     const { isLoading, alertMessage, handleIndex } = useHandleFormsPages();
@@ -22,6 +27,16 @@ const ProductsPage = () => {
             {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
 
             <section className="section__">
+                <div className={style.productsContainer} data-container-buttons="true">
+                    <button data-primary="true">
+                        <NoteAdd />
+                        <span>Crear productos</span>
+                    </button>
+                    <button data-primary="true">
+                        <SearchOutlinedIcon />
+                        <span>Buscar productos</span>
+                    </button>
+                </div>
                 <TableContainer component={Paper}>
                     <Table>
                         <TableHead>
@@ -34,6 +49,7 @@ const ProductsPage = () => {
                                 <TableCell>Invima Registration</TableCell>
                                 <TableCell>Strength</TableCell>
                                 <TableCell>Unit</TableCell>
+                                <TableCell>Edit</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -48,16 +64,40 @@ const ProductsPage = () => {
                                         <TableCell>{product.invima_registration}</TableCell>
                                         <TableCell>{product.strength}</TableCell>
                                         <TableCell>{product.unit}</TableCell>
+                                        <TableCell><button data-secondary="true" data-icon="true"><ModeEditOutlineRoundedIcon /></button></TableCell>
                                     </TableRow>
                                 )) :
                                     <TableRow key="no-products-row">
-                                        <TableCell colSpan={8} className="text-center"><h6>No hay productos</h6></TableCell>
+                                        <TableCell colSpan={9} className="text-center"><h6>No hay productos</h6></TableCell>
                                     </TableRow>
                             }
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <div className={style.productsContainer} data-container-buttons="true">
+                    <button data-primary="true">
+                        <TimelineOutlinedIcon />
+                        <span>Ver estadisticas</span>
+                    </button>
+                </div>
             </section >
+            {/* SECCIÓN INTERACTIVA */}
+            {/* <section className="section__">
+                <div className={style.productsContent}>
+                    <div className={style.productsTarget}>
+                        <h6>Titulo</h6>
+                        <h1>1</h1>
+                    </div>
+                    <div className={style.productsTarget}>
+                        <h6>Titulo</h6>
+                        <h1>1</h1>
+                    </div>
+                    <div className={style.productsTarget}>
+                        <h6>Titulo</h6>
+                        <h1>1</h1>
+                    </div>
+                </div>
+            </section> */}
 
         </>
     )

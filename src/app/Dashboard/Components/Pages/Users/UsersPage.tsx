@@ -9,6 +9,8 @@ import LoadingComponent from "../../../../../components/LoadingComponent/Loading
 import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
 import PersonSearchRoundedIcon from '@mui/icons-material/PersonSearchRounded';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
+import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
+
 const UsersPages = () => {
     const [users, setUsers] = useState<UserType[] | null>(null);
     const { isLoading, alertMessage, handleIndex } = useHandleFormsPages();
@@ -66,8 +68,15 @@ const UsersPages = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <div className={style.usersContainer} data-container-buttons="true">
+                    <button data-primary="true">
+                        <TimelineOutlinedIcon />
+                        <span>Ver estadisticas</span>
+                    </button>
+                </div>
             </section>
-            <section className="section__">
+            {/* SECCIÓN INTERACTIVA */}
+            {/* <section className="section__">
                 <div className={style.usersContent}>
                     <div className={style.usersTarget}>
                         <h6>Usuarios totales</h6>
@@ -82,7 +91,7 @@ const UsersPages = () => {
                         <span>1</span>
                     </div>
                 </div>
-            </section >
+            </section > */}
         </>
     )
 }
