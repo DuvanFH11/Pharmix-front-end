@@ -1,36 +1,36 @@
-.usersContentTable{
+.usersContainer[data-container-buttons="true"]{
     display:flex;
-    flex-direction: column;
-    padding: 15px;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 .usersContent{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    align-content: space-between;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 20px;
+    align-content: space-evenly;
     justify-items: center;
     padding: 15px;
 }
-.usersContainer{
-    /* background-color: var(--secondary-color); */
-    transition: transform 300ms ease-in-out;
+.usersTarget{
+    background-color: var(--secondary-color);
+    border-radius: none;
+    padding:20px;
+    width: 200px;
+    height: 240px;
+    transition: all 300ms ease-in-out;
     transform: translateY(0);
 }
-.usersContainer:hover{
-    transform: translateY(-5px);
+.usersTarget:hover{
+    transform: translateY(-7px);
+    box-shadow: 0px 0px 10px var(--secondary-background-color);
+    border-radius: 10px;
 }
-
-.formUsers{
-
+@media (max-width:780px){
+    .usersContent{
+        grid-template-columns: repeat(2, 1fr);
+        padding: 5px;
+    }
 }
-.usersFormContainer{
-    margin : 20px 0px 20px 0px;
-}
-.usersFormContainer[data-container-btn="true"]{
-    display:flex;
-    flex-direction: column
-    ;
-}
-
 @media (max-width:480px){
     .usersContent{
         grid-template-columns: repeat(1, 1fr);

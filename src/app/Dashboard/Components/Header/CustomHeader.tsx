@@ -2,6 +2,9 @@
 import { useState } from "react";
 import SideMenu from "../SideMenu/SideMenu";
 import style from './header.module.css';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+
+
 const CustomHeader = () => {
     const [showMenu, setShowMenu] = useState<boolean>(false);
 
@@ -17,7 +20,7 @@ const CustomHeader = () => {
                     <h1>DISTRIBUIDORA Tleyn</h1>
                 </div>
                 <div className={style.headerContainer}>
-                    <button data-primary="true" onClick={() => { handleShowMenu() }}>|||</button>
+                    <button data-primary="true" onClick={() => { handleShowMenu() }}> <MenuOutlinedIcon /></button>
                 </div>
             </header>
 

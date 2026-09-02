@@ -16,10 +16,16 @@ button[data-secondary="true"]:hover{
     color : var(--secondary-color);
     border-color: var(--secondary-color);
     border-radius: 5px;
+    transition: all 150ms ease-out;
+    transform: translateY(0);
+}
+button[data-icon="true"]:hover{
+    transform: translateY(-3px);
+    box-shadow: -10px 20px 20px  10px var(--secondary-color);
 }
 .section__{
     background-color: var(--tercery-background-color);
-    padding: 20px 0px 20px 0px;
+    padding: 20px;
     margin: 30px 0px 30px 0px;
 }
 
