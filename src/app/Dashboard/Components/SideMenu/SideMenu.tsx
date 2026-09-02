@@ -76,7 +76,7 @@ const SideMenu = ({ isOpen, handleClose }: SideMenuProps,) => {
                 <div className={style.menuContainer}>
                     <h4 className={style.subtitle}>Ajustes</h4>
                     <ul className={style.listActions}>
-                        <Link to='/profile_page' onClick={handleClose}><h6 className={style.actionItems}>Perfil</h6></Link>
+                        <Link to='profile_page' onClick={handleClose}><h6 className={style.actionItems}>Perfil</h6></Link>
                     </ul>
                 </div>
                 <div className={style.menuContainer}>

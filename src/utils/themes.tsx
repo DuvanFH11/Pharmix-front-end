@@ -9,6 +9,7 @@ const themes = createTheme({
                     boxShadow: 'none',
                     borderRadius: '10px',
                     padding: '10px',
+                    marginBottom: '20px',
                     overflow: 'x-scroll',
                     backgroundColor: '#e2e8f0',
                 }
