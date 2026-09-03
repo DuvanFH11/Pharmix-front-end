@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../../context/authContext";
 import { index } from "../../../../services/category.service";
 import { useHandleFormAccess } from "../../../../hooks/useHandleFormsAccess";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export interface SideMenuProps {
     isOpen: boolean;
@@ -80,7 +81,7 @@ const SideMenu = ({ isOpen, handleClose }: SideMenuProps,) => {
                     </ul>
                 </div>
                 <div className={style.menuContainer}>
-                    <button data-secondary="true" className={style.btnLogout} onClick={handleLogout}>Cerrar Sesión</button>
+                    <button data-secondary="true" data-icon="true" className={style.btnLogout} onClick={handleLogout}><LogoutIcon /></button>
                 </div>
             </nav >
         </>

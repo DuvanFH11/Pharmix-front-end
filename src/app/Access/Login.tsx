@@ -7,6 +7,7 @@ import { useHandleFormAccess } from "../../hooks/useHandleFormsAccess";
 import { useEffect } from "react";
 import type { UserLoginSchema } from "../../schemas/user.schema";
 import userLoginSchema from "../../schemas/user.schema";
+import LoginIcon from '@mui/icons-material/Login';
 
 const Login = () => {
     const { submitFormLogin, alertMessage, isLoading } = useHandleFormAccess();
@@ -40,7 +41,7 @@ const Login = () => {
                     </div >
 
                     <div className={style.accessContainer} data-container-btn="true">
-                        <button data-primary="true" type="submit">Ingresar</button>
+                        <button data-primary="true" type="submit" data-icon="true"><LoginIcon /></button>
                         {/* <Link to="/"><button data-secondary="true">Regresar</button></Link> */}
                     </div >
                 </form >

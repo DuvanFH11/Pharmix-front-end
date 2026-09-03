@@ -28,11 +28,11 @@ const ProductsPage = () => {
 
             <section className="section__">
                 <div className={style.productsContainer} data-container-buttons="true">
-                    <button data-primary="true">
+                    <button data-primary="true" data-icon="true">
                         <NoteAdd />
                         <span>Crear productos</span>
                     </button>
-                    <button data-primary="true">
+                    <button data-primary="true" data-icon="true">
                         <SearchOutlinedIcon />
                         <span>Buscar productos</span>
                     </button>
@@ -75,7 +75,7 @@ const ProductsPage = () => {
                     </Table>
                 </TableContainer>
                 <div className={style.productsContainer} data-container-buttons="true">
-                    <button data-primary="true">
+                    <button data-primary="true" data-icon="true">
                         <TimelineOutlinedIcon />
                         <span>Ver estadisticas</span>
                     </button>
