@@ -20,8 +20,7 @@ button[data-secondary="true"]:hover{
     transform: translateY(0);
 }
 button[data-icon="true"]:hover{
-    transform: translateY(-3px);
-    box-shadow: -10px 20px 20px  10px var(--secondary-color);
+    transform: translateY(-5px);
 }
 .section__{
     background-color: var(--tercery-background-color);

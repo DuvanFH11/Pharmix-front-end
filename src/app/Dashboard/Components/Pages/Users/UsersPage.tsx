@@ -28,11 +28,11 @@ const UsersPages = () => {
 
             <section className="section__">
                 <div className={style.usersContainer} data-container-buttons="true">
-                    <button data-primary="true">
+                    <button data-primary="true" data-icon="true">
                         <PersonAddAltRoundedIcon />
                         <span>Agregar usuario</span>
                     </button>
-                    <button data-primary="true">
+                    <button data-primary="true" data-icon="true">
                         <PersonSearchRoundedIcon />
                         <span>Buscar usuario</span>
                     </button>
@@ -69,7 +69,7 @@ const UsersPages = () => {
                     </Table>
                 </TableContainer>
                 <div className={style.usersContainer} data-container-buttons="true">
-                    <button data-primary="true">
+                    <button data-primary="true" data-icon="true">
                         <TimelineOutlinedIcon />
                         <span>Ver estadisticas</span>
                     </button>
