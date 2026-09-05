@@ -1,13 +1,13 @@
+import type { UserLoginInterface, UserStoreInterface } from "../interfaces/UserInterface";
 import api from "../plugins/axios"
-import type { LoginSchema, RegisterSchema } from "../schemas/user.schema";
 
 //Servicio para traer todos los usuarios;
-export const index = async () => {
-    const response = await api.get('/users');
+export const index = async (data?: string) => {
+    const response = await api.get('/users', { params: { name: data } });
     return response.data;
 }
 //Servicio para crear usuario;
-export const store = async (data: RegisterSchema) => {
+export const store = async (data: UserStoreInterface) => {
     const response = await api.post('/users', data);
     return response;
 }
@@ -17,7 +17,7 @@ export const logout = async () => {
     return response;
 }
 //Iniciar sesión.
-export const login = async (data: LoginSchema) => {
+export const login = async (data: UserLoginInterface) => {
     const response = await api.post('/login', data);
     return response;
 }

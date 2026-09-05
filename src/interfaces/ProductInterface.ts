@@ -1,4 +1,4 @@
-export interface StoreProduct {
+export interface productStoreInterface {
     name: string;
     brand: string;
     description: string;
@@ -9,7 +9,7 @@ export interface StoreProduct {
     unit: string;
 }
 
-export interface ProductInterface extends StoreProduct {
+export interface ProductInterface extends productStoreInterface {
     id: number;
     user_creator: number | null,
     created_at: string;

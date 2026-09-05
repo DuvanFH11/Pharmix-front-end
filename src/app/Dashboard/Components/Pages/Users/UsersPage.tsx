@@ -7,14 +7,17 @@ import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
 import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
 import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
-import PersonSearchRoundedIcon from '@mui/icons-material/PersonSearchRounded';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 
 const UsersPages = () => {
     const [users, setUsers] = useState<UserType[] | null>(null);
+    const [showStats, setShowStats] = useState<boolean>(false);
     const { isLoading, alertMessage, handleIndex } = useHandleFormsPages();
 
+    const handleShowStats = () => {
+        setShowStats(showStats ? false : true);
+    }
     useEffect(() => {
         const loadUsers = async () => {
             setUsers(await handleIndex(index));
@@ -28,13 +31,12 @@ const UsersPages = () => {
 
             <section className="section__">
                 <div className={style.usersContainer} data-container-buttons="true">
+                    <div>
+                        <input type="search" placeholder="Buscar Usuario" /*onChange={handleSearch} */ />
+                    </div>
                     <button data-primary="true" data-icon="true">
                         <PersonAddAltRoundedIcon />
                         <span>Agregar usuario</span>
-                    </button>
-                    <button data-primary="true" data-icon="true">
-                        <PersonSearchRoundedIcon />
-                        <span>Buscar usuario</span>
                     </button>
                 </div>
                 <TableContainer component={Paper}>
@@ -69,13 +71,12 @@ const UsersPages = () => {
                     </Table>
                 </TableContainer>
                 <div className={style.usersContainer} data-container-buttons="true">
-                    <button data-primary="true" data-icon="true">
+                    <button data-primary="true" data-icon="true" onClick={handleShowStats}>
                         <TimelineOutlinedIcon />
                         <span>Ver estadisticas</span>
                     </button>
                 </div>
             </section>
-            {/* SECCIÓN INTERACTIVA */}
             {/* <section className="section__">
                 <div className={style.usersContent}>
                     <div className={style.usersTarget}>
