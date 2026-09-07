@@ -7,7 +7,6 @@ import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 import { index } from "../../../../../services/product.service";
 import style from "./products.module.css";
 import NoteAdd from '@mui/icons-material/NoteAdd';
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 
@@ -28,13 +27,12 @@ const ProductsPage = () => {
 
             <section className="section__">
                 <div className={style.productsContainer} data-container-buttons="true">
+                    <div>
+                        <input type="search" placeholder="Buscar productos" />
+                    </div>
                     <button data-primary="true" data-icon="true">
                         <NoteAdd />
-                        <span>Crear productos</span>
-                    </button>
-                    <button data-primary="true" data-icon="true">
-                        <SearchOutlinedIcon />
-                        <span>Buscar productos</span>
+                        <span>Agregar producto</span>
                     </button>
                 </div>
                 <TableContainer component={Paper}>
@@ -68,7 +66,7 @@ const ProductsPage = () => {
                                     </TableRow>
                                 )) :
                                     <TableRow key="no-products-row">
-                                        <TableCell colSpan={9} className="text-center"><h6>No hay productos</h6></TableCell>
+                                        <TableCell colSpan={9}><h6>No hay productos</h6></TableCell>
                                     </TableRow>
                             }
                         </TableBody>
@@ -81,24 +79,6 @@ const ProductsPage = () => {
                     </button>
                 </div>
             </section >
-            {/* SECCIÓN INTERACTIVA */}
-            {/* <section className="section__">
-                <div className={style.productsContent}>
-                    <div className={style.productsTarget}>
-                        <h6>Titulo</h6>
-                        <h1>1</h1>
-                    </div>
-                    <div className={style.productsTarget}>
-                        <h6>Titulo</h6>
-                        <h1>1</h1>
-                    </div>
-                    <div className={style.productsTarget}>
-                        <h6>Titulo</h6>
-                        <h1>1</h1>
-                    </div>
-                </div>
-            </section> */}
-
         </>
     )
 

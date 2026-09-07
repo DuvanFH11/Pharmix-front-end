@@ -10,10 +10,10 @@ const useHandleFormsPages = () => {
     const [isLoading, setLoading] = useState<boolean>(false);
     const [alertMessage, setAlertMessage] = useState<{ message: string, success: boolean, time: number } | null>(null);
 
-    const handleIndex = async (service: () => Promise<ResponseInterface>) => {
+    const handleIndex = async (service: (name?: string) => Promise<ResponseInterface>, name?: string) => {
         setLoading(true);
         try {
-            const response = await service();
+            const response = await service(name);
             const { data } = response;
             return data.length > 0 ? data : null;
 

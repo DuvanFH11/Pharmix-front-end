@@ -36,10 +36,4 @@
         grid-template-columns: repeat(1, 1fr);
         padding: 5px;
     }
-    .formsUsers{
-        border: none;
-        margin:10px;
-        padding:20px;
-        width: 250px;
-    }
 }
