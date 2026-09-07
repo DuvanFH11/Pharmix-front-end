@@ -64,7 +64,7 @@ const UsersPages = () => {
                                     </TableRow>
                                 )) :
                                     <TableRow key='no-users-row'>
-                                        <TableCell colSpan={7} className="text-center"><h6>No hay usuarios</h6></TableCell>
+                                        <TableCell colSpan={7}><h6>No hay usuarios</h6></TableCell>
                                     </TableRow>
                             }
                         </TableBody>
