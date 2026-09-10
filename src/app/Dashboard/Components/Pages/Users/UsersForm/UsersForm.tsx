@@ -9,7 +9,7 @@ import type { roleInterface } from "../../../../../../interfaces/RoleInterface";
 import type { AppointmentInterface } from "../../../../../../interfaces/AppointmentInterface";
 import { index as appointmentIndex } from "../../../../../../services/appointment.service";
 import { index as rolesIndex } from "../../../../../../services/role.service";
-
+import style from "./users.form.module.css";
 
 interface UsersFormProps {
     id: number | null;
@@ -42,15 +42,17 @@ const UsersForm = ({ id, handleClose }: UsersFormProps) => {
             {isLoading && <LoadingComponent />}
             {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
             <Dialog open={true}>
-                <h1>{id ? "Editar Usuario" : "Crear usuario"}</h1>
-                <form>
-                    <div>
+                <form className={style.usersForm}>
+                    <h1>{id ? "Editar Usuario" : "Crear usuario"}</h1>
+                    <div className={style.usersFormContainer}>
+                        <span className="alert__"></span>
                         <input type="text" placeholder="Ingresa el nombre" defaultValue={user ? user.name : ''} />
                     </div>
-                    <div>
+                    <div className={style.usersFormContainer}>
+                        <span className="alert__"></span>
                         <input type="email" placeholder="Ingresa el email" defaultValue={user ? user.email : ''} />
                     </div>
-                    <div>
+                    <div className={style.usersFormContainer}>
                         <select name="appointment" value={user?.user_appointment.id}>
                             <option>seleccionar cargo</option>
                             {
@@ -62,7 +64,7 @@ const UsersForm = ({ id, handleClose }: UsersFormProps) => {
                             }
                         </select>
                     </div>
-                    <div>
+                    <div className={style.usersFormContainer}>
                         <select name="roles" value={user?.user_role.id}>
                             <option>seleccionar rol</option>
                             {
@@ -74,8 +76,9 @@ const UsersForm = ({ id, handleClose }: UsersFormProps) => {
                             }
                         </select>
                     </div>
-                    <div>
-                        <button data-primary="true" data-icon="true" onClick={handleClose}>Cerrar</button>
+                    <div className={style.usersFormContainer} data-container-buttons="true">
+                        <button data-primary="true" data-icon="true" onClick={handleClose}>{user ? 'Modificar' : 'Crear'}</button>
+                        <button data-secondary="true" data-icon="true" onClick={handleClose}>Cerrar</button>
                     </div>
                 </form>
             </Dialog>
