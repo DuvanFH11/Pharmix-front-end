@@ -6,6 +6,10 @@ export const index = async (data?: string) => {
     const response = await api.get('/users', { params: { name: data } });
     return response.data;
 }
+export const show = async (data: number) => {
+    const response = await api.get(`/users/${data}`);
+    return response.data;
+}
 //Servicio para crear usuario;
 export const store = async (data: UserStoreInterface) => {
     const response = await api.post('/users', data);

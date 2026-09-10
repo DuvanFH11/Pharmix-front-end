@@ -84,3 +84,16 @@ a{
 summary{
     list-style: none;
 }
+select{
+    border-radius: 5px;
+    color : var(--primary-color);
+    width: 100%;
+    margin : 10px 0px 10px 0px;
+    padding: 10px 5px 10px 5px;
+    text-transform: uppercase;
+    text-align:left;
+}
+option{
+    background-color: var(--secondary-background-color);
+}
+

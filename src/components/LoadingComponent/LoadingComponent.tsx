@@ -7,7 +7,7 @@ const LoadingComponent = () => {
                 sx={{
                     color: '#fff',
                     // Asegura que esté por encima de modales y barras de navegación
-                    zIndex: (theme) => theme.zIndex.drawer + 1,
+                    zIndex: (theme) => theme.zIndex.modal + 1,
                     flexDirection: 'column',
                     gap: 2,
                     // Agrega un desenfoque sutil al fondo si lo deseas
