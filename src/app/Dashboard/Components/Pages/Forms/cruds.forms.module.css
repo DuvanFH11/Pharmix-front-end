@@ -1,0 +1,37 @@
+.forms{
+    display:flex;
+    flex-direction:  column;
+}
+.formsTitle{
+    color : var(--secondary-background-color);
+}
+.formsContainer{
+    margin: 10px 0px 10px 0px;
+}
+.formsSubmit{
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border-color :var(--primary-color);
+    border-radius: 5px;
+}
+.formsExit{
+    background-color : var(--secondary-background-color);
+    color : var(--secondary-color);
+    border-color: var(--secondary-color);
+    border-radius: 5px;
+    transition: all 150ms ease-out;
+}
+.formsContainer[data-container-buttons="true"]{
+    display:flex;
+    flex-direction: column;
+}
+
+@media(max-width: 480px){
+    .forms{
+        border: none;
+        margin:10px;
+        padding:20px;
+        width: 270px;
+        font-size: 0.8rem !important;
+    }
+}

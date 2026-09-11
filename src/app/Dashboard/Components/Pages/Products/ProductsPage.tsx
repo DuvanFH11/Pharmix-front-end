@@ -47,6 +47,7 @@ const ProductsPage = () => {
                                 <TableCell>Invima Registration</TableCell>
                                 <TableCell>Strength</TableCell>
                                 <TableCell>Unit</TableCell>
+                                <TableCell>User Creator</TableCell>
                                 <TableCell>Edit</TableCell>
                             </TableRow>
                         </TableHead>
@@ -62,6 +63,7 @@ const ProductsPage = () => {
                                         <TableCell>{product.invima_registration}</TableCell>
                                         <TableCell>{product.strength}</TableCell>
                                         <TableCell>{product.unit}</TableCell>
+                                        <TableCell>{product.user_creator ? product.user_creator : 'N/A'}</TableCell>
                                         <TableCell><button data-secondary="true" data-icon="true"><ModeEditOutlineRoundedIcon /></button></TableCell>
                                     </TableRow>
                                 )) :

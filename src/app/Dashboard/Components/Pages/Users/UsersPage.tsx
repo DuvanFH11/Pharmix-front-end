@@ -9,7 +9,7 @@ import LoadingComponent from "../../../../../components/LoadingComponent/Loading
 import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
-import UsersForm from "./UsersForm/UsersForm";
+import UsersForm from "../Forms/UsersForm";
 
 const UsersPages = () => {
     const [users, setUsers] = useState<UserType[] | null>(null);
@@ -49,8 +49,9 @@ const UsersPages = () => {
                                 <TableCell>Id</TableCell>
                                 <TableCell>Name</TableCell>
                                 <TableCell>Email</TableCell>
-                                <TableCell>Appointment</TableCell>
+                                <TableCell>Job Title</TableCell>
                                 <TableCell>Role</TableCell>
+                                <TableCell>User Creator</TableCell>
                                 <TableCell>Edit</TableCell>
                             </TableRow>
                         </TableHead>
@@ -61,8 +62,9 @@ const UsersPages = () => {
                                         <TableCell>{user.id}</TableCell>
                                         <TableCell>{user.name}</TableCell>
                                         <TableCell>{user.email}</TableCell>
-                                        <TableCell>{user.user_appointment.name}</TableCell>
+                                        <TableCell>{user.user_job_title.name}</TableCell>
                                         <TableCell>{user.user_role.name}</TableCell>
+                                        <TableCell>{user.user_creator ? user.user_creator : 'N/A'}</TableCell>
                                         <TableCell><button data-secondary="true" data-icon="true" onClick={() => { handleShowForm(user.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
                                     </TableRow>
                                 )) :
