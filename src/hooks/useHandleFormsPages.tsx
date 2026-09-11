@@ -47,7 +47,6 @@ const useHandleFormsPages = () => {
             setLoading(false);
         }
     }
-
     return {
         handleIndex,
         handleShow,
