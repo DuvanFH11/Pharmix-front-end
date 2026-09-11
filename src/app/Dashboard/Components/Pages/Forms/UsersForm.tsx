@@ -5,10 +5,10 @@ import { show } from "../../../../../services/user.service";
 import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
 import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 import { Dialog, MenuItem, Select } from "@mui/material";
+import type { JobTitleInterface } from "../../../../../interfaces/JobTitleInterface";
 import type { roleInterface } from "../../../../../interfaces/RoleInterface";
-import type { AppointmentInterface } from "../../../../../interfaces/AppointmentInterface";
-import { index as appointmentIndex } from "../../../../../services/appointment.service";
 import { index as rolesIndex } from "../../../../../services/role.service";
+import { index as jobTitlesIndex } from "../../../../../services/job.title.service";
 import style from './cruds.forms.module.css';
 
 interface UsersFormProps {
@@ -19,12 +19,12 @@ interface UsersFormProps {
 const UsersForm = ({ id, handleClose }: UsersFormProps) => {
     const [user, setUser] = useState<UserType | null>(null);
     const [roles, setRoles] = useState<roleInterface[] | null>(null);
-    const [appointments, setAppointments] = useState<AppointmentInterface[] | null>(null);
+    const [jobTitles, setJobTitles] = useState<JobTitleInterface[] | null>(null);
 
     const { handleShow, handleIndex, isLoading, alertMessage } = useHandleFormsPages();
     useEffect(() => {
         const loadValues = async () => {
-            setAppointments(await handleIndex(appointmentIndex));
+            setJobTitles(await handleIndex(jobTitlesIndex));
             setRoles(await handleIndex(rolesIndex));
         }
         loadValues();
@@ -58,10 +58,10 @@ const UsersForm = ({ id, handleClose }: UsersFormProps) => {
                     <div className={style.formsContainer}>
                         <Select name="appointment" /*defaultValue={user?.user_appointment.id}*/>
                             {
-                                appointments ? appointments.map((appointment) => (
-                                    <MenuItem key={appointment.id} value={appointment.id}>{appointment.name}</MenuItem>
+                                jobTitles ? jobTitles.map((jobTitle) => (
+                                    <MenuItem key={jobTitle.id} value={jobTitle.id}>{jobTitle.name}</MenuItem>
                                 )) : (
-                                    <MenuItem key="no-appointment-value">...</MenuItem>
+                                    <MenuItem key="no-job-titles-value">...</MenuItem>
                                 )
                             }
                         </Select>
