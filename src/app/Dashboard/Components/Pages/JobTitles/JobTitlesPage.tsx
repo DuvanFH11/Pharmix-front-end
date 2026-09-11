@@ -18,7 +18,7 @@ const JobTitlesPage = () => {
             setJobTitles(await handleIndex(index));
         }
         loadAppoinments();
-    }, []);
+    }, [handleIndex]);
     return (
         <>
             {isLoading && <LoadingComponent />}
