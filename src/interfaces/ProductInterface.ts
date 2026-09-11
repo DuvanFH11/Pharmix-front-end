@@ -12,6 +12,4 @@ export interface productStoreInterface {
 export interface ProductInterface extends productStoreInterface {
     id: number;
     user_creator: number | null,
-    created_at: string;
-    updated_at: string;
 }

@@ -9,14 +9,17 @@ import LoadingComponent from "../../../../../components/LoadingComponent/Loading
 import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
+import UsersForm from "./UsersForm/UsersForm";
 
 const UsersPages = () => {
     const [users, setUsers] = useState<UserType[] | null>(null);
-    const [showStats, setShowStats] = useState<boolean>(false);
+    const [id, setId] = useState<number | null>(null);
+    const [showForm, setShowForm] = useState<boolean>(false);
     const { isLoading, alertMessage, handleIndex } = useHandleFormsPages();
 
-    const handleShowStats = () => {
-        setShowStats(showStats ? false : true);
+    const handleShowForm = (id: number | null) => {
+        setId(id);
+        setShowForm(true);
     }
     useEffect(() => {
         const loadUsers = async () => {
@@ -28,13 +31,13 @@ const UsersPages = () => {
         <>
             {isLoading && <LoadingComponent />}
             {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
-
+            {showForm && <UsersForm id={id} handleClose={() => { setShowForm(false) }} />}
             <section className="section__">
                 <div className={style.usersContainer} data-container-buttons="true">
                     <div>
                         <input type="search" placeholder="Buscar Usuario" /*onChange={handleSearch} */ />
                     </div>
-                    <button data-primary="true" data-icon="true">
+                    <button data-primary="true" data-icon="true" onClick={() => { handleShowForm(null) }}>
                         <PersonAddAltRoundedIcon />
                         <span>Agregar usuario</span>
                     </button>
@@ -60,7 +63,7 @@ const UsersPages = () => {
                                         <TableCell>{user.email}</TableCell>
                                         <TableCell>{user.user_appointment.name}</TableCell>
                                         <TableCell>{user.user_role.name}</TableCell>
-                                        <TableCell><button data-secondary="true" data-icon="true"><ModeEditOutlineRoundedIcon /></button></TableCell>
+                                        <TableCell><button data-secondary="true" data-icon="true" onClick={() => { handleShowForm(user.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
                                     </TableRow>
                                 )) :
                                     <TableRow key='no-users-row'>
@@ -71,28 +74,12 @@ const UsersPages = () => {
                     </Table>
                 </TableContainer>
                 <div className={style.usersContainer} data-container-buttons="true">
-                    <button data-primary="true" data-icon="true" onClick={handleShowStats}>
+                    <button data-primary="true" data-icon="true">
                         <TimelineOutlinedIcon />
                         <span>Ver estadisticas</span>
                     </button>
                 </div>
             </section>
-            {/* <section className="section__">
-                <div className={style.usersContent}>
-                    <div className={style.usersTarget}>
-                        <h6>Usuarios totales</h6>
-                        <span>10000</span>
-                    </div>
-                    <div className={style.usersTarget}>
-                        <h6></h6>
-                        <span>1</span>
-                    </div>
-                    <div className={style.usersTarget}>
-                        <h6>Title</h6>
-                        <span>1</span>
-                    </div>
-                </div>
-            </section > */}
         </>
     )
 }

@@ -1,0 +1,20 @@
+.usersForm{
+    max-width: ;
+}
+.usersFormContainer{
+    margin: 10px 0px 10px 0px;
+}
+.usersFormContainer[data-container-buttons="true"]{
+    display:flex;
+    flex-direction: column;
+}
+
+@media(max-width: 480px){
+    .usersForm{
+        border: none;
+        margin:10px;
+        padding:20px;
+        width: 250px;
+        font-size: 0.8rem !important;
+    }
+}

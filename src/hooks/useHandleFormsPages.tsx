@@ -13,14 +13,13 @@ const useHandleFormsPages = () => {
     const handleIndex = async (service: (name?: string) => Promise<ResponseInterface>, name?: string) => {
         setLoading(true);
         try {
-            const response = await service(name);
-            const { data } = response;
+            const { data } = await service(name);
             return data.length > 0 ? data : null;
 
         } catch (error: unknown) {
             const err = error as AxiosErrorResponse;
 
-            const message = err.response?.data?.message || 'Error inesperado del servidor';
+            const message = err.response?.data?.message || 'Error al cargar los datos';
             const success = err.response?.data?.success || false;
             const exception = err.response?.data?.exception || 'Error inesperado del servidor';
 
@@ -30,10 +29,28 @@ const useHandleFormsPages = () => {
             setLoading(false);
         }
     }
+    const handleShow = async (service: (id: number) => Promise<ResponseInterface>, id: number) => {
+        setLoading(true);
+        try {
+            const { data } = await service(id);
+            return data;
+        } catch (error: unknown) {
+            const err = error as AxiosErrorResponse;
 
+            const message = err.response?.data?.message || 'Error al cargar los datos';
+            const success = err.response?.data?.success || false;
+            const exception = err.response?.data?.exception || 'Error inesperado del servidor';
+
+            console.log({ exception });
+            setAlertMessage({ message, success, time: Date.now() });
+        } finally {
+            setLoading(false);
+        }
+    }
 
     return {
         handleIndex,
+        handleShow,
         isLoading,
         alertMessage
     }

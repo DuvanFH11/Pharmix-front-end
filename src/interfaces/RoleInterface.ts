@@ -5,6 +5,4 @@ export interface roleStoreInterface {
 }
 export interface roleInterface extends roleStoreInterface {
     id: number;
-    created_at: string;
-    updated_at: string;
 }

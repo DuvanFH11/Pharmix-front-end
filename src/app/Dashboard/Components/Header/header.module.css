@@ -14,7 +14,7 @@
 }
 
 @media(max-width:480px){
-    .header__{
+    .header{
         flex-direction: column;
         align-items: flex-end;
     }
