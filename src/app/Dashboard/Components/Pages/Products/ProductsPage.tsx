@@ -19,7 +19,7 @@ const ProductsPage = () => {
             setProducts(await handleIndex(index));
         }
         loadProducts();
-    }, [])
+    }, [handleIndex])
     return (
         <>
             {isLoading && <LoadingComponent />}

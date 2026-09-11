@@ -28,7 +28,7 @@ const UsersForm = ({ id, handleClose }: UsersFormProps) => {
             setRoles(await handleIndex(rolesIndex));
         }
         loadValues();
-    }, []);
+    }, [handleIndex]);
     useEffect(() => {
         const loadUser = async () => {
             if (id) {
@@ -37,7 +37,7 @@ const UsersForm = ({ id, handleClose }: UsersFormProps) => {
             }
         };
         loadUser();
-    }, [id]);
+    }, [id, handleShow]);
     return (
         <>
             {isLoading && <LoadingComponent />}

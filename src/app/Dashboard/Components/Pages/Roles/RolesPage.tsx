@@ -18,7 +18,7 @@ const RolesPage = () => {
             setRoles(await handleIndex(index));
         };
         loadRoles();
-    }, [])
+    }, [handleIndex])
     return (
         <>
             {isLoading && <LoadingComponent />}

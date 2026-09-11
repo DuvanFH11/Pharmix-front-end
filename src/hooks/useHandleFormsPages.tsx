@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import type { AxiosErrorResponse } from "../interfaces/AxiosErrorResponse";
 interface ResponseInterface {
     message: string,
@@ -10,7 +10,8 @@ const useHandleFormsPages = () => {
     const [isLoading, setLoading] = useState<boolean>(false);
     const [alertMessage, setAlertMessage] = useState<{ message: string, success: boolean, time: number } | null>(null);
 
-    const handleIndex = async (service: (name?: string) => Promise<ResponseInterface>, name?: string) => {
+
+    const handleIndex = useCallback(async (service: (name?: string) => Promise<ResponseInterface>, name?: string) => {
         setLoading(true);
         try {
             const { data } = await service(name);
@@ -28,8 +29,9 @@ const useHandleFormsPages = () => {
         } finally {
             setLoading(false);
         }
-    }
-    const handleShow = async (service: (id: number) => Promise<ResponseInterface>, id: number) => {
+    }, []);
+
+    const handleShow = useCallback(async (service: (id: number) => Promise<ResponseInterface>, id: number) => {
         setLoading(true);
         try {
             const { data } = await service(id);
@@ -46,7 +48,7 @@ const useHandleFormsPages = () => {
         } finally {
             setLoading(false);
         }
-    }
+    }, [])
     return {
         handleIndex,
         handleShow,

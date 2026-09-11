@@ -15,8 +15,8 @@ const UsersPages = () => {
     const [users, setUsers] = useState<UserType[] | null>(null);
     const [id, setId] = useState<number | null>(null);
     const [showForm, setShowForm] = useState<boolean>(false);
-    const { isLoading, alertMessage, handleIndex } = useHandleFormsPages();
 
+    const { isLoading, alertMessage, handleIndex } = useHandleFormsPages();
     const handleShowForm = (id: number | null) => {
         setId(id);
         setShowForm(true);
@@ -26,7 +26,7 @@ const UsersPages = () => {
             setUsers(await handleIndex(index));
         }
         loadUsers();
-    }, [])
+    }, [handleIndex]);
     return (
         <>
             {isLoading && <LoadingComponent />}
