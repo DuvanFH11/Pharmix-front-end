@@ -10,11 +10,16 @@ export const show = async (data: number) => {
     const response = await api.get(`/users/${data}`);
     return response.data;
 }
-//Servicio para crear usuario;
-export const store = async (data: UserStoreInterface) => {
+export const storeOrUpdate = async (data: UserStoreInterface) => {
     const response = await api.post('/users', data);
-    return response;
+    return response.data;
 }
+
+// //Servicio para crear usuario;
+// export const store = async (data: UserStoreInterface) => {
+//     const response = await api.post('/users', data);
+//     return response;
+// }
 //Cerrar sesión.
 export const logout = async () => {
     const response = await api.post('/logout');

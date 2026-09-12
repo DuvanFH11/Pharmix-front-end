@@ -49,9 +49,32 @@ const useHandleFormsPages = () => {
             setLoading(false);
         }
     }, [])
+
+    const handleSave = useCallback(async <T,>(service: (values: T) => Promise<ResponseInterface>, values: T) => {
+        setLoading(true);
+        try {
+            const { data, success, message } = await service(values);
+
+            setAlertMessage({ message, success, time: Date.now() });
+            return data;
+        } catch (error: unknown) {
+            const err = error as AxiosErrorResponse;
+
+            const message = err?.response?.data?.message || 'Error al guardar los datos';
+            const success = err?.response?.data?.success || false;
+            const exception = err?.response?.data?.exception || 'Error inesperado del servidor';
+
+            console.log({ exception });
+            setAlertMessage({ message, success, time: Date.now() });
+        } finally {
+            setLoading(false);
+        }
+
+    }, []);
     return {
         handleIndex,
         handleShow,
+        handleSave,
         isLoading,
         alertMessage
     }
