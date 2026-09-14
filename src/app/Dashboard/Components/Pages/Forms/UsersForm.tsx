@@ -71,6 +71,7 @@ const UsersForm = ({ id, handleClose }: UsersFormProps) => {
                     </div>
                     <div className={style.formsContainer}>
                         <FormControl fullWidth error={!!errors.user_job_title}>
+                            <span className="alert__">{errors.user_job_title ? errors.user_job_title.message : ''}</span>
                             <Controller name="user_job_title" control={control} render={({ field }) => (
                                 <Select {...field}>
                                     <MenuItem value={0}>Seleccionar cargos</MenuItem>
@@ -87,6 +88,7 @@ const UsersForm = ({ id, handleClose }: UsersFormProps) => {
                         </FormControl>
                     </div>
                     <div className={style.formsContainer}>
+                        <span className="alert__">{errors.user_role ? errors.user_role.message : ''}</span>
                         <FormControl fullWidth error={!!errors.user_role}>
                             <Controller name="user_role" control={control} render={({ field }) => (
                                 <Select {...field}>

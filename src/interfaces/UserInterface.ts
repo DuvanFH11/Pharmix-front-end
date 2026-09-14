@@ -1,6 +1,6 @@
 export interface UserLoginInterface {
     email: string;
-    password: string;
+    password?: string;
 }
 export interface UserStoreInterface extends UserLoginInterface {
     name: string;

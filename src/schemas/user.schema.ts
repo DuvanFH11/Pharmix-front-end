@@ -9,7 +9,8 @@ const userLoginSchema = z.object({
 export const userStoreSchema = userLoginSchema.extend({
     name: z.string().min(10, MESSAGES(5).MIN_LENGTH).max(50, MESSAGES(50).MAX_LENGTH),
     user_role: z.number(MESSAGES(0).INVALID_NUMBER).min(1, "Debes seleccionar un rol"),
-    user_job_title: z.number(MESSAGES(0).INVALID_NUMBER).min(1, "Debes seleccionar un cargo")
+    user_job_title: z.number(MESSAGES(0).INVALID_NUMBER).min(1, "Debes seleccionar un cargo"),
+    password: z.string().optional()
 })
 
 export type UserStoreSchema = z.infer<typeof userStoreSchema>

@@ -50,7 +50,7 @@ const useHandleFormsPages = () => {
         }
     }, [])
 
-    const handleSave = useCallback(async <T,>(service: (values: T) => Promise<ResponseInterface>, values: T) => {
+    const handleSave = async <T,>(service: (values: T) => Promise<ResponseInterface>, values: T) => {
         setLoading(true);
         try {
             const { data, success, message } = await service(values);
@@ -69,8 +69,7 @@ const useHandleFormsPages = () => {
         } finally {
             setLoading(false);
         }
-
-    }, []);
+    };
     return {
         handleIndex,
         handleShow,
