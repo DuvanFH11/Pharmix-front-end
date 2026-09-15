@@ -15,7 +15,7 @@ import { userStoreSchema, type UserStoreSchema } from "../../../../../schemas/us
 import { zodResolver } from "@hookform/resolvers/zod";
 
 interface UsersFormProps {
-    id: number | null;
+    id?: number;
     handleClose: () => void
 }
 
@@ -57,7 +57,7 @@ const UsersForm = ({ id, handleClose }: UsersFormProps) => {
             {isLoading && <LoadingComponent />}
             {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
             <Dialog open={true}>
-                <form className={style.forms} onSubmit={handleSubmit((data) => handleSave(storeOrUpdate, data))} >
+                <form className={style.forms} onSubmit={handleSubmit((data) => handleSave(storeOrUpdate, data, id))} >
                     <div className={style.formsContainer}>
                         <h2 className={style.formsTitle}>{id ? "Editar Usuario" : "Crear usuario"}</h2>
                     </div>

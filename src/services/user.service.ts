@@ -10,8 +10,8 @@ export const show = async (data: number) => {
     const response = await api.get(`/users/${data}`);
     return response.data;
 }
-export const storeOrUpdate = async (data: UserStoreInterface) => {
-    const response = await api.post('/users', data);
+export const storeOrUpdate = async (data: UserStoreInterface, id?: number) => {
+    const response = await api.post(`/users/save/${id ? id : ''}`, data);
     return response.data;
 }
 

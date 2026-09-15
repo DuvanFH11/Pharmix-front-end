@@ -50,10 +50,10 @@ const useHandleFormsPages = () => {
         }
     }, [])
 
-    const handleSave = async <T,>(service: (values: T) => Promise<ResponseInterface>, values: T) => {
+    const handleSave = async <T,>(service: (values: T, id?: number) => Promise<ResponseInterface>, values: T, id?: number) => {
         setLoading(true);
         try {
-            const { data, success, message } = await service(values);
+            const { data, success, message } = await service(values, id);
 
             setAlertMessage({ message, success, time: Date.now() });
             return data;

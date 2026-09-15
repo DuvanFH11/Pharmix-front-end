@@ -9,7 +9,6 @@ export interface UserStoreInterface extends UserLoginInterface {
 }
 export type UserType = Omit<UserStoreInterface, 'user_role' | 'user_appointment'> & {
     id: number,
-    user_creator: number | null,
     user_role: {
         id: number;
         name: string;

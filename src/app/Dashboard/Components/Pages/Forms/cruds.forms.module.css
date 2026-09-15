@@ -1,6 +1,9 @@
 .forms{
     display:flex;
     flex-direction:  column;
+    justify-content: space-around;
+    height: 574px;
+    padding : 10px;
 }
 .formsTitle{
     color : var(--secondary-background-color);
