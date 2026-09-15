@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import style from "./users.module.css";
 import type { UserType } from "../../../../../interfaces/UserInterface";
 import { index } from "../../../../../services/user.service";
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Dialog, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
 import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
@@ -16,10 +16,13 @@ const UsersPages = () => {
     const [id, setId] = useState<number | undefined>(undefined);
     const [showForm, setShowForm] = useState<boolean>(false);
 
-    const { isLoading, alertMessage, handleIndex } = useHandleFormsPages();
+    const { isLoading, alertMessage, handleIndex, setAlertMessage } = useHandleFormsPages();
     const handleShowForm = (id: number | undefined) => {
         setId(id);
         setShowForm(true);
+    }
+    const showSuccess = () => {
+        setAlertMessage({ message: 'Datos guardados con exito', success: true, time: Date.now() })
     }
     useEffect(() => {
         const loadUsers = async () => {
@@ -31,7 +34,6 @@ const UsersPages = () => {
         <>
             {isLoading && <LoadingComponent />}
             {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
-            {showForm && <UsersForm id={id} handleClose={() => { setShowForm(false) }} />}
             <section className="section__">
                 <div className={style.usersContainer} data-container-buttons="true">
                     <div>
@@ -80,6 +82,9 @@ const UsersPages = () => {
                     </button>
                 </div>
             </section>
+            <Dialog open={showForm}>
+                {showForm && <UsersForm id={id} handleClose={() => { setShowForm(false) }} handleSuccess={() => { showSuccess() }} />}
+            </Dialog>
         </>
     )
 }

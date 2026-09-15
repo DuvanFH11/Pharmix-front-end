@@ -53,10 +53,10 @@ const useHandleFormsPages = () => {
     const handleSave = async <T,>(service: (values: T, id?: number) => Promise<ResponseInterface>, values: T, id?: number) => {
         setLoading(true);
         try {
-            const { data, success, message } = await service(values, id);
+            const { success, message } = await service(values, id);
 
             setAlertMessage({ message, success, time: Date.now() });
-            return data;
+            return success;
         } catch (error: unknown) {
             const err = error as AxiosErrorResponse;
 
@@ -66,6 +66,7 @@ const useHandleFormsPages = () => {
 
             console.log({ exception });
             setAlertMessage({ message, success, time: Date.now() });
+            return success;
         } finally {
             setLoading(false);
         }
@@ -75,7 +76,8 @@ const useHandleFormsPages = () => {
         handleShow,
         handleSave,
         isLoading,
-        alertMessage
+        alertMessage,
+        setAlertMessage
     }
 }
 
