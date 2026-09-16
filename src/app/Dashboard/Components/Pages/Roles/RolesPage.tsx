@@ -4,14 +4,25 @@ import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
 import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
 import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Dialog, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { index } from "../../../../../services/role.service";
 import style from "./roles.module.css";
 import NoteAdd from '@mui/icons-material/NoteAdd';
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
+import RolesForm from "../Forms/RolesForm";
 const RolesPage = () => {
     const [roles, setRoles] = useState<roleInterface[] | null>(null);
-    const { isLoading, alertMessage, handleIndex } = useHandleFormsPages();
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [id, setId] = useState<number | undefined>(undefined);
+    const { isLoading, alertMessage, handleIndex, setAlertMessage } = useHandleFormsPages();
+
+    const handleShowForm = (id: number | undefined) => {
+        setId(id);
+        setShowModal(true);
+    }
+    const showSuccess = () => {
+        setAlertMessage({ message: 'Datos guardados con exito', success: true, time: Date.now() });
+    }
 
     useEffect(() => {
         const loadRoles = async () => {
@@ -28,7 +39,7 @@ const RolesPage = () => {
                     <div>
                         <input type="search" placeholder="Buscar Rol" />
                     </div>
-                    <button data-primary="true" data-icon="true">
+                    <button data-primary="true" data-icon="true" onClick={() => { handleShowForm(undefined) }}>
                         <NoteAdd />
                         <span>Agregar Rol</span>
                     </button>
@@ -53,7 +64,7 @@ const RolesPage = () => {
                                         <TableCell>{role.code}</TableCell>
                                         <TableCell>{role.name}</TableCell>
                                         <TableCell>{role.description}</TableCell>
-                                        <TableCell><button data-secondary="true" data-icon="true"><ModeEditOutlineRoundedIcon /></button></TableCell>
+                                        <TableCell><button data-secondary="true" data-icon="true" onClick={() => { handleShowForm(role.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
                                     </TableRow>
                                 )) : (
                                     <TableRow key="no-role-row">
@@ -71,6 +82,9 @@ const RolesPage = () => {
                     </button>
                 </div>
             </section>
+            <Dialog open={showModal}>
+                {showModal && <RolesForm id={id} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess() }} />}
+            </Dialog>
         </>
     )
 }
