@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { FormControl, MenuItem, Select } from "@mui/material";
-import type { UserType } from "../../../../../interfaces/UserInterface";
 import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
 import { show, storeOrUpdate } from "../../../../../services/user.service";
 import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
@@ -12,6 +11,7 @@ import style from './cruds.forms.module.css';
 import { Controller, useForm } from "react-hook-form";
 import { userStoreSchema, type UserStoreSchema } from "../../../../../schemas/user.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 
 interface UsersFormProps {
     id?: number;
@@ -20,10 +20,9 @@ interface UsersFormProps {
 }
 
 const UsersForm = ({ id, handleClose, handleSuccess }: UsersFormProps) => {
-    const [user, setUser] = useState<UserType | null>(null);
     const [roles, setRoles] = useState<roleInterface[] | null>(null);
     const [jobTitles, setJobTitles] = useState<JobTitleInterface[] | null>(null);
-    const { handleShow, handleIndex, handleSave, isLoading } = useHandleFormsPages();
+    const { handleShow, handleIndex, handleSave, isLoading, alertMessage } = useHandleFormsPages();
     const { control, handleSubmit, register, formState: { errors }, setValue } = useForm<UserStoreSchema>({
         resolver: zodResolver(userStoreSchema),
         defaultValues: {
@@ -47,7 +46,6 @@ const UsersForm = ({ id, handleClose, handleSuccess }: UsersFormProps) => {
             setRoles(await handleIndex(rolesIndex));
             if (id) {
                 const data = await handleShow(show, id);
-                setUser(data);
                 if (data) {
                     setValue('name', data.name);
                     setValue('email', data.email);
@@ -61,6 +59,8 @@ const UsersForm = ({ id, handleClose, handleSuccess }: UsersFormProps) => {
     return (
         <>
             {isLoading && <LoadingComponent />}
+            {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
+
             <form className={style.forms} onSubmit={onSubmitForm} >
                 <div className={style.formsContainer}>
                     <h2 className={style.formsTitle}>{id ? "Editar Usuario" : "Crear usuario"}</h2>
@@ -110,7 +110,7 @@ const UsersForm = ({ id, handleClose, handleSuccess }: UsersFormProps) => {
                     </FormControl>
                 </div>
                 <div className={style.formsContainer} data-container-buttons="true">
-                    <button type="submit" className={style.formsSubmit} data-primary="true" data-icon="true">{user ? 'Modificar' : 'Crear'}</button>
+                    <button type="submit" className={style.formsSubmit} data-primary="true" data-icon="true">{id ? 'Modificar' : 'Crear'}</button>
                     <button type="button" className={style.formsExit} data-secondary="true" data-icon="true" onClick={handleClose}>Cerrar</button>
                 </div>
             </form>
