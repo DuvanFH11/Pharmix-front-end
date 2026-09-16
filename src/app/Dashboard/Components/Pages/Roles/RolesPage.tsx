@@ -29,7 +29,7 @@ const RolesPage = () => {
             setRoles(await handleIndex(index));
         };
         loadRoles();
-    }, [handleIndex])
+    }, [handleIndex, showModal])
     return (
         <>
             {isLoading && <LoadingComponent />}
