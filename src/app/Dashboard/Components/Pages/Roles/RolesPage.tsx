@@ -21,7 +21,7 @@ const RolesPage = () => {
         setShowModal(true);
     }
     const showSuccess = () => {
-        setAlertMessage({ message: 'Datos guardados con exito', success: true, time: Date.now() });
+        setAlertMessage({ message: 'Datos guardados correctamente', success: true, time: Date.now() });
     }
 
     useEffect(() => {

@@ -3,23 +3,18 @@ import { FormControl, MenuItem, Select } from "@mui/material";
 import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
 import { show, storeOrUpdate } from "../../../../../services/user.service";
 import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
-import type { JobTitleInterface } from "../../../../../interfaces/JobTitleInterface";
-import type { roleInterface } from "../../../../../interfaces/RoleInterface";
 import { index as rolesIndex } from "../../../../../services/role.service";
 import { index as jobTitlesIndex } from "../../../../../services/job.title.service";
 import style from './cruds.forms.module.css';
 import { Controller, useForm } from "react-hook-form";
-import { userStoreSchema, type UserStoreSchema } from "../../../../../schemas/user.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
+import { userStoreSchema, type UserStoreSchema } from "../../../../../schemas/user.schema";
+import type { JobTitleInterface } from "../../../../../interfaces/JobTitleInterface";
+import type { roleInterface } from "../../../../../interfaces/RoleInterface";
+import type { FormsProps } from "../../../../../interfaces/FormsPropsInterface";
 
-interface UsersFormProps {
-    id?: number;
-    handleClose: () => void,
-    handleSuccess: () => void,
-}
-
-const UsersForm = ({ id, handleClose, handleSuccess }: UsersFormProps) => {
+const UsersForm = ({ id, handleClose, handleSuccess }: FormsProps) => {
     const [roles, setRoles] = useState<roleInterface[] | null>(null);
     const [jobTitles, setJobTitles] = useState<JobTitleInterface[] | null>(null);
     const { handleShow, handleIndex, handleSave, isLoading, alertMessage } = useHandleFormsPages();
@@ -66,16 +61,16 @@ const UsersForm = ({ id, handleClose, handleSuccess }: UsersFormProps) => {
                     <h2 className={style.formsTitle}>{id ? "Editar Usuario" : "Crear usuario"}</h2>
                 </div>
                 <div className={style.formsContainer}>
-                    <span className="alert__">{errors.name ? errors.name.message : ''}</span>
+                    <span className="alert__">{errors.name && errors.name.message}</span>
                     <input type="text" placeholder="Ingresa el nombre" {...register('name')} />
                 </div>
                 <div className={style.formsContainer}>
-                    <span className="alert__">{errors.email ? errors.email.message : ''}</span>
+                    <span className="alert__">{errors.email && errors.email.message}</span>
                     <input type="email" placeholder="Ingresa el email" {...register('email')} />
                 </div>
                 <div className={style.formsContainer}>
                     <FormControl fullWidth error={!!errors.user_job_title}>
-                        <span className="alert__">{errors.user_job_title ? errors.user_job_title.message : ''}</span>
+                        <span className="alert__">{errors.user_job_title && errors.user_job_title.message}</span>
                         <Controller name="user_job_title" control={control} render={({ field }) => (
                             <Select {...field}>
                                 <MenuItem value={0}>Seleccionar cargos</MenuItem>
@@ -92,7 +87,7 @@ const UsersForm = ({ id, handleClose, handleSuccess }: UsersFormProps) => {
                     </FormControl>
                 </div>
                 <div className={style.formsContainer}>
-                    <span className="alert__">{errors.user_role ? errors.user_role.message : ''}</span>
+                    <span className="alert__">{errors.user_role && errors.user_role.message}</span>
                     <FormControl fullWidth error={!!errors.user_role}>
                         <Controller name="user_role" control={control} render={({ field }) => (
                             <Select {...field}>
