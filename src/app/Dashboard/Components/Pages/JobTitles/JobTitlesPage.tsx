@@ -1,4 +1,4 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Dialog, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import type { JobTitleInterface } from "../../../../../interfaces/JobTitleInterface";
 import { useEffect, useState } from "react";
 import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
@@ -9,16 +9,29 @@ import style from "./job.titles.module.css";
 import NoteAdd from '@mui/icons-material/NoteAdd';
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
+import JobTitlesForm from "../Forms/JobTitlesForm";
 
 const JobTitlesPage = () => {
     const [jobTitles, setJobTitles] = useState<JobTitleInterface[] | null>(null);
-    const { isLoading, alertMessage, handleIndex } = useHandleFormsPages();
+    const [id, setId] = useState<number | undefined>(undefined);
+    const [showModal, setShowModal] = useState<boolean>(false);
+
+    const { isLoading, alertMessage, handleIndex, setAlertMessage } = useHandleFormsPages();
+
+    const handleShowForm = (id: number | undefined) => {
+        setShowModal(true);
+        setId(id);
+    }
+    const showSuccess = () => {
+        setAlertMessage({ message: 'Datos guardados correctamente', success: true, time: Date.now() })
+    }
+
     useEffect(() => {
         const loadAppoinments = async () => {
             setJobTitles(await handleIndex(index));
         }
         loadAppoinments();
-    }, [handleIndex]);
+    }, [handleIndex, showModal]);
     return (
         <>
             {isLoading && <LoadingComponent />}
@@ -29,7 +42,7 @@ const JobTitlesPage = () => {
                     <div>
                         <input type="search" placeholder="Buscar Cargo" />
                     </div>
-                    <button data-primary="true" data-icon="true">
+                    <button data-primary="true" data-icon="true" onClick={() => { handleShowForm(undefined) }}>
                         <NoteAdd />
                         <span>Agregar Cargo</span>
                     </button>
@@ -52,7 +65,7 @@ const JobTitlesPage = () => {
                                     <TableCell>{jobTitle.code}</TableCell>
                                     <TableCell>{jobTitle.name}</TableCell>
                                     <TableCell>{jobTitle.description}</TableCell>
-                                    <TableCell><button data-secondary="true" data-icon="true"><ModeEditOutlineRoundedIcon /></button></TableCell>
+                                    <TableCell><button data-secondary="true" data-icon="true" onClick={() => { handleShowForm(jobTitle.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
                                 </TableRow>
                             )) : (
                                 <TableRow key="no-job-titles-row">
@@ -69,6 +82,9 @@ const JobTitlesPage = () => {
                     </button>
                 </div>
             </section>
+            <Dialog open={showModal}>
+                <JobTitlesForm id={id} handleClose={() => setShowModal(false)} handleSuccess={() => showSuccess()} />
+            </Dialog>
         </>
     )
 }
