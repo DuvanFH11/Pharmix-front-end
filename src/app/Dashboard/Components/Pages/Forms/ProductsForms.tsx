@@ -4,7 +4,7 @@ import style from "./cruds.forms.module.css";
 import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
 import { show, storeOrUpdate } from "../../../../../services/product.service";
 import { useForm } from "react-hook-form";
-import type { ProductStoreSchema } from "../../../../../schemas/product.schema";
+// import type { ProductStoreSchema } from "../../../../../schemas/product.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import productStoreSchema from "../../../../../schemas/product.schema";
 import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
@@ -13,7 +13,7 @@ import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 const ProductsForm = ({ id, handleClose, handleSuccess }: FormsProps) => {
     const { handleShow, handleSave, isLoading, alertMessage } = useHandleFormsPages();
 
-    const { register, formState: { errors }, handleSubmit, setValue } = useForm<ProductStoreSchema>({
+    const { register, formState: { errors }, handleSubmit, setValue } = useForm({
         resolver: zodResolver(productStoreSchema),
     })
 
@@ -37,6 +37,7 @@ const ProductsForm = ({ id, handleClose, handleSuccess }: FormsProps) => {
                     setValue('invima_registration', data.invima_registration);
                     setValue('strength', data.strength);
                     setValue('unit', data.unit);
+                    setValue('description', data.description);
                 }
             }
         };

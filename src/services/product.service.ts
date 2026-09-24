@@ -11,9 +11,10 @@ export const show = async (data: number) => {
 }
 
 export const storeOrUpdate = async (data: productStoreInterface, id: number | undefined) => {
-    const response = await api.post(`/products/${id ? id : ''}`, data);
+    const response = await api.post(`/products/save/${id ? id : ''}`, data);
     return response.data;
 }
+
 // export const store = async (data: products) => {
 //     const response = await api.post('product/store', data);
 //     return response;

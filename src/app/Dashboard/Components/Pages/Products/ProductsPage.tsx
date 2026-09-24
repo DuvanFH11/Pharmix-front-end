@@ -29,7 +29,7 @@ const ProductsPage = () => {
             setProducts(await handleIndex(index));
         }
         loadProducts();
-    }, [handleIndex])
+    }, [handleIndex, showModal])
     return (
         <>
             {isLoading && <LoadingComponent />}
@@ -56,8 +56,6 @@ const ProductsPage = () => {
                                 <TableCell>Package Price</TableCell>
                                 <TableCell>Invima Registration</TableCell>
                                 <TableCell>Strength</TableCell>
-                                <TableCell>Unit</TableCell>
-                                <TableCell>User Creator</TableCell>
                                 <TableCell>Edit</TableCell>
                             </TableRow>
                         </TableHead>
@@ -68,12 +66,22 @@ const ProductsPage = () => {
                                         <TableCell>{product.id}</TableCell>
                                         <TableCell>{product.name}</TableCell>
                                         <TableCell>{product.brand}</TableCell>
-                                        <TableCell>{product.unit_price}</TableCell>
-                                        <TableCell>{product.package_price}</TableCell>
+                                        <TableCell>
+                                            {new Intl.NumberFormat('es-CO', {
+                                                style: 'currency',
+                                                currency: 'COP',
+                                                minimumFractionDigits: 0
+                                            }).format(product.unit_price)}
+                                        </TableCell>
+                                        <TableCell>
+                                            {new Intl.NumberFormat('es-CO', {
+                                                style: 'currency',
+                                                currency: 'COP',
+                                                minimumFractionDigits: 0
+                                            }).format(product.package_price)}
+                                        </TableCell>
                                         <TableCell>{product.invima_registration}</TableCell>
-                                        <TableCell>{product.strength}</TableCell>
-                                        <TableCell>{product.unit}</TableCell>
-                                        <TableCell>{product.user_creator ? product.user_creator : 'N/A'}</TableCell>
+                                        <TableCell>{Number(product.strength)}{product.unit}</TableCell>
                                         <TableCell><button data-secondary="true" data-icon="true" onClick={() => { handleShowForm(product.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
                                     </TableRow>
                                 )) :
