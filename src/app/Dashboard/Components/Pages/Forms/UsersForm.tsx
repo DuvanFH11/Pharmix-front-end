@@ -62,11 +62,11 @@ const UsersForm = ({ id, handleClose, handleSuccess }: FormsProps) => {
                 </div>
                 <div className={style.formsContainer}>
                     <span className="alert__">{errors.name && errors.name.message}</span>
-                    <input type="text" placeholder="Ingresa el nombre" {...register('name')} />
+                    <input type="text" placeholder="Nombre del usuario" {...register('name')} />
                 </div>
                 <div className={style.formsContainer}>
                     <span className="alert__">{errors.email && errors.email.message}</span>
-                    <input type="email" placeholder="Ingresa el email" {...register('email')} />
+                    <input type="email" placeholder="Email del usuario" {...register('email')} />
                 </div>
                 <div className={style.formsContainer}>
                     <FormControl fullWidth error={!!errors.user_job_title}>
