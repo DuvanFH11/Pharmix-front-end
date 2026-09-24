@@ -3,17 +3,27 @@ import LoadingComponent from "../../../../../components/LoadingComponent/Loading
 import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 import type { ProductInterface } from "../../../../../interfaces/ProductInterface";
 import { useEffect, useState } from "react";
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Dialog, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { index } from "../../../../../services/product.service";
 import style from "./products.module.css";
 import NoteAdd from '@mui/icons-material/NoteAdd';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
+import ProductsForm from "../Forms/ProductsForms";
 
 const ProductsPage = () => {
-    const { isLoading, alertMessage, handleIndex } = useHandleFormsPages();
+    const { isLoading, alertMessage, handleIndex, setAlertMessage } = useHandleFormsPages();
+    const [id, setId] = useState<number | undefined>(undefined);
     const [products, setProducts] = useState<ProductInterface[] | null>(null);
+    const [showModal, setShowModal] = useState<boolean>(false);
 
+    const showSuccess = () => {
+        setAlertMessage({ message: 'Datos guardados con exito', success: true, time: Date.now() });
+    }
+    const handleShowForm = (id: number | undefined) => {
+        setId(id);
+        setShowModal(true);
+    }
     useEffect(() => {
         const loadProducts = async () => {
             setProducts(await handleIndex(index));
@@ -30,7 +40,7 @@ const ProductsPage = () => {
                     <div>
                         <input type="search" placeholder="Buscar productos" />
                     </div>
-                    <button data-primary="true" data-icon="true">
+                    <button data-primary="true" data-icon="true" onClick={() => { handleShowForm(undefined) }}>
                         <NoteAdd />
                         <span>Agregar producto</span>
                     </button>
@@ -64,7 +74,7 @@ const ProductsPage = () => {
                                         <TableCell>{product.strength}</TableCell>
                                         <TableCell>{product.unit}</TableCell>
                                         <TableCell>{product.user_creator ? product.user_creator : 'N/A'}</TableCell>
-                                        <TableCell><button data-secondary="true" data-icon="true"><ModeEditOutlineRoundedIcon /></button></TableCell>
+                                        <TableCell><button data-secondary="true" data-icon="true" onClick={() => { handleShowForm(product.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
                                     </TableRow>
                                 )) :
                                     <TableRow key="no-products-row">
@@ -81,9 +91,10 @@ const ProductsPage = () => {
                     </button>
                 </div>
             </section >
+            <Dialog open={showModal}>
+                {showModal && <ProductsForm id={id} handleClose={() => setShowModal(false)} handleSuccess={() => showSuccess()} />}
+            </Dialog>
         </>
     )
-
-
 }
 export default ProductsPage;

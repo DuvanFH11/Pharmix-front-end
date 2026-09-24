@@ -1,7 +1,7 @@
 import z from "zod";
 import { MESSAGES } from "../constants/messages";
 
-const storeProduct = z.object({
+const productStoreSchema = z.object({
     name: z.string().min(5, MESSAGES(5).MIN_LENGTH).max(50, MESSAGES(50).MAX_LENGTH),
     brand: z.string().min(5, MESSAGES(5).MIN_LENGTH).max(50, MESSAGES(50).MAX_LENGTH),
     description: z.string().min(5, MESSAGES(5).MIN_LENGTH).max(250, MESSAGES(250).MAX_LENGTH),
@@ -13,5 +13,5 @@ const storeProduct = z.object({
     is_active: z.boolean()
 })
 
-export type StoreProduct = z.infer<typeof storeProduct>
-export default storeProduct;
+export type ProductStoreSchema = z.infer<typeof productStoreSchema>
+export default productStoreSchema;

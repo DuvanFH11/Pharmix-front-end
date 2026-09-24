@@ -11,6 +11,9 @@
 .formsContainer{
     margin: 10px 0px 10px 0px;
 }
+.formsSubContainer{
+    margin: 5px;
+}
 .formsSubmit{
     background-color: var(--primary-color);
     color: var(--secondary-color);
@@ -28,6 +31,10 @@
     display:flex;
     flex-direction: column;
 }
+.formsContainer[data-container-duo="true"]{
+    display:flex;
+    flex-direction : row;
+}
 
 @media(max-width: 480px){
     .forms{
@@ -36,5 +43,11 @@
         padding:20px;
         width: 270px;
         font-size: 0.8rem !important;
+    }
+    .formsContainer{
+        margin: 5px 0px 5px 0px;
+    }
+    .formsContainer[data-container-duo="true"]{
+        flex-direction: column;
     }
 }
