@@ -14,11 +14,6 @@ const JobTitlesForm = ({ id, handleClose, handleSuccess }: FormsProps) => {
 
     const { register, formState: { errors }, handleSubmit, setValue } = useForm<JobTitleSchema>({
         resolver: zodResolver(jobTitleSchema),
-        defaultValues: {
-            code: '',
-            name: '',
-            description: 'Ingresar descripción'
-        }
     })
     const onSubmitForm = handleSubmit(async (data) => {
         const success = await handleSave(storeOrUpdate, data, id);
@@ -51,15 +46,15 @@ const JobTitlesForm = ({ id, handleClose, handleSuccess }: FormsProps) => {
                 </div>
                 <div className={style.formsContainer}>
                     <span className="alert__">{errors.code && errors.code.message}</span>
-                    <input type="text" placeholder="Ingresa el código del cargo" {...register('code')} />
+                    <input type="text" placeholder="Código del cargo" {...register('code')} />
                 </div>
                 <div className={style.formsContainer}>
                     <span className="alert__">{errors.name && errors.name.message}</span>
-                    <input type="text" placeholder="Ingresa el nombre del cargo" {...register('name')} />
+                    <input type="text" placeholder="Nombre del cargo" {...register('name')} />
                 </div>
                 <div className={style.formsContainer}>
                     <span className="alert__">{errors.description && errors.description.message}</span>
-                    <textarea maxLength={250} minLength={5} {...register('description')} />
+                    <textarea maxLength={250} minLength={5} {...register('description')} placeholder="Descripción" />
                 </div>
                 <div className={style.formsContainer} data-container-buttons="true">
                     <button type="submit" className={style.formsSubmit} data-primary="true" data-icon="true">{id ? "Modificar" : "Crear"}</button>

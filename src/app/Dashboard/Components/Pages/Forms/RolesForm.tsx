@@ -14,11 +14,6 @@ const RolesForm = ({ id, handleClose, handleSuccess }: FormsProps) => {
 
     const { register, formState: { errors }, handleSubmit, setValue } = useForm<RoleSchema>({
         resolver: zodResolver(roleSchema),
-        defaultValues: {
-            code: '',
-            name: '',
-            description: 'Ingresar descripción'
-        }
     })
     const onSubmitForm = handleSubmit(async (data) => {
         const success = await handleSave(storeOrUpdate, data, id);
@@ -51,15 +46,15 @@ const RolesForm = ({ id, handleClose, handleSuccess }: FormsProps) => {
                 </div>
                 <div className={style.formsContainer}>
                     <span className={"alert__"}>{errors.code && errors.code.message}</span>
-                    <input type="text" placeholder="Ingregar código del rol"  {...register('code')} />
+                    <input type="text" placeholder="Código del rol"  {...register('code')} />
                 </div>
                 <div className={style.formsContainer}>
                     <span className={"alert__"}>{errors.name && errors.name.message}</span>
-                    <input type="text" placeholder="Ingresar nombre del rol" {...register('name')} />
+                    <input type="text" placeholder="Nombre del rol" {...register('name')} />
                 </div>
                 <div>
                     <span className={"alert__"}>{errors.description && errors.description.message}</span>
-                    <textarea maxLength={250} minLength={5} {...register('description')} />
+                    <textarea maxLength={250} minLength={5} {...register('description')} placeholder="Descripción" />
                 </div>
                 <div className={style.formsContainer} data-container-buttons="true">
                     <button type="submit" className={style.formsSubmit} data-primary="true" data-icon="true">{id ? 'Modificar' : 'Crear'}</button>
