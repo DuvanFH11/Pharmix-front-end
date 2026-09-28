@@ -30,19 +30,13 @@ const UsersPages = () => {
                 setUsers(await handleIndex(index));
             }
             loadUsers();
+        } else {
+            const timeout = setTimeout(async () => {
+                setUsers(await handleIndex(index, searchTerm));
+            }, 600);
+            return () => clearTimeout(timeout);
         }
-        const timeout = setTimeout(async () => {
-            setUsers(await handleIndex(index, searchTerm));
-        }, 600);
-
-        return () => clearTimeout(timeout);
     }, [searchTerm, handleIndex, showForm]);
-
-    // useEffect(() => {
-    //     const loadUsers = async () => {
-    //     }
-    //     loadUsers();
-    // }, [handleIndex, showForm]);
     return (
         <>
             {isLoading && <LoadingComponent />}
