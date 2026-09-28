@@ -3,7 +3,7 @@ import api from "../plugins/axios"
 
 //Servicio para traer todos los usuarios;
 export const index = async (data?: string) => {
-    const response = await api.get('/users', { params: { name: data } });
+    const response = await api.get('/users', { params: { email: data } });
     return response.data;
 }
 export const show = async (data: number) => {

@@ -11,10 +11,10 @@ const useHandleFormsPages = () => {
     const [alertMessage, setAlertMessage] = useState<{ message: string, success: boolean, time: number } | null>(null);
 
 
-    const handleIndex = useCallback(async (service: (name?: string) => Promise<ResponseInterface>, name?: string) => {
+    const handleIndex = useCallback(async (service: (term?: string) => Promise<ResponseInterface>, term?: string) => {
         setLoading(true);
         try {
-            const { data } = await service(name);
+            const { data } = await service(term);
             return data.length > 0 ? data : null;
 
         } catch (error: unknown) {

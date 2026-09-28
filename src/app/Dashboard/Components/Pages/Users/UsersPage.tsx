@@ -15,7 +15,7 @@ const UsersPages = () => {
     const [users, setUsers] = useState<UserType[] | null>(null);
     const [id, setId] = useState<number | undefined>(undefined);
     const [showForm, setShowForm] = useState<boolean>(false);
-
+    const [searchTerm, setTerm] = useState<string | undefined>(undefined);
     const { isLoading, alertMessage, handleIndex, setAlertMessage } = useHandleFormsPages();
     const handleShowForm = (id: number | undefined) => {
         setId(id);
@@ -25,11 +25,24 @@ const UsersPages = () => {
         setAlertMessage({ message: 'Datos guardados con exito', success: true, time: Date.now() })
     }
     useEffect(() => {
-        const loadUsers = async () => {
-            setUsers(await handleIndex(index));
+        if (!searchTerm) {
+            const loadUsers = async () => {
+                setUsers(await handleIndex(index));
+            }
+            loadUsers();
         }
-        loadUsers();
-    }, [handleIndex, showForm]);
+        const timeout = setTimeout(async () => {
+            setUsers(await handleIndex(index, searchTerm));
+        }, 600);
+
+        return () => clearTimeout(timeout);
+    }, [searchTerm, handleIndex, showForm]);
+
+    // useEffect(() => {
+    //     const loadUsers = async () => {
+    //     }
+    //     loadUsers();
+    // }, [handleIndex, showForm]);
     return (
         <>
             {isLoading && <LoadingComponent />}
@@ -37,7 +50,7 @@ const UsersPages = () => {
             <section className="section__">
                 <div className={style.usersContainer} data-container-buttons="true">
                     <div>
-                        <input type="search" placeholder="Buscar Usuario" /*onChange={handleSearch} */ />
+                        <input type="search" placeholder="Buscar Usuario" onChange={(e) => setTerm(e.target.value)} />
                     </div>
                     <button data-primary="true" data-icon="true" onClick={() => { handleShowForm(undefined) }}>
                         <PersonAddAltRoundedIcon />
