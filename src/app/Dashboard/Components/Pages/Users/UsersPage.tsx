@@ -51,7 +51,12 @@ const UsersPages = () => {
                         <span>Agregar usuario</span>
                     </button>
                     <div>
-                        <input className={style.pagesInputSearch} type="search" placeholder="Buscar usuarios por E-mail" onChange={(e) => setTerm(e.target.value)} />
+                        <input
+                            className={style.pagesInputSearch}
+                            type="search"
+                            placeholder="Buscar usuarios por E-mail"
+                            onChange={(e) => setTerm(e.target.value)}
+                        />
                     </div>
                 </div>
                 <TableContainer component={Paper}>

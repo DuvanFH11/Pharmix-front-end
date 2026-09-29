@@ -2,7 +2,7 @@ import type { productStoreInterface } from "../interfaces/ProductInterface";
 import api from "../plugins/axios"
 
 export const index = async (data?: string) => {
-    const response = await api.get('/products', { params: { name: data } });
+    const response = await api.get('/products', { params: { value: data } });
     return response.data;
 }
 export const show = async (data: number) => {

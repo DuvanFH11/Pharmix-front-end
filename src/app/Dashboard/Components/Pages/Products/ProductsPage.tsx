@@ -16,6 +16,7 @@ const ProductsPage = () => {
     const [id, setId] = useState<number | undefined>(undefined);
     const [products, setProducts] = useState<ProductInterface[] | null>(null);
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [searchTerm, setTerm] = useState<string | undefined>(undefined);
 
     const showSuccess = () => {
         setAlertMessage({ message: 'Datos guardados con exito', success: true, time: Date.now() });
@@ -25,11 +26,18 @@ const ProductsPage = () => {
         setShowModal(true);
     }
     useEffect(() => {
-        const loadProducts = async () => {
-            setProducts(await handleIndex(index));
+        if (!searchTerm) {
+            const loadProducts = async () => {
+                setProducts(await handleIndex(index));
+            }
+            loadProducts();
+        } else {
+            const timeout = setTimeout(async () => {
+                setProducts(await handleIndex(index, searchTerm));
+            }, 600);
+            return () => clearTimeout(timeout);
         }
-        loadProducts();
-    }, [handleIndex, showModal])
+    }, [searchTerm, handleIndex, showModal])
     return (
         <>
             {isLoading && <LoadingComponent />}
@@ -45,7 +53,12 @@ const ProductsPage = () => {
                         <span>Agregar producto</span>
                     </button>
                     <div>
-                        <input className={style.pagesInputSearch} type="search" placeholder="Buscar productos por nombre o registro " />
+                        <input
+                            className={style.pagesInputSearch}
+                            type="search"
+                            placeholder="Buscar productos por nombre o registro"
+                            onChange={(e) => setTerm(e.target.value)}
+                        />
                     </div>
                 </div>
                 <TableContainer component={Paper}>
