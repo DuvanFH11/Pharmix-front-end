@@ -1,5 +1,0 @@
-.rolesContainer[data-container-buttons="true"]{
-    display:flex;
-    flex-direction: row;
-    justify-content: flex-end;
-}

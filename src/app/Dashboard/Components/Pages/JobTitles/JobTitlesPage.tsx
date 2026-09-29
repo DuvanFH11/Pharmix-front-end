@@ -5,11 +5,11 @@ import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
 import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
 import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 import { index } from "../../../../../services/job.title.service";
-import style from "./job.titles.module.css";
 import NoteAdd from '@mui/icons-material/NoteAdd';
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
 import JobTitlesForm from "../Forms/JobTitlesForm";
+import style from "../pages..style.module.css";
 
 const JobTitlesPage = () => {
     const [jobTitles, setJobTitles] = useState<JobTitleInterface[] | null>(null);
@@ -38,14 +38,17 @@ const JobTitlesPage = () => {
             {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
 
             <section className="section__">
-                <div className={style.jobTitlesContainer} data-container-buttons="true">
-                    <div>
-                        <input type="search" placeholder="Buscar Cargo" />
-                    </div>
+                <div className={style.pagesContainer} data-title="true">
+                    <h1>Cargos</h1>
+                </div>
+                <div className={style.pagesContainer} data-container-buttons="true">
                     <button data-primary="true" data-icon="true" onClick={() => { handleShowForm(undefined) }}>
                         <NoteAdd />
                         <span>Agregar Cargo</span>
                     </button>
+                    <div>
+                        <input className={style.pagesInputSearch} type="search" placeholder="Buscar cargo por código" />
+                    </div>
                 </div>
                 <TableContainer component={Paper}>
                     <Table>
@@ -75,7 +78,7 @@ const JobTitlesPage = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <div className={style.jobTitlesContainer} data-container-buttons="true">
+                <div className={style.pagesContainer} data-container-buttons="true">
                     <button data-primary="true" data-icon="true">
                         <TimelineOutlinedIcon />
                         <span>Ver estadisticas</span>

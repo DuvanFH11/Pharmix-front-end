@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import style from "./users.module.css";
 import type { UserType } from "../../../../../interfaces/UserInterface";
 import { index } from "../../../../../services/user.service";
 import { Dialog, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
@@ -10,6 +9,7 @@ import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import UsersForm from "../Forms/UsersForm";
+import style from "../pages..style.module.css";
 
 const UsersPages = () => {
     const [users, setUsers] = useState<UserType[] | null>(null);
@@ -42,14 +42,17 @@ const UsersPages = () => {
             {isLoading && <LoadingComponent />}
             {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
             <section className="section__">
-                <div className={style.usersContainer} data-container-buttons="true">
-                    <div>
-                        <input type="search" placeholder="Buscar Usuario" onChange={(e) => setTerm(e.target.value)} />
-                    </div>
+                <div className={style.pagesContainer} data-title="true">
+                    <h1>Usuarios</h1>
+                </div>
+                <div className={style.pagesContainer} data-container-buttons="true">
                     <button data-primary="true" data-icon="true" onClick={() => { handleShowForm(undefined) }}>
                         <PersonAddAltRoundedIcon />
                         <span>Agregar usuario</span>
                     </button>
+                    <div>
+                        <input className={style.pagesInputSearch} type="search" placeholder="Buscar usuarios por E-mail" onChange={(e) => setTerm(e.target.value)} />
+                    </div>
                 </div>
                 <TableContainer component={Paper}>
                     <Table>
@@ -82,7 +85,7 @@ const UsersPages = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <div className={style.usersContainer} data-container-buttons="true">
+                <div className={style.pagesContainer} data-container-buttons="true">
                     <button data-primary="true" data-icon="true">
                         <TimelineOutlinedIcon />
                         <span>Ver estadisticas</span>
