@@ -6,10 +6,11 @@ import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
 import { Dialog, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { index } from "../../../../../services/role.service";
-import style from "./roles.module.css";
 import NoteAdd from '@mui/icons-material/NoteAdd';
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import RolesForm from "../Forms/RolesForm";
+import style from "../pages..style.module.css";
+
 const RolesPage = () => {
     const [roles, setRoles] = useState<roleInterface[] | null>(null);
     const [showModal, setShowModal] = useState<boolean>(false);
@@ -35,14 +36,17 @@ const RolesPage = () => {
             {isLoading && <LoadingComponent />}
             {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
             <section className="section__">
-                <div className={style.rolesContainer} data-container-buttons="true">
-                    <div>
-                        <input type="search" placeholder="Buscar Rol" />
-                    </div>
+                <div className={style.pagesContainer} data-title="true">
+                    <h1>Roles</h1>
+                </div>
+                <div className={style.pagesContainer} data-container-buttons="true">
                     <button data-primary="true" data-icon="true" onClick={() => { handleShowForm(undefined) }}>
                         <NoteAdd />
                         <span>Agregar Rol</span>
                     </button>
+                    <div>
+                        <input className={style.pagesInputSearch} type="search" placeholder="Buscar roles por código" />
+                    </div>
                 </div>
 
                 <TableContainer>
@@ -75,7 +79,7 @@ const RolesPage = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <div className={style.rolesContainer} data-container-buttons="true">
+                <div className={style.pagesContainer} data-container-buttons="true">
                     <button data-primary="true" data-icon="true">
                         <TimelineOutlinedIcon />
                         <span>Ver estadísticas</span>

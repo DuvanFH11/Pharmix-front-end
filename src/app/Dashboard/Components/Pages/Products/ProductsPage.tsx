@@ -5,17 +5,18 @@ import type { ProductInterface } from "../../../../../interfaces/ProductInterfac
 import { useEffect, useState } from "react";
 import { Dialog, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { index } from "../../../../../services/product.service";
-import style from "./products.module.css";
 import NoteAdd from '@mui/icons-material/NoteAdd';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import ProductsForm from "../Forms/ProductsForms";
+import style from "../pages..style.module.css";
 
 const ProductsPage = () => {
     const { isLoading, alertMessage, handleIndex, setAlertMessage } = useHandleFormsPages();
     const [id, setId] = useState<number | undefined>(undefined);
     const [products, setProducts] = useState<ProductInterface[] | null>(null);
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [searchTerm, setTerm] = useState<string | undefined>(undefined);
 
     const showSuccess = () => {
         setAlertMessage({ message: 'Datos guardados con exito', success: true, time: Date.now() });
@@ -25,25 +26,40 @@ const ProductsPage = () => {
         setShowModal(true);
     }
     useEffect(() => {
-        const loadProducts = async () => {
-            setProducts(await handleIndex(index));
+        if (!searchTerm) {
+            const loadProducts = async () => {
+                setProducts(await handleIndex(index));
+            }
+            loadProducts();
+        } else {
+            const timeout = setTimeout(async () => {
+                setProducts(await handleIndex(index, searchTerm));
+            }, 600);
+            return () => clearTimeout(timeout);
         }
-        loadProducts();
-    }, [handleIndex, showModal])
+    }, [searchTerm, handleIndex, showModal])
     return (
         <>
             {isLoading && <LoadingComponent />}
             {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
 
             <section className="section__">
-                <div className={style.productsContainer} data-container-buttons="true">
-                    <div>
-                        <input type="search" placeholder="Buscar productos" />
-                    </div>
+                <div className={style.pagesContainer} data-title="true">
+                    <h1>Productos</h1>
+                </div>
+                <div className={style.pagesContainer} data-container-buttons="true">
                     <button data-primary="true" data-icon="true" onClick={() => { handleShowForm(undefined) }}>
                         <NoteAdd />
                         <span>Agregar producto</span>
                     </button>
+                    <div>
+                        <input
+                            className={style.pagesInputSearch}
+                            type="search"
+                            placeholder="Buscar productos por nombre o registro"
+                            onChange={(e) => setTerm(e.target.value)}
+                        />
+                    </div>
                 </div>
                 <TableContainer component={Paper}>
                     <Table>
@@ -92,7 +108,7 @@ const ProductsPage = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <div className={style.productsContainer} data-container-buttons="true">
+                <div className={style.pagesContainer} data-container-buttons="true">
                     <button data-primary="true" data-icon="true">
                         <TimelineOutlinedIcon />
                         <span>Ver estadisticas</span>
