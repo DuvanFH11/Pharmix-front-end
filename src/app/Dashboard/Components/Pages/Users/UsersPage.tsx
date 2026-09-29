@@ -14,12 +14,12 @@ import style from "../pages..style.module.css";
 const UsersPages = () => {
     const [users, setUsers] = useState<UserType[] | null>(null);
     const [id, setId] = useState<number | undefined>(undefined);
-    const [showForm, setShowForm] = useState<boolean>(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
     const [searchTerm, setTerm] = useState<string | undefined>(undefined);
     const { isLoading, alertMessage, handleIndex, setAlertMessage } = useHandleFormsPages();
     const handleShowForm = (id: number | undefined) => {
         setId(id);
-        setShowForm(true);
+        setShowModal(true);
     }
     const showSuccess = () => {
         setAlertMessage({ message: 'Datos guardados con exito', success: true, time: Date.now() })
@@ -36,7 +36,7 @@ const UsersPages = () => {
             }, 600);
             return () => clearTimeout(timeout);
         }
-    }, [searchTerm, handleIndex, showForm]);
+    }, [searchTerm, handleIndex, showModal]);
     return (
         <>
             {isLoading && <LoadingComponent />}
@@ -92,8 +92,8 @@ const UsersPages = () => {
                     </button>
                 </div>
             </section>
-            <Dialog open={showForm}>
-                {showForm && <UsersForm id={id} handleClose={() => { setShowForm(false) }} handleSuccess={() => { showSuccess() }} />}
+            <Dialog open={showModal}>
+                {showModal && <UsersForm id={id} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess() }} />}
             </Dialog>
         </>
     )
