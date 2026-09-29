@@ -16,6 +16,7 @@ const RolesPage = () => {
     const [showModal, setShowModal] = useState<boolean>(false);
     const [id, setId] = useState<number | undefined>(undefined);
     const { isLoading, alertMessage, handleIndex, setAlertMessage } = useHandleFormsPages();
+    const [searchTerm, setTerm] = useState<string | undefined>(undefined);
 
     const handleShowForm = (id: number | undefined) => {
         setId(id);
@@ -26,11 +27,18 @@ const RolesPage = () => {
     }
 
     useEffect(() => {
-        const loadRoles = async () => {
-            setRoles(await handleIndex(index));
-        };
-        loadRoles();
-    }, [handleIndex, showModal])
+        if (!searchTerm) {
+            const loadRoles = async () => {
+                setRoles(await handleIndex(index));
+            };
+            loadRoles();
+        } else {
+            const timeout = setTimeout(async () => {
+                setRoles(await handleIndex(index, searchTerm));
+            }, 600)
+            return () => clearTimeout(timeout);
+        }
+    }, [handleIndex, showModal, searchTerm])
     return (
         <>
             {isLoading && <LoadingComponent />}
@@ -45,7 +53,12 @@ const RolesPage = () => {
                         <span>Agregar Rol</span>
                     </button>
                     <div>
-                        <input className={style.pagesInputSearch} type="search" placeholder="Buscar roles por código" />
+                        <input
+                            className={style.pagesInputSearch}
+                            type="search"
+                            placeholder="Buscar roles por código"
+                            onChange={(e) => setTerm(e.target.value)}
+                        />
                     </div>
                 </div>
 

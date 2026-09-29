@@ -8,8 +8,8 @@ export const storeOrUpdate = async (data: roleStoreInterface, id?: number) => {
     return response.data;
 }
 
-export const index = async () => {
-    const response = await api.get("/roles");
+export const index = async (data?: string) => {
+    const response = await api.get("/roles", { params: { code: data } });
     return response.data;
 }
 export const show = async (data: number) => {
