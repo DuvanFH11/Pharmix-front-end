@@ -15,6 +15,7 @@ const JobTitlesPage = () => {
     const [jobTitles, setJobTitles] = useState<JobTitleInterface[] | null>(null);
     const [id, setId] = useState<number | undefined>(undefined);
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [searchTerm, setTerm] = useState<string | undefined>(undefined);
 
     const { isLoading, alertMessage, handleIndex, setAlertMessage } = useHandleFormsPages();
 
@@ -27,11 +28,19 @@ const JobTitlesPage = () => {
     }
 
     useEffect(() => {
-        const loadAppoinments = async () => {
-            setJobTitles(await handleIndex(index));
+        if (!searchTerm) {
+            const loadAppoinments = async () => {
+                setJobTitles(await handleIndex(index));
+            }
+            loadAppoinments();
+        } else {
+            const timeout = setTimeout(async () => {
+                setJobTitles(await handleIndex(index, searchTerm));
+            }, 600)
+            return () => clearTimeout(timeout);
         }
-        loadAppoinments();
-    }, [handleIndex, showModal]);
+    }, [handleIndex, showModal, searchTerm]);
+
     return (
         <>
             {isLoading && <LoadingComponent />}
@@ -47,7 +56,12 @@ const JobTitlesPage = () => {
                         <span>Agregar Cargo</span>
                     </button>
                     <div>
-                        <input className={style.pagesInputSearch} type="search" placeholder="Buscar cargo por código" />
+                        <input
+                            className={style.pagesInputSearch}
+                            type="search"
+                            placeholder="Buscar cargo por código"
+                            onChange={(e) => setTerm(e.target.value)}
+                        />
                     </div>
                 </div>
                 <TableContainer component={Paper}>
