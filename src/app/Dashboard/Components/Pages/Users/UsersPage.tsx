@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { UserType } from "../../../../../interfaces/UserInterface";
 import { index } from "../../../../../services/user.service";
-import { Dialog, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Dialog, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
 import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
 import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
@@ -13,6 +13,8 @@ import style from "../pages..style.module.css";
 
 const UsersPages = () => {
     const [users, setUsers] = useState<UserType[] | null>(null);
+    const [total, setTotal] = useState<number>(0);
+    const [perPage, setPerPage] = useState<number>(4);
     const [id, setId] = useState<number | undefined>(undefined);
     const [showModal, setShowModal] = useState<boolean>(false);
     const [searchTerm, setTerm] = useState<string | undefined>(undefined);
@@ -27,12 +29,18 @@ const UsersPages = () => {
     useEffect(() => {
         if (!searchTerm) {
             const loadUsers = async () => {
-                setUsers(await handleIndex(index));
+                const { data, total, per_page } = await handleIndex(index)
+                setUsers(data);
+                setTotal(total);
+                setPerPage(per_page);
             }
             loadUsers();
         } else {
             const timeout = setTimeout(async () => {
-                setUsers(await handleIndex(index, searchTerm));
+                const { data, total, per_page } = await handleIndex(index, searchTerm);
+                setUsers(data);
+                setTotal(total);
+                setPerPage(per_page);
             }, 600);
             return () => clearTimeout(timeout);
         }
@@ -90,6 +98,14 @@ const UsersPages = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <TablePagination
+                    component="div"
+                    page={0} //Indice de la página actual, empezando en 0
+                    count={total} //Número total de filas en toda la colección
+                    rowsPerPage={perPage} //Cantidad de filas por página
+                    rowsPerPageOptions={[]}
+                    onPageChange={console.log}
+                />
                 <div className={style.pagesContainer} data-container-buttons="true">
                     <button data-primary="true" data-icon="true">
                         <TimelineOutlinedIcon />

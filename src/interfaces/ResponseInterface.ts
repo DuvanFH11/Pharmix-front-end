@@ -2,15 +2,14 @@
 export interface ResponseInterface {
     message: string,
     success: boolean,
+}
+export interface DefaultResponse extends ResponseInterface {
     data?: any
 }
-export interface IndexResponseInterface extends ResponseInterface {
-    message: string,
-    succes: boolean,
+export interface PaginationResponse extends ResponseInterface {
     data: {
+        data: [],
         per_page: number,
-        current_page: number,
-        total: number,
-        data: any
+        total: number
     }
 }
