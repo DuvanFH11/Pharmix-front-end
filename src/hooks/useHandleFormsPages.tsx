@@ -17,7 +17,6 @@ const useHandleFormsPages = () => {
                 "per_page": data.per_page,
                 "page": data.page
             }
-            // return data.length > 0 ? data : null;
 
         } catch (error: unknown) {
             const err = error as AxiosErrorResponse;

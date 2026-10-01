@@ -12,42 +12,39 @@ import style from "../pages..style.module.css";
 
 const UsersPages = () => {
     const [users, setUsers] = useState<UserType[] | null>(null);
-    const [pagination, setPagination] = useState<{ total: number, per_page: number, page: number }>({ total: 0, per_page: 4, page: 1 });
+    const [pagination, setPagination] = useState<{ total: number, per_page: number }>({ total: 0, per_page: 4 });
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [refresh, setRefresh] = useState<boolean>(false);
     const [id, setId] = useState<number | undefined>(undefined);
     const [showModal, setShowModal] = useState<boolean>(false);
     const [searchTerm, setTerm] = useState<string | undefined>(undefined);
     const { isLoading, alertMessage, handleIndex, setAlertMessage } = useHandleFormsPages();
 
-    const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
-        setPagination((prev) => ({
-            ...prev,
-            page: newPage
-        }))
-    }
     const handleShowForm = (id: number | undefined) => {
         setId(id);
         setShowModal(true);
     }
     const showSuccess = () => {
         setAlertMessage({ message: 'Datos guardados con exito', success: true, time: Date.now() })
+        setRefresh(prev => !prev);
     }
     useEffect(() => {
         if (!searchTerm) {
             const loadUsers = async () => {
-                const { data, total, per_page, page } = await handleIndex(index, pagination.page);
+                const { data, total, per_page } = await handleIndex(index, currentPage);
                 setUsers(data);
-                setPagination({ total, per_page, page });
+                setPagination({ total, per_page });
             }
             loadUsers();
         } else {
             const timeout = setTimeout(async () => {
-                const { data, total, per_page, page } = await handleIndex(index, pagination.page, searchTerm);
+                const { data, total, per_page } = await handleIndex(index, currentPage, searchTerm);
                 setUsers(data);
-                setPagination({ total, per_page, page });
+                setPagination({ total, per_page });
             }, 600);
             return () => clearTimeout(timeout);
         }
-    }, [searchTerm, handleIndex, showModal, pagination.page]);
+    }, [searchTerm, handleIndex, currentPage, refresh]);
     return (
         <>
             {isLoading && <LoadingComponent />}
@@ -103,11 +100,11 @@ const UsersPages = () => {
                 </TableContainer>
                 <TablePagination
                     component="div"
-                    page={pagination.page - 1} //Indice de la página actual, empezando en 0
+                    page={currentPage - 1} //Indice de la página actual, empezando en 0
                     count={pagination.total} //Número total de filas en toda la colección
                     rowsPerPage={pagination.per_page} //Cantidad de filas por página
                     rowsPerPageOptions={[]}
-                    onPageChange={handleChangePage}
+                    onPageChange={(event, newPage) => setCurrentPage(newPage + 1)}
                 />
             </section>
             <Dialog open={showModal}>
