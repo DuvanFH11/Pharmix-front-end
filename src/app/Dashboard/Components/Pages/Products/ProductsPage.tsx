@@ -14,40 +14,38 @@ const ProductsPage = () => {
     const { isLoading, alertMessage, handleIndex, setAlertMessage } = useHandleFormsPages();
     const [id, setId] = useState<number | undefined>(undefined);
     const [products, setProducts] = useState<ProductInterface[] | null>(null);
-    const [pagination, setPagination] = useState<{ total: number, per_page: number, page: number }>({ total: 1, per_page: 1, page: 0 });
+    const [pagination, setPagination] = useState<{ total: number, per_page: number }>({ total: 1, per_page: 1 });
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [refresh, setRefresh] = useState<boolean>(false);
     const [showModal, setShowModal] = useState<boolean>(false);
     const [searchTerm, setTerm] = useState<string | undefined>(undefined);
 
-    const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
-        setPagination((prev) => ({
-            ...prev,
-            page: newPage,
-        }));
-    };
-    const showSuccess = () => {
-        setAlertMessage({ message: 'Datos guardados con exito', success: true, time: Date.now() });
-    }
     const handleShowForm = (id: number | undefined) => {
         setId(id);
         setShowModal(true);
     }
+    const showSuccess = () => {
+        setAlertMessage({ message: 'Datos guardados con exito', success: true, time: Date.now() });
+        setRefresh(prev => !prev);
+    }
+
     useEffect(() => {
         if (!searchTerm) {
             const loadProducts = async () => {
-                const { data, total, per_page, page } = await handleIndex(index, pagination.page);
+                const { data, total, per_page } = await handleIndex(index, currentPage);
                 setProducts(data);
-                setPagination({ total, per_page, page: page - 1 });
+                setPagination({ total, per_page });
             }
             loadProducts();
         } else {
             const timeout = setTimeout(async () => {
-                const { data, total, per_page, page } = await handleIndex(index, pagination.page, searchTerm);
+                const { data, total, per_page } = await handleIndex(index, currentPage, searchTerm);
                 setProducts(data);
-                setPagination({ total, per_page, page: page - 1 });
+                setPagination({ total, per_page });
             }, 600);
             return () => clearTimeout(timeout);
         }
-    }, [searchTerm, handleIndex, showModal, pagination.page])
+    }, [searchTerm, handleIndex, refresh, currentPage])
     return (
         <>
             {isLoading && <LoadingComponent />}
@@ -120,11 +118,11 @@ const ProductsPage = () => {
                 </TableContainer>
                 <TablePagination
                     component="div"
-                    page={pagination.page}
+                    page={currentPage - 1}
                     rowsPerPage={pagination.per_page}
                     count={pagination.total}
-                    onPageChange={handleChangePage}
                     rowsPerPageOptions={[]}
+                    onPageChange={(event, newPage) => setCurrentPage(newPage + 1)}
                 />
             </section >
             <Dialog open={showModal}>
