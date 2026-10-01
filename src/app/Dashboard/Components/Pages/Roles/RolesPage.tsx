@@ -12,7 +12,9 @@ import style from "../pages..style.module.css";
 
 const RolesPage = () => {
     const [roles, setRoles] = useState<roleInterface[] | null>(null);
-    const [pagination, setPagination] = useState<{ total: number, per_page: number, page: number }>({ total: 0, per_page: 4, page: 0 });
+    const [pagination, setPagination] = useState<{ total: number, per_page: number }>({ total: 0, per_page: 4 });
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [refresh, setRefresh] = useState<boolean>(false);
     const [showModal, setShowModal] = useState<boolean>(false);
     const [id, setId] = useState<number | undefined>(undefined);
     const { isLoading, alertMessage, handleIndex, setAlertMessage } = useHandleFormsPages();
@@ -24,25 +26,26 @@ const RolesPage = () => {
     }
     const showSuccess = () => {
         setAlertMessage({ message: 'Datos guardados correctamente', success: true, time: Date.now() });
+        setRefresh(prev => !prev);
     }
 
     useEffect(() => {
         if (!searchTerm) {
             const loadRoles = async () => {
-                const { data, total, per_page, page } = await handleIndex(index, pagination.page);
+                const { data, total, per_page } = await handleIndex(index, currentPage);
                 setRoles(data);
-                setPagination({ total, per_page, page: page - 1 });
+                setPagination({ total, per_page });
             };
             loadRoles();
         } else {
             const timeout = setTimeout(async () => {
-                const { data, total, per_page, page } = await handleIndex(index, pagination.page, searchTerm);
+                const { data, total, per_page } = await handleIndex(index, currentPage, searchTerm);
                 setRoles(data);
-                setPagination({ total, per_page, page: page - 1 });
+                setPagination({ total, per_page });
             }, 600)
             return () => clearTimeout(timeout);
         }
-    }, [handleIndex, showModal, searchTerm, pagination.page])
+    }, [handleIndex, searchTerm, currentPage, refresh])
     return (
         <>
             {isLoading && <LoadingComponent />}
@@ -97,11 +100,11 @@ const RolesPage = () => {
                 </TableContainer>
                 <TablePagination
                     component="div"
-                    page={pagination.page}
+                    page={currentPage - 1}
                     rowsPerPage={pagination.per_page}
                     count={pagination.total}
-                    onPageChange={console.log}
                     rowsPerPageOptions={[]}
+                    onPageChange={(event, newPage) => setCurrentPage(newPage + 1)}
                 />
             </section>
             <Dialog open={showModal}>
