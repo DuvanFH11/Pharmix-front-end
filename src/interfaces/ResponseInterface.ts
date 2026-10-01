@@ -9,7 +9,8 @@ export interface DefaultResponse extends ResponseInterface {
 export interface PaginationResponse extends ResponseInterface {
     data: {
         data: [],
+        total: number,
         per_page: number,
-        total: number
+        page: number
     }
 }

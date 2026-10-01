@@ -4,15 +4,15 @@ import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
 import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
 import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
-import { Dialog, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Dialog, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
 import { index } from "../../../../../services/role.service";
 import NoteAdd from '@mui/icons-material/NoteAdd';
-import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import RolesForm from "../Forms/RolesForm";
 import style from "../pages..style.module.css";
 
 const RolesPage = () => {
     const [roles, setRoles] = useState<roleInterface[] | null>(null);
+    const [pagination, setPagination] = useState<{ total: number, per_page: number, page: number }>({ total: 0, per_page: 4, page: 0 });
     const [showModal, setShowModal] = useState<boolean>(false);
     const [id, setId] = useState<number | undefined>(undefined);
     const { isLoading, alertMessage, handleIndex, setAlertMessage } = useHandleFormsPages();
@@ -29,16 +29,20 @@ const RolesPage = () => {
     useEffect(() => {
         if (!searchTerm) {
             const loadRoles = async () => {
-                setRoles(await handleIndex(index));
+                const { data, total, per_page, page } = await handleIndex(index, pagination.page);
+                setRoles(data);
+                setPagination({ total, per_page, page: page - 1 });
             };
             loadRoles();
         } else {
             const timeout = setTimeout(async () => {
-                setRoles(await handleIndex(index, searchTerm));
+                const { data, total, per_page, page } = await handleIndex(index, pagination.page, searchTerm);
+                setRoles(data);
+                setPagination({ total, per_page, page: page - 1 });
             }, 600)
             return () => clearTimeout(timeout);
         }
-    }, [handleIndex, showModal, searchTerm])
+    }, [handleIndex, showModal, searchTerm, pagination.page])
     return (
         <>
             {isLoading && <LoadingComponent />}
@@ -61,7 +65,6 @@ const RolesPage = () => {
                         />
                     </div>
                 </div>
-
                 <TableContainer>
                     <Table>
                         <TableHead>
@@ -92,12 +95,14 @@ const RolesPage = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <div className={style.pagesContainer} data-container-buttons="true">
-                    <button data-primary="true" data-icon="true">
-                        <TimelineOutlinedIcon />
-                        <span>Ver estadísticas</span>
-                    </button>
-                </div>
+                <TablePagination
+                    component="div"
+                    page={pagination.page}
+                    rowsPerPage={pagination.per_page}
+                    count={pagination.total}
+                    onPageChange={console.log}
+                    rowsPerPageOptions={[]}
+                />
             </section>
             <Dialog open={showModal}>
                 {showModal && <RolesForm id={id} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess() }} />}
@@ -105,6 +110,4 @@ const RolesPage = () => {
         </>
     )
 }
-
-
 export default RolesPage;

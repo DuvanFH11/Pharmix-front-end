@@ -3,11 +3,10 @@ import LoadingComponent from "../../../../../components/LoadingComponent/Loading
 import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 import type { ProductInterface } from "../../../../../interfaces/ProductInterface";
 import { useEffect, useState } from "react";
-import { Dialog, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Dialog, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
 import { index } from "../../../../../services/product.service";
 import NoteAdd from '@mui/icons-material/NoteAdd';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
-import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import ProductsForm from "../Forms/ProductsForms";
 import style from "../pages..style.module.css";
 
@@ -15,9 +14,16 @@ const ProductsPage = () => {
     const { isLoading, alertMessage, handleIndex, setAlertMessage } = useHandleFormsPages();
     const [id, setId] = useState<number | undefined>(undefined);
     const [products, setProducts] = useState<ProductInterface[] | null>(null);
+    const [pagination, setPagination] = useState<{ total: number, per_page: number, page: number }>({ total: 1, per_page: 1, page: 0 });
     const [showModal, setShowModal] = useState<boolean>(false);
     const [searchTerm, setTerm] = useState<string | undefined>(undefined);
 
+    const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+        setPagination((prev) => ({
+            ...prev,
+            page: newPage,
+        }));
+    };
     const showSuccess = () => {
         setAlertMessage({ message: 'Datos guardados con exito', success: true, time: Date.now() });
     }
@@ -28,16 +34,20 @@ const ProductsPage = () => {
     useEffect(() => {
         if (!searchTerm) {
             const loadProducts = async () => {
-                setProducts(await handleIndex(index));
+                const { data, total, per_page, page } = await handleIndex(index, pagination.page);
+                setProducts(data);
+                setPagination({ total, per_page, page: page - 1 });
             }
             loadProducts();
         } else {
             const timeout = setTimeout(async () => {
-                setProducts(await handleIndex(index, searchTerm));
+                const { data, total, per_page, page } = await handleIndex(index, pagination.page, searchTerm);
+                setProducts(data);
+                setPagination({ total, per_page, page: page - 1 });
             }, 600);
             return () => clearTimeout(timeout);
         }
-    }, [searchTerm, handleIndex, showModal])
+    }, [searchTerm, handleIndex, showModal, pagination.page])
     return (
         <>
             {isLoading && <LoadingComponent />}
@@ -108,12 +118,14 @@ const ProductsPage = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <div className={style.pagesContainer} data-container-buttons="true">
-                    <button data-primary="true" data-icon="true">
-                        <TimelineOutlinedIcon />
-                        <span>Ver estadisticas</span>
-                    </button>
-                </div>
+                <TablePagination
+                    component="div"
+                    page={pagination.page}
+                    rowsPerPage={pagination.per_page}
+                    count={pagination.total}
+                    onPageChange={handleChangePage}
+                    rowsPerPageOptions={[]}
+                />
             </section >
             <Dialog open={showModal}>
                 {showModal && <ProductsForm id={id} handleClose={() => setShowModal(false)} handleSuccess={() => showSuccess()} />}

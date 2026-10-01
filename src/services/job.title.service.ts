@@ -1,8 +1,8 @@
 import type { JobTitleStoreInterface } from "../interfaces/JobTitleInterface";
 import api from "../plugins/axios"
 
-export const index = async (data?: string) => {
-    const response = await api.get('/job_titles', { params: { code: data } });
+export const index = async (page: number, termSearch?: string) => {
+    const response = await api.get('/job_titles', { params: { page: page, code: termSearch } });
     return response.data;
 }
 export const show = async (data: number) => {

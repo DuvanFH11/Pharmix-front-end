@@ -7,14 +7,15 @@ const useHandleFormsPages = () => {
     const [alertMessage, setAlertMessage] = useState<{ message: string, success: boolean, time: number } | null>(null);
 
 
-    const handleIndex = useCallback(async (service: (term?: string) => Promise<PaginationResponse>, term?: string) => {
+    const handleIndex = useCallback(async (service: (page: number, term?: string) => Promise<PaginationResponse>, page: number, term?: string) => {
         setLoading(true);
         try {
-            const { data } = await service(term);
+            const { data } = await service(page, term);
             return {
-                'data': data.data.length > 0 ? data.data : null,
-                'per_page': data.per_page,
-                'total': data.total
+                "data": data.data.length > 0 ? data.data : null,
+                "total": data.total,
+                "per_page": data.per_page,
+                "page": data.page
             }
             // return data.length > 0 ? data : null;
 
@@ -29,8 +30,9 @@ const useHandleFormsPages = () => {
             setAlertMessage({ message, success, time: Date.now() })
             return {
                 "data": null,
+                "total": 0,
                 "per_page": 0,
-                "total": 0
+                "page": 0
             }
         } finally {
             setLoading(false);

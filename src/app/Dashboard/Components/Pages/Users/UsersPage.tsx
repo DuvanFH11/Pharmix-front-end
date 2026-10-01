@@ -7,18 +7,23 @@ import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
 import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
-import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import UsersForm from "../Forms/UsersForm";
 import style from "../pages..style.module.css";
 
 const UsersPages = () => {
     const [users, setUsers] = useState<UserType[] | null>(null);
-    const [total, setTotal] = useState<number>(0);
-    const [perPage, setPerPage] = useState<number>(4);
+    const [pagination, setPagination] = useState<{ total: number, per_page: number, page: number }>({ total: 0, per_page: 4, page: 1 });
     const [id, setId] = useState<number | undefined>(undefined);
     const [showModal, setShowModal] = useState<boolean>(false);
     const [searchTerm, setTerm] = useState<string | undefined>(undefined);
     const { isLoading, alertMessage, handleIndex, setAlertMessage } = useHandleFormsPages();
+
+    const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+        setPagination((prev) => ({
+            ...prev,
+            page: newPage
+        }))
+    }
     const handleShowForm = (id: number | undefined) => {
         setId(id);
         setShowModal(true);
@@ -29,22 +34,20 @@ const UsersPages = () => {
     useEffect(() => {
         if (!searchTerm) {
             const loadUsers = async () => {
-                const { data, total, per_page } = await handleIndex(index)
+                const { data, total, per_page, page } = await handleIndex(index, pagination.page);
                 setUsers(data);
-                setTotal(total);
-                setPerPage(per_page);
+                setPagination({ total, per_page, page });
             }
             loadUsers();
         } else {
             const timeout = setTimeout(async () => {
-                const { data, total, per_page } = await handleIndex(index, searchTerm);
+                const { data, total, per_page, page } = await handleIndex(index, pagination.page, searchTerm);
                 setUsers(data);
-                setTotal(total);
-                setPerPage(per_page);
+                setPagination({ total, per_page, page });
             }, 600);
             return () => clearTimeout(timeout);
         }
-    }, [searchTerm, handleIndex, showModal]);
+    }, [searchTerm, handleIndex, showModal, pagination.page]);
     return (
         <>
             {isLoading && <LoadingComponent />}
@@ -100,18 +103,12 @@ const UsersPages = () => {
                 </TableContainer>
                 <TablePagination
                     component="div"
-                    page={0} //Indice de la página actual, empezando en 0
-                    count={total} //Número total de filas en toda la colección
-                    rowsPerPage={perPage} //Cantidad de filas por página
+                    page={pagination.page - 1} //Indice de la página actual, empezando en 0
+                    count={pagination.total} //Número total de filas en toda la colección
+                    rowsPerPage={pagination.per_page} //Cantidad de filas por página
                     rowsPerPageOptions={[]}
-                    onPageChange={console.log}
+                    onPageChange={handleChangePage}
                 />
-                <div className={style.pagesContainer} data-container-buttons="true">
-                    <button data-primary="true" data-icon="true">
-                        <TimelineOutlinedIcon />
-                        <span>Ver estadisticas</span>
-                    </button>
-                </div>
             </section>
             <Dialog open={showModal}>
                 {showModal && <UsersForm id={id} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess() }} />}
