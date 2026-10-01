@@ -37,8 +37,10 @@ const UsersForm = ({ id, handleClose, handleSuccess }: FormsProps) => {
 
     useEffect(() => {
         const loadValues = async () => {
-            setJobTitles(await handleIndex(jobTitlesIndex));
-            setRoles(await handleIndex(rolesIndex));
+            const { data: dataJobTitles } = await handleIndex(jobTitlesIndex);
+            const { data: dataRoles } = await handleIndex(rolesIndex);
+            setJobTitles(dataJobTitles);
+            setRoles(dataRoles);
             if (id) {
                 const data = await handleShow(show, id);
                 if (data) {

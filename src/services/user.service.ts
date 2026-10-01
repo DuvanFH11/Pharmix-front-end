@@ -2,8 +2,8 @@ import type { UserLoginInterface, UserStoreInterface } from "../interfaces/UserI
 import api from "../plugins/axios"
 
 //Servicio para traer todos los usuarios;
-export const index = async (data?: string) => {
-    const response = await api.get('/users', { params: { email: data } });
+export const index = async (page: number, termSearch?: string) => {
+    const response = await api.get('/users', { params: { page: page, email: termSearch } });
     return response.data;
 }
 export const show = async (data: number) => {

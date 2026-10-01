@@ -3,11 +3,10 @@ import LoadingComponent from "../../../../../components/LoadingComponent/Loading
 import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 import type { ProductInterface } from "../../../../../interfaces/ProductInterface";
 import { useEffect, useState } from "react";
-import { Dialog, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Dialog, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
 import { index } from "../../../../../services/product.service";
 import NoteAdd from '@mui/icons-material/NoteAdd';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
-import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import ProductsForm from "../Forms/ProductsForms";
 import style from "../pages..style.module.css";
 
@@ -15,29 +14,38 @@ const ProductsPage = () => {
     const { isLoading, alertMessage, handleIndex, setAlertMessage } = useHandleFormsPages();
     const [id, setId] = useState<number | undefined>(undefined);
     const [products, setProducts] = useState<ProductInterface[] | null>(null);
+    const [pagination, setPagination] = useState<{ total: number, per_page: number }>({ total: 1, per_page: 1 });
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [refresh, setRefresh] = useState<boolean>(false);
     const [showModal, setShowModal] = useState<boolean>(false);
     const [searchTerm, setTerm] = useState<string | undefined>(undefined);
 
-    const showSuccess = () => {
-        setAlertMessage({ message: 'Datos guardados con exito', success: true, time: Date.now() });
-    }
     const handleShowForm = (id: number | undefined) => {
         setId(id);
         setShowModal(true);
     }
+    const showSuccess = () => {
+        setAlertMessage({ message: 'Datos guardados con exito', success: true, time: Date.now() });
+        setRefresh(prev => !prev);
+    }
+
     useEffect(() => {
         if (!searchTerm) {
             const loadProducts = async () => {
-                setProducts(await handleIndex(index));
+                const { data, total, per_page } = await handleIndex(index, currentPage);
+                setProducts(data);
+                setPagination({ total, per_page });
             }
             loadProducts();
         } else {
             const timeout = setTimeout(async () => {
-                setProducts(await handleIndex(index, searchTerm));
+                const { data, total, per_page } = await handleIndex(index, currentPage, searchTerm);
+                setProducts(data);
+                setPagination({ total, per_page });
             }, 600);
             return () => clearTimeout(timeout);
         }
-    }, [searchTerm, handleIndex, showModal])
+    }, [searchTerm, handleIndex, refresh, currentPage])
     return (
         <>
             {isLoading && <LoadingComponent />}
@@ -108,12 +116,14 @@ const ProductsPage = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <div className={style.pagesContainer} data-container-buttons="true">
-                    <button data-primary="true" data-icon="true">
-                        <TimelineOutlinedIcon />
-                        <span>Ver estadisticas</span>
-                    </button>
-                </div>
+                <TablePagination
+                    component="div"
+                    page={currentPage - 1}
+                    rowsPerPage={pagination.per_page}
+                    count={pagination.total}
+                    rowsPerPageOptions={[]}
+                    onPageChange={(event, newPage) => setCurrentPage(newPage + 1)}
+                />
             </section >
             <Dialog open={showModal}>
                 {showModal && <ProductsForm id={id} handleClose={() => setShowModal(false)} handleSuccess={() => showSuccess()} />}
