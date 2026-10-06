@@ -122,4 +122,20 @@ select{
     font-style: italic;
     text-align:left;
 }
+body::-webkit-scrollbar{
+    background-color: transparent;
+    width: 5px;
+}
+body::-webkit-scrollbar-thumb{
+    background-color: var(--primary-color);
+    border-radius: 10px;
+}
+div::-webkit-scrollbar{
+    background-color: transparent;
+    width: 5px;
+}
+div::-webkit-scrollbar-thumb{
+    background-color: var(--primary-color);
+    border-radius: 10px;
+}
 

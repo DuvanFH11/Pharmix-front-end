@@ -12,18 +12,21 @@
     flex-direction: column;
     row-gap: 20px;
     padding: 20px;
+    box-sizing: content-box;
+    max-height: 560px;
     background-color : var(--tercery-background-color);
     transform: translateY(0);
     transition: all 300ms ease;
 }
+.profileContainer[data-container-info="true"]{justify-content: space-around;}
 .profileContainer[data-container-info="true"]:hover{
-    justify-content: space-around;
     transform: translateY(-10px);
     box-shadow: 0px 5px 10px 0px var(--secondary-background-color);
     color: var(--secondary-color);
 }
 .profileContainer[data-container-options="true"]{
     justify-content: flex-start;
+    overflow-y: auto;
 }
 .profileSubContainer{
     padding: 10px 20px 10px 20px;
@@ -45,6 +48,7 @@
 }
 .profileContainer[data-options="true"]>:first-child{ flex:1; }
 .optionTitle{text-align: left;}
+
 .optionContent{
     color : var(--secondary-background-color);
     font-weight: 300;

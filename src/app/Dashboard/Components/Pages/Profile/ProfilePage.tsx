@@ -33,7 +33,7 @@ const ProfilePage = () => {
                     <div className={style.profileSubContainer} data-options="true">
                         <div>
                             <h5 className={style.optionTitle}>Cambiar Nombre</h5>
-                            <p className={style.optionContent}>Gestión para el respectivo cambio de contraseña de cada usuario</p>
+                            <p className={style.optionContent}>El cambio de nombre se efectuará de inmediato según el resultado de la operación.</p>
                         </div>
                         <div>
                             <button type="button" data-primary="true" data-icon="true"><OpenInNewIcon /></button>
@@ -42,7 +42,7 @@ const ProfilePage = () => {
                     <div className={style.profileSubContainer} data-options="true">
                         <div>
                             <h5 className={style.optionTitle}>Cambiar email</h5>
-                            <p className={style.optionContent}>Gestión para el respectivo cambio de contraseña de cada usuario</p>
+                            <p className={style.optionContent}>Al hacer el cambio de Email, se cerrará sesión y será necesario volver a iniciarla.</p>
                         </div>
                         <div>
                             <button type="button" data-primary="true" data-icon="true"><OpenInNewIcon /></button>
@@ -51,7 +51,7 @@ const ProfilePage = () => {
                     <div className={style.profileSubContainer} data-options="true">
                         <div>
                             <h5 className={style.optionTitle}>Cambiar contraseña</h5>
-                            <p className={style.optionContent}>Gestión para el respectivo cambio de contraseña de cada usuario</p>
+                            <p className={style.optionContent}>Al hacer el cambio de la contraseña, se cerrará la sesión y será necesario volver a iniciarla.</p>
                         </div>
                         <div>
                             <button type="button" data-primary="true" data-icon="true"><OpenInNewIcon /></button>
