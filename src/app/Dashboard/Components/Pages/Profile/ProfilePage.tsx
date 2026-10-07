@@ -67,8 +67,8 @@ const ProfilePage = () => {
                 </div>
             </div>
             <Dialog open={showModal}>
-                {showModal && <UserEditForm id={1} handleClose={() => setShowModal(false)} handleSuccess={() => showSuccess()} />}
-                {showModal && <ChangePasswordForm id={1} handleClose={() => setShowModal(false)} handleSuccess={() => showSuccess()} />}
+                {showModal && <UserEditForm id={1} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess() }} />}
+                {showModal && <ChangePasswordForm id={1} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess() }} />}
             </Dialog>
         </>
     )
