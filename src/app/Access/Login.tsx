@@ -6,7 +6,7 @@ import AlertMessage from "../../components/AlertMessage/AlertMessage";
 import { useHandleFormAccess } from "../../hooks/useHandleFormsAccess";
 import { useEffect } from "react";
 import type { UserLoginSchema } from "../../schemas/user.schema";
-import userLoginSchema from "../../schemas/user.schema";
+import { userLoginSchema } from "../../schemas/user.schema";
 import LoginIcon from '@mui/icons-material/Login';
 
 const Login = () => {
