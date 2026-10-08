@@ -5,16 +5,23 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { Dialog } from "@mui/material";
 import UserEditForm from "../Forms/UserEditForm";
 import ChangePasswordForm from "../Forms/ChangePasswordForm";
+import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
+import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
+import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 
 const ProfilePage = () => {
-    const { user } = useContext(AuthContext);
+    const { user, checkAuth } = useContext(AuthContext);
+    const [id, setId] = useState<number>(user ? user.id : 0);
     const [showModal, setShowModal] = useState<boolean>(false);
-
+    const { isLoading, alertMessage, setAlertMessage } = useHandleFormsPages();
     const showSuccess = () => {
-        console.log("Exitoso");
+        setAlertMessage({ message: 'Datos guardados correctamente', success: true, time: Date.now() });
+        if (checkAuth) checkAuth();
     }
     return (
         <>
+            {isLoading && <LoadingComponent />}
+            {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
             <div className={style.profileContent}>
                 <div className={style.profileContainer} data-container-info="true">
                     <h4>Información del usuario</h4>
@@ -67,8 +74,8 @@ const ProfilePage = () => {
                 </div>
             </div>
             <Dialog open={showModal}>
-                {showModal && <UserEditForm id={1} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess() }} />}
-                {showModal && <ChangePasswordForm id={1} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess() }} />}
+                {/* {showModal && <UserEditForm id={id} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess() }} />} */}
+                {showModal && <ChangePasswordForm id={id} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess() }} />}
             </Dialog>
         </>
     )
