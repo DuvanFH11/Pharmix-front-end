@@ -6,45 +6,49 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext, useState } from "react";
 import { sendCode } from "../../../../../services/user.service";
 import { AuthContext } from "../../../../../context/authContext";
-import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
 import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
+import useHandleRequestMails from "../../../../../hooks/useHandleRequestMails";
+import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 
 const ChangePasswordForm = ({ id, handleSuccess, handleClose }: FormsProps) => {
     const { user } = useContext(AuthContext);
     const [validation, setValidation] = useState<boolean>(false);
-    const [timeOutCode, setTimeOutCode] = useState<string | null>(null);
-    const { isLoading, setLoading } = useHandleFormsPages();
-    const { register, formState: { errors }, handleSubmit } = useForm<UserChangePasSchema>({
+    // const [timeOutCode, setTimeOutCode] = useState<string | null>(null);
+    const { isLoading, alertMessage, timeOutCode, requestCodeToEmail } = useHandleRequestMails();
+
+    const requestCode = async () => {
+        if (user) requestCodeToEmail(sendCode, user.email);
+    }
+    const { register, formState: { errors } } = useForm<UserChangePasSchema>({
         resolver: zodResolver(userChangePasSchema)
     })
 
-    const requestCode = async () => {
-        if (user) {
-            setLoading(true);
-            const success = await sendCode(user.email);
-            setLoading(false);
-            if (success) {
-                let seconds = 60;
-                const interval = setInterval(() => {
-                    setTimeOutCode(`${seconds} Segundos`);
-                    seconds = seconds - 1;
-                    if (seconds < 0) {
-                        clearInterval(interval);
-                        setTimeOutCode(null);
-                    }
-                }, 1000);
-            }
-            if (!success) handleClose();
-        } else handleClose();
-    }
+    // const requestCode = async () => {
+    //     if (user) {
+    //         setLoading(true);
+    //         const success = await sendCode(user.email);
+    //         setLoading(false);
+    //         if (success) {
+    //             let seconds = 60;
+    //             const interval = setInterval(() => {
+    //                 setTimeOutCode(`${seconds} Segundos`);
+    //                 seconds = seconds - 1;
+    //                 if (seconds < 0) {
+    //                     clearInterval(interval);
+    //                     setTimeOutCode(null);
+    //                 }
+    //             }, 1000);
+    //         } else handleClose();
+    //     } else handleClose();
+    // }
 
     return (
         <>
             {isLoading && <LoadingComponent />}
-
+            {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
             {!validation ? (
                 <form className={style.forms}>
-                    <h2 className={style.formsTitle}>Se ha enviado un código a su correo, ingreselo por favor.</h2>
+                    <h1 className={style.formsTitle}>Verificar Código</h1>
                     <div className={style.formsContainer} data-container-code="true">
                         <input className={style.formsInputCode} type="number" />
                         <input className={style.formsInputCode} type="number" />

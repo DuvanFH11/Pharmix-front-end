@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import type { AxiosErrorResponse } from "../interfaces/AxiosErrorResponse";
-import type { DefaultResponse, PaginationResponse, ResponseInterface } from "../interfaces/ResponseInterface";
+import type { DefaultResponse, PaginationResponse } from "../interfaces/ResponseInterface";
 
 const useHandleFormsPages = () => {
     const [isLoading, setLoading] = useState<boolean>(false);
