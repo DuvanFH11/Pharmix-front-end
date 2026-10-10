@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import type { AxiosErrorResponse } from "../interfaces/AxiosErrorResponse";
-import type { DefaultResponse, PaginationResponse } from "../interfaces/ResponseInterface";
+import type { DefaultResponse, PaginationResponse, ResponseInterface } from "../interfaces/ResponseInterface";
 
 const useHandleFormsPages = () => {
     const [isLoading, setLoading] = useState<boolean>(false);
@@ -78,11 +78,33 @@ const useHandleFormsPages = () => {
             setLoading(false);
         }
     };
+    const handleEdit = useCallback(async <T,>(service: (values: T) => Promise<DefaultResponse>, data: T) => {
+        setLoading(true);
+        try {
+            const { message, success } = await service(data);
+            setAlertMessage({ message, success, time: Date.now() });
+            return success;
+        } catch (error: unknown) {
+            const err = error as AxiosErrorResponse;
+
+            const message = err.response?.data?.message || 'Error al guardar los datos';
+            const success = err.response?.data?.success || false;
+            const exception = err.response?.data?.exception || 'Error inesperado del servidor';
+
+            console.log({ exception });
+            setAlertMessage({ message, success, time: Date.now() });
+            return success;
+        } finally {
+            setLoading(false);
+        }
+    }, []);
     return {
         handleIndex,
         handleShow,
         handleSave,
+        handleEdit,
         isLoading,
+        setLoading,
         alertMessage,
         setAlertMessage
     }
