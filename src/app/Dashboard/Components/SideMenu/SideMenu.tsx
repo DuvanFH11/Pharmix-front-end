@@ -1,9 +1,8 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AlertMessage from "../../../../components/AlertMessage/AlertMessage";
 import LoadingComponent from "../../../../components/LoadingComponent/LoadingComponent";
 import style from './sideMenu.module.css';
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../../../context/authContext";
 import { index } from "../../../../services/category.service";
 import { useHandleFormAccess } from "../../../../hooks/useHandleFormsAccess";
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -25,7 +24,6 @@ const SideMenu = ({ isOpen, handleClose }: SideMenuProps,) => {
     const { handleLogout, isLoading, alertMessage } = useHandleFormAccess();
     const [showMenu, setShowMenu] = useState<string>('');
     const [categories, setCategories] = useState<CategoryInterfaces[] | null>(null);
-    const { user } = use(AuthContext);
 
     useEffect(() => {
         const handleShowMenu = () => {
@@ -52,11 +50,6 @@ const SideMenu = ({ isOpen, handleClose }: SideMenuProps,) => {
             {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
 
             <nav className={style.sideMenu} data-open={showMenu}>
-                <div className={style.menuContainer}>
-                    <div className={style.userInformation}>
-                        <p>{user ? user.name : ''}</p>
-                    </div>
-                </div>
                 <div className={style.menuContainer}>
                     <h4 className={style.subtitle}>Incio</h4>
                     <ul className={style.listActions}>
