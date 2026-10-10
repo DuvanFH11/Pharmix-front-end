@@ -2,10 +2,26 @@ import { useCallback, useState } from "react";
 import type { AxiosErrorResponse } from "../interfaces/AxiosErrorResponse";
 import type { DefaultResponse, PaginationResponse } from "../interfaces/ResponseInterface";
 
+export const handleErrorResponse = (
+    err: unknown,
+    alert: string,
+    setAlertState: (alert: { message: string, success: boolean, time: number } | null) => void
+) => {
+    const error = err as AxiosErrorResponse;
+
+    const message = error.response?.data?.message || alert;
+    const success = error.response?.data?.success || false;
+    const exception = error.response?.data?.exception || alert;
+
+    console.log({ exception });
+    setAlertState({
+        message, success, time: Date.now()
+    });
+    return success;
+}
 const useHandleFormsPages = () => {
     const [isLoading, setLoading] = useState<boolean>(false);
     const [alertMessage, setAlertMessage] = useState<{ message: string, success: boolean, time: number } | null>(null);
-
 
     const handleIndex = useCallback(async (service: (page: number, term?: string) => Promise<PaginationResponse>, page: number, term?: string) => {
         setLoading(true);
@@ -19,14 +35,7 @@ const useHandleFormsPages = () => {
             }
 
         } catch (error: unknown) {
-            const err = error as AxiosErrorResponse;
-
-            const message = err.response?.data?.message || 'Error al cargar los datos';
-            const success = err.response?.data?.success || false;
-            const exception = err.response?.data?.exception || 'Error inesperado del servidor';
-
-            console.log({ exception });
-            setAlertMessage({ message, success, time: Date.now() })
+            handleErrorResponse(error, 'Error inesperado del servidor', setAlertMessage);
             return {
                 "data": null,
                 "total": 0,
@@ -44,14 +53,7 @@ const useHandleFormsPages = () => {
             const { data } = await service(id);
             return data;
         } catch (error: unknown) {
-            const err = error as AxiosErrorResponse;
-
-            const message = err.response?.data?.message || 'Error al cargar los datos';
-            const success = err.response?.data?.success || false;
-            const exception = err.response?.data?.exception || 'Error inesperado del servidor';
-
-            console.log({ exception });
-            setAlertMessage({ message, success, time: Date.now() });
+            handleErrorResponse(error, "Error al cargar los datos", setAlertMessage);
         } finally {
             setLoading(false);
         }
@@ -65,14 +67,7 @@ const useHandleFormsPages = () => {
             setAlertMessage({ message, success, time: Date.now() });
             return success;
         } catch (error: unknown) {
-            const err = error as AxiosErrorResponse;
-
-            const message = err?.response?.data?.message || 'Error al guardar los datos';
-            const success = err?.response?.data?.success || false;
-            const exception = err?.response?.data?.exception || 'Error inesperado del servidor';
-
-            console.log({ exception });
-            setAlertMessage({ message, success, time: Date.now() });
+            const success = handleErrorResponse(error, "Error al guardar los datos", setAlertMessage);
             return success;
         } finally {
             setLoading(false);
@@ -85,14 +80,7 @@ const useHandleFormsPages = () => {
             setAlertMessage({ message, success, time: Date.now() });
             return success;
         } catch (error: unknown) {
-            const err = error as AxiosErrorResponse;
-
-            const message = err.response?.data?.message || 'Error al guardar los datos';
-            const success = err.response?.data?.success || false;
-            const exception = err.response?.data?.exception || 'Error inesperado del servidor';
-
-            console.log({ exception });
-            setAlertMessage({ message, success, time: Date.now() });
+            const success = handleErrorResponse(error, "Error al guardar los datos", setAlertMessage);
             return success;
         } finally {
             setLoading(false);

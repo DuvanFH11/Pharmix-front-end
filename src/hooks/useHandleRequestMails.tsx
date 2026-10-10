@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import type { DefaultResponse } from "../interfaces/ResponseInterface";
-import type { AxiosErrorResponse } from "../interfaces/AxiosErrorResponse";
+import { handleErrorResponse } from "./useHandleFormsPages";
 
 const useHandleRequestMails = () => {
     const [timeOutCode, setTimeOutCode] = useState<string | null>(null);
@@ -10,7 +10,9 @@ const useHandleRequestMails = () => {
     const requestCodeToEmail = useCallback(async (service: (email: string) => Promise<DefaultResponse>, email: string) => {
         setLoading(true);
         try {
-            const { success } = await service(email);
+            const { message, success } = await service(email);
+
+            setAlertMessage({ message, success, time: Date.now() });
             if (success) {
                 let seconds = 60;
                 const interval = setInterval(() => {
@@ -26,25 +28,33 @@ const useHandleRequestMails = () => {
                 return false;
             }
         } catch (error: unknown) {
-            const err = error as AxiosErrorResponse;
-
-            const message = err.response?.data?.message || 'Error al enviar el código';
-            const success = err.response?.data?.success || false;
-            const exception = err.response?.data?.exception || 'Error al enviar el código';
-
-            console.log({ exception });
-            setAlertMessage({ message, success, time: Date.now() });
-
+            handleErrorResponse(error, 'Error al enviar el código', setAlertMessage);
         } finally {
             setLoading(false);
         }
 
     }, []);
+    const handleVerifyCode = async (service: (data: string, email: string) => Promise<DefaultResponse>, data: string, email: string) => {
+        setLoading(true);
+        try {
+            const { message, success } = await service(data, email);
+
+            setAlertMessage({ message, success, time: Date.now() });
+
+            return success;
+        } catch (error: unknown) {
+            const success = handleErrorResponse(error, 'Error al verificar el código', setAlertMessage);
+            return success;
+        } finally {
+            setLoading(false);
+        }
+    }
     return {
         isLoading,
         alertMessage,
         timeOutCode,
         requestCodeToEmail,
+        handleVerifyCode,
     }
 }
 
