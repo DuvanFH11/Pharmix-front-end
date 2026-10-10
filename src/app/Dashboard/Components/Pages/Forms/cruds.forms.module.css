@@ -41,6 +41,14 @@
     justify-content: space-around;
     column-gap: 20px;
 }
+.formsRequestCode{
+    transition: all 300ms ease;
+}
+
+.formsRequestCode[disabled="true"]{
+    color : var(--secondary-color);
+    
+}
 .formsInputCode{
     border-radius: 10px;
     border: 1px solid var(--primary-color);
