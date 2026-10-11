@@ -23,4 +23,3 @@ export type UserStoreSchema = z.infer<typeof userStoreSchema>;
 export type UserLoginSchema = z.infer<typeof userLoginSchema>;
 export type UserEditSchema = z.infer<typeof userEditSchema>;
 export type UserChangePasSchema = z.infer<typeof userChangePasSchema>
-export type UserInputCodeSchema = z.infer<typeof userInputCodeSchema>
