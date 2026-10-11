@@ -21,7 +21,7 @@ export const sendCode = async (email: string) => {
     const response = await api.post('/user/code', { email });
     return response.data;
 }
-export const verifyCode = async (email: string, userCode: number) => {
+export const verifyCode = async (userCode: number, email: string) => {
     const response = await api.post('/user/code/verify', { email: email, userCode: userCode });
     return response.data;
 }

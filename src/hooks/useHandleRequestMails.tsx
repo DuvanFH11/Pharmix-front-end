@@ -34,10 +34,10 @@ const useHandleRequestMails = () => {
         }
 
     }, []);
-    const handleVerifyCode = async (service: (data: string, email: string) => Promise<DefaultResponse>, data: string, email: string) => {
+    const handleVerifyCode = async (service: (data: number, email: string) => Promise<DefaultResponse>, data: string, email: string) => {
         setLoading(true);
         try {
-            const { message, success } = await service(data, email);
+            const { message, success } = await service(parseInt(data, 10), email);
 
             setAlertMessage({ message, success, time: Date.now() });
 
