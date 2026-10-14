@@ -12,8 +12,14 @@ import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 const ProfilePage = () => {
     const { user, checkAuth } = useContext(AuthContext);
     const [id, setId] = useState<number>(user ? user.id : 0);
+    const [showForm, setShowForm] = useState<string | null>(null);
     const [showModal, setShowModal] = useState<boolean>(false);
     const { isLoading, alertMessage, setAlertMessage } = useHandleFormsPages();
+
+    const showFormsOption = (e: React.MouseEvent) => {
+        setShowForm(e.currentTarget.id);
+        setShowModal(true);
+    }
     const showSuccess = () => {
         setAlertMessage({ message: 'Datos guardados correctamente', success: true, time: Date.now() });
         if (checkAuth) checkAuth();
@@ -54,7 +60,7 @@ const ProfilePage = () => {
                             </p>
                         </div>
                         <div>
-                            <button type="button" data-primary="true" data-icon="true" onClick={() => setShowModal(true)}><OpenInNewIcon /></button>
+                            <button id="change_info" type="button" data-primary="true" data-icon="true" onClick={showFormsOption}><OpenInNewIcon /></button>
                         </div>
                     </div>
                     <div className={style.profileSubContainer} data-options="true">
@@ -68,14 +74,14 @@ const ProfilePage = () => {
                             </p>
                         </div>
                         <div>
-                            <button type="button" data-primary="true" data-icon="true" onClick={() => setShowModal(true)}><OpenInNewIcon /></button>
+                            <button id="change_pass" type="button" data-primary="true" data-icon="true" onClick={showFormsOption}><OpenInNewIcon /></button>
                         </div>
                     </div>
                 </div>
             </div>
             <Dialog open={showModal}>
-                {/* {showModal && <UserEditForm id={id} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess() }} />} */}
-                {showModal && <ChangePasswordForm id={id} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess() }} />}
+                {showForm == 'change_info' && showModal && <UserEditForm id={id} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess() }} />}
+                {showForm == 'change_pass' && <ChangePasswordForm id={id} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess() }} />}
             </Dialog>
         </>
     )
