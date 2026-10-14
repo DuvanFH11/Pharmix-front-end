@@ -11,7 +11,7 @@ import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 
 const ProfilePage = () => {
     const { user, checkAuth } = useContext(AuthContext);
-    const [id, setId] = useState<number>(user ? user.id : 0);
+    const id = user ? user.id : 0;
     const [showForm, setShowForm] = useState<string | null>(null);
     const [showModal, setShowModal] = useState<boolean>(false);
     const { isLoading, alertMessage, setAlertMessage } = useHandleFormsPages();
