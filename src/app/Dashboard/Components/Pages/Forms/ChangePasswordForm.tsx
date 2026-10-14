@@ -25,11 +25,10 @@ const ChangePasswordForm = ({ id, handleSuccess, handleClose }: FormsProps) => {
         resolver: zodResolver(userChangePasSchema),
     })
     const onSubmitFormCode = handleSubmitCode(async (data) => {
-        // const cleanCode = `${data.digit_1}${data.digit_2}${data.digit_3}${data.digit_4}`;
         if (user) {
             console.log("Pasó el filtro")
-            // const success = await handleVerifyCode(verifyCode, cleanCode, user.email)
-            // if (success) setValidation(true);
+            const success = await handleVerifyCode(verifyCode, data.code, user.email)
+            if (success) setValidation(true);
         }
     })
     const requestCode = async () => {
@@ -43,16 +42,15 @@ const ChangePasswordForm = ({ id, handleSuccess, handleClose }: FormsProps) => {
                 <form className={style.forms}>
                     <h1 className={style.formsTitle}>Verificar Código</h1>
                     <div className={style.formsContainer} data-container-code="true">
-                        <input className={style.formsInputCode} type="text" min={0} max={9} placeholder="0" maxLength={1} {...registerCode('digit_1')} />
-                        <input className={style.formsInputCode} type="text" min={0} max={9} placeholder="0" maxLength={1} {...registerCode('digit_2')} />
-                        <input className={style.formsInputCode} type="text" min={0} max={9} placeholder="0" maxLength={1} {...registerCode('digit_3')} />
-                        <input className={style.formsInputCode} type="text" min={0} max={9} placeholder="0" maxLength={1} {...registerCode('digit_4')} />
+                        <input className={style.formsInputCode}
+                            type="text"
+                            minLength={4}
+                            maxLength={4}
+                            {...registerCode('code')}
+                        />
                     </div>
                     <div>
-                        <span className="alert__">{errorsCode.digit_1 && errorsCode.digit_1.message}</span>
-                        <span className="alert__">{errorsCode.digit_2 && errorsCode.digit_2.message}</span>
-                        <span className="alert__">{errorsCode.digit_3 && errorsCode.digit_3.message}</span>
-                        <span className="alert__">{errorsCode.digit_4 && errorsCode.digit_4.message}</span>
+                        <span className="alert__">{errorsCode.code && errorsCode.code.message}</span>
                     </div>
                     <div className={style.formsContainer} data-container-buttons="true">
                         <button className={style.formsRequestCode} type="button" onClick={requestCode} disabled={timeOutCode ? true : false}>

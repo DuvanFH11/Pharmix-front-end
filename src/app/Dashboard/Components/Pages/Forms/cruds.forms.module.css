@@ -51,10 +51,14 @@
 }
 .formsInputCode{
     border-radius: 10px;
-    border: 1px solid var(--primary-color);
+    border: 1px solid transparent;
     height: 90px;
-    transition: all 300ms ease;
+    font-size: 2rem;
+    transition: all 500ms ease;
+    letter-spacing: 1.2rem;
+    background-color: var(--tercery-color);
     transform: translateY(0);
+    font-family : var(--header-font-family);
 }
 .formsInputCode:focus{
     transform: translateY(-10px);

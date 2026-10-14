@@ -22,7 +22,7 @@ export const sendCode = async (email: string) => {
     return response.data;
 }
 export const verifyCode = async (userCode: number, email: string) => {
-    const response = await api.post('/user/code/verify', { email: email, userCode: userCode });
+    const response = await api.post('/user/code/verify', { email: email, code: userCode });
     return response.data;
 }
 //Cerrar sesión.

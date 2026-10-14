@@ -3,10 +3,7 @@ import { MESSAGES } from "../constants/messages"
 
 
 const userInputCodeSchema = z.object({
-    digit_1: z.coerce.number(MESSAGES(0).INVALID_NUMBER).nonnegative(),
-    digit_2: z.coerce.number(MESSAGES(0).INVALID_NUMBER).nonnegative(),
-    digit_3: z.coerce.number(MESSAGES(0).INVALID_NUMBER).nonnegative(),
-    digit_4: z.coerce.number(MESSAGES(0).INVALID_NUMBER).nonnegative()
+    code: z.string(MESSAGES(0).INVALID_NUMBER).min(4, MESSAGES(4).MIN_LENGTH).max(4, MESSAGES(4).MAX_LENGTH).regex(/^\d{4}$/, MESSAGES(0).INVALID_NUMBER),
 })
 export type UserInputCodeSchema = z.infer<typeof userInputCodeSchema>
 export default userInputCodeSchema;
