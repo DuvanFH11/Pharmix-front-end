@@ -8,21 +8,25 @@ import ChangePasswordForm from "../Forms/ChangePasswordForm";
 import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
 import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
 import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
+import { useHandleFormAccess } from "../../../../../hooks/useHandleFormsAccess";
 
 const ProfilePage = () => {
-    const { user, checkAuth } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const id = user ? user.id : 0;
     const [showForm, setShowForm] = useState<string | null>(null);
     const [showModal, setShowModal] = useState<boolean>(false);
     const { isLoading, alertMessage, setAlertMessage } = useHandleFormsPages();
+    const { handleLogout } = useHandleFormAccess();
 
     const showFormsOption = (e: React.MouseEvent) => {
         setShowForm(e.currentTarget.id);
         setShowModal(true);
     }
     const showSuccess = () => {
-        setAlertMessage({ message: 'Datos guardados correctamente', success: true, time: Date.now() });
-        if (checkAuth) checkAuth();
+        setAlertMessage({ message: 'Datos guardados correctamente, se cerrará la sesión.', success: true, time: Date.now() });
+        setTimeout(async () => {
+            await handleLogout();
+        }, 3000)
     }
     return (
         <>
