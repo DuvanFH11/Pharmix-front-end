@@ -16,6 +16,11 @@ export const storeOrUpdate = async (data: UserStoreInterface, id?: number) => {
     const response = await api.post(`/users/save/${id ? id : ''}`, data);
     return response.data;
 }
+//Actualizar nombre y email de un usuario;
+export const edit = async (id: number, data: { name: string, email: string }) => {
+    const response = await api.patch(`/users/${id}`, { name: data.name, email: data.email });
+    return response.data;
+}
 //Solicitar un código de usuario;
 export const sendCode = async (email: string) => {
     const response = await api.post('/user/code', { email });

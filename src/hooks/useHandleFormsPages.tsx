@@ -73,10 +73,10 @@ const useHandleFormsPages = () => {
             setLoading(false);
         }
     };
-    const handleEdit = useCallback(async <T,>(service: (values: T) => Promise<DefaultResponse>, data: T) => {
+    const handleEdit = useCallback(async <T,>(service: (id: number, values: T) => Promise<DefaultResponse>, id: number, data: T) => {
         setLoading(true);
         try {
-            const { message, success } = await service(data);
+            const { message, success } = await service(id, data);
             setAlertMessage({ message, success, time: Date.now() });
             return success;
         } catch (error: unknown) {

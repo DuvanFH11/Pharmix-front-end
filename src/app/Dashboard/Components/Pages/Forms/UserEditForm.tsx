@@ -1,23 +1,28 @@
 import { useEffect } from "react";
 import type { FormsProps } from "../../../../../interfaces/FormsPropsInterface";
 import style from "./cruds.forms.module.css";
-import { show } from "../../../../../services/user.service";
+import { edit, show } from "../../../../../services/user.service";
 import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
 import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
 import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 import { useForm } from "react-hook-form";
 import { userEditSchema, type UserEditSchema } from "../../../../../schemas/user.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useHandleFormAccess } from "../../../../../hooks/useHandleFormsAccess";
 
 const UserEditForm = ({ id, handleSuccess, handleClose }: FormsProps) => {
-    const { handleShow, isLoading, alertMessage } = useHandleFormsPages();
+    const { handleShow, handleEdit, alertMessage } = useHandleFormsPages();
+    const { handleLogout, isLoading, setLoading } = useHandleFormAccess();
     const { register, formState: { errors }, handleSubmit, setValues } = useForm<UserEditSchema>({
         resolver: zodResolver(userEditSchema)
     })
     const onSubmitForm = handleSubmit(async (data) => {
-        console.log("exito");
-        handleClose();
-        handleSuccess();
+        if (id) {
+            setLoading(true);
+            const success = await handleEdit(edit, id, data);
+            if (success) await handleLogout();
+            setLoading(false);
+        } else handleClose();
     });
     useEffect(() => {
         const loadUser = async () => {

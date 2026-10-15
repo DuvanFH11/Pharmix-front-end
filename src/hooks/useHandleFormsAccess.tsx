@@ -41,6 +41,7 @@ export const useHandleFormAccess = () => {
     return ({
         submitFormLogin,
         isLoading,
+        setLoading,
         alertMessage,
         handleLogout
     })
