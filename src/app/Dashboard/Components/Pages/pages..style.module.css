@@ -4,6 +4,7 @@
 }
 .pagesContainer[data-title="true"]{
     justify-content:flex-end;
+    font-style: italic;
 }
 .pagesContainer[data-container-buttons="true"]{
     justify-content: flex-start;
