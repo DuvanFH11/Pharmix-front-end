@@ -4,15 +4,16 @@ import { AuthContext } from "../../../../../context/authContext";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { Dialog } from "@mui/material";
 import UserEditForm from "../Forms/UserEditForm";
-import ChangePasswordForm from "../Forms/ChangePasswordForm";
 import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
 import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
 import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 import { useHandleFormAccess } from "../../../../../hooks/useHandleFormsAccess";
+import VerifyCodeForm from "../Forms/VerifyCodeForm";
 
 const ProfilePage = () => {
-    const { user } = useContext(AuthContext);
+    const { user, checkAuth } = useContext(AuthContext);
     const id = user ? user.id : 0;
+    const email = user ? user.email : undefined;
     const [showForm, setShowForm] = useState<string | null>(null);
     const [showModal, setShowModal] = useState<boolean>(false);
     const { isLoading, alertMessage, setAlertMessage } = useHandleFormsPages();
@@ -22,11 +23,19 @@ const ProfilePage = () => {
         setShowForm(e.currentTarget.id);
         setShowModal(true);
     }
-    const showSuccess = () => {
+    const showSuccess = async (logout: boolean) => {
         setAlertMessage({ message: 'Datos guardados correctamente, se cerrará la sesión.', success: true, time: Date.now() });
-        setTimeout(async () => {
-            await handleLogout();
-        }, 3000)
+        if (logout) {
+            if (checkAuth) {
+                setTimeout(async () => {
+                    await checkAuth();
+                }, 3000);
+            }
+        } else {
+            setTimeout(async () => {
+                await handleLogout();
+            }, 3000)
+        }
     }
     return (
         <>
@@ -84,8 +93,8 @@ const ProfilePage = () => {
                 </div>
             </div>
             <Dialog open={showModal}>
-                {showForm == 'change_info' && showModal && <UserEditForm id={id} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess() }} />}
-                {showForm == 'change_pass' && <ChangePasswordForm id={id} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess() }} />}
+                {showForm == 'change_info' && showModal && <UserEditForm id={id} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess(false) }} />}
+                {showForm == 'change_pass' && showModal && <VerifyCodeForm id={id} email={email} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess(true) }} />}
             </Dialog>
         </>
     )

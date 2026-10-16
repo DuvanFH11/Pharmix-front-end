@@ -2,8 +2,8 @@ import { use, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import type { UserLoginInterface } from "../interfaces/UserInterface";
 import { AuthContext } from "../context/authContext";
-import { login, logout } from "../services/user.service";
 import { handleErrorResponse } from "./useHandleFormsPages";
+import { login, logout } from "../services/user.service";
 
 export const useHandleFormAccess = () => {
     const [isLoading, setLoading] = useState<boolean>(false);
@@ -14,8 +14,7 @@ export const useHandleFormAccess = () => {
     const submitFormLogin = async (data: UserLoginInterface) => {
         setLoading(true);
         try {
-            const response = await login(data);
-            const { message, success } = response.data;
+            const { message, success } = await login(data);
             setAlertMessage({ message, success, time: Date.now() });
             if (checkAuth) await checkAuth();
             setTimeout(() => {

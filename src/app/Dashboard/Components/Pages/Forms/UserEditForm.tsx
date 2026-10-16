@@ -26,10 +26,12 @@ const UserEditForm = ({ id, handleSuccess, handleClose }: FormsProps) => {
     });
     useEffect(() => {
         const loadUser = async () => {
-            const data = await handleShow(show, id);
-            if (data) setValues({
-                'email': data.email, 'name': data.name
-            })
+            if (id) {
+                const data = await handleShow(show, id);
+                if (data) setValues({
+                    'email': data.email, 'name': data.name
+                })
+            }
         }
         loadUser();
     }, [handleShow, id, setValues])
