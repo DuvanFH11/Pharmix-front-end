@@ -63,7 +63,7 @@ const RolesPage = () => {
                         <input
                             className={style.pagesInputSearch}
                             type="search"
-                            placeholder="Buscar roles por código"
+                            placeholder="Buscar código"
                             onChange={(e) => setTerm(e.target.value)}
                         />
                     </div>

@@ -64,7 +64,7 @@ const ProductsPage = () => {
                         <input
                             className={style.pagesInputSearch}
                             type="search"
-                            placeholder="Buscar productos por nombre o registro"
+                            placeholder="Buscar nombre o registro"
                             onChange={(e) => setTerm(e.target.value)}
                         />
                     </div>

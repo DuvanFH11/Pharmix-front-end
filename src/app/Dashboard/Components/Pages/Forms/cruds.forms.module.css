@@ -81,3 +81,8 @@
         flex-direction: column;
     }
 }
+@media(max-width: 350px){
+    .forms{
+        width: 230px;
+    }
+}

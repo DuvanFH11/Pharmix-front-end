@@ -62,7 +62,7 @@ const UsersPages = () => {
                         <input
                             className={style.pagesInputSearch}
                             type="search"
-                            placeholder="Buscar usuarios por E-mail"
+                            placeholder="Buscar E-mail"
                             onChange={(e) => setTerm(e.target.value)}
                         />
                     </div>

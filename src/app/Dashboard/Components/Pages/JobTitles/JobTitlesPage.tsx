@@ -66,7 +66,7 @@ const JobTitlesPage = () => {
                         <input
                             className={style.pagesInputSearch}
                             type="search"
-                            placeholder="Buscar cargo por código"
+                            placeholder="Buscar código"
                             onChange={(e) => setTerm(e.target.value)}
                         />
                     </div>
