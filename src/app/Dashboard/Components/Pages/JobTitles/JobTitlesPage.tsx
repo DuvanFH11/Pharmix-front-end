@@ -76,10 +76,10 @@ const JobTitlesPage = () => {
                         <TableHead>
                             <TableRow>
                                 <TableCell>Id</TableCell>
-                                <TableCell>Code</TableCell>
-                                <TableCell>Name</TableCell>
-                                <TableCell>Description</TableCell>
-                                <TableCell>Edit</TableCell>
+                                <TableCell>Código</TableCell>
+                                <TableCell>Nombre</TableCell>
+                                <TableCell>Descripción</TableCell>
+                                <TableCell>Editar</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

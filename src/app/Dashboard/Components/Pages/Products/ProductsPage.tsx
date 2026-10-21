@@ -74,13 +74,13 @@ const ProductsPage = () => {
                         <TableHead>
                             <TableRow>
                                 <TableCell>Id</TableCell>
-                                <TableCell>Name</TableCell>
-                                <TableCell>Brand</TableCell>
-                                <TableCell>Unit Price</TableCell>
-                                <TableCell>Package Price</TableCell>
-                                <TableCell>Invima Registration</TableCell>
-                                <TableCell>Strength</TableCell>
-                                <TableCell>Edit</TableCell>
+                                <TableCell>Nombre</TableCell>
+                                <TableCell>Laboratorio</TableCell>
+                                <TableCell>Precio Unidad</TableCell>
+                                <TableCell>Precio Paquete</TableCell>
+                                <TableCell>Registro Invima</TableCell>
+                                <TableCell>Pricipio Activo</TableCell>
+                                <TableCell>Editar</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

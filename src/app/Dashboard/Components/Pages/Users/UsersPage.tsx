@@ -72,11 +72,11 @@ const UsersPages = () => {
                         <TableHead>
                             <TableRow>
                                 <TableCell>Id</TableCell>
-                                <TableCell>Name</TableCell>
+                                <TableCell>Nombre</TableCell>
                                 <TableCell>Email</TableCell>
-                                <TableCell>Job Title</TableCell>
+                                <TableCell>Cargo</TableCell>
                                 <TableCell>Role</TableCell>
-                                <TableCell>Edit</TableCell>
+                                <TableCell>Editar</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
