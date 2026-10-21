@@ -2,8 +2,24 @@ import { createTheme } from '@mui/material/styles';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const themes = createTheme({
-
+    palette: {
+        primary: {
+            main: '#041f50'
+        }
+    },
     components: {
+        MuiPagination: {
+            styleOverrides: {
+                root: {
+                    display: 'flex',
+                    justifyContent: 'center',
+                    width: '100%',
+                    color: 'primary',
+                    marginTop: '20px',
+                    marginBottom: '20px',
+                },
+            }
+        },
         MuiTableContainer: {
             styleOverrides: {
                 root: {

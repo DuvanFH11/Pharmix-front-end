@@ -1,4 +1,4 @@
-import { Dialog, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
+import { Dialog, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
 import type { JobTitleInterface } from "../../../../../interfaces/JobTitleInterface";
 import { useEffect, useState } from "react";
 import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
@@ -99,13 +99,13 @@ const JobTitlesPage = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <TablePagination
-                    component="div"
-                    page={currentPage - 1}
-                    rowsPerPage={pagination.per_page}
+                <Pagination
+                    shape="circular"
+                    page={currentPage}
                     count={pagination.total}
-                    rowsPerPageOptions={[]}
-                    onPageChange={(event, newPage) => setCurrentPage(newPage + 1)}
+                    color='primary'
+                    onChange={(event, newPage) => setCurrentPage(newPage)}
+                    size="large"
                 />
             </section>
             <Dialog open={showModal}>

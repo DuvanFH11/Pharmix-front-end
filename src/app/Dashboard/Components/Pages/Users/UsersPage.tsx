@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { UserType } from "../../../../../interfaces/UserInterface";
 import { index } from "../../../../../services/user.service";
-import { Dialog, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
+import { Dialog, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
 import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
 import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
@@ -98,13 +98,13 @@ const UsersPages = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <TablePagination
-                    component="div"
-                    page={currentPage - 1} //Indice de la página actual, empezando en 0
-                    count={pagination.total} //Número total de filas en toda la colección
-                    rowsPerPage={pagination.per_page} //Cantidad de filas por página
-                    rowsPerPageOptions={[]}
-                    onPageChange={(event, newPage) => setCurrentPage(newPage + 1)}
+                <Pagination
+                    shape="circular"
+                    page={currentPage}
+                    count={pagination.total}
+                    color='primary'
+                    onChange={(event, newPage) => setCurrentPage(newPage)}
+                    size="large"
                 />
             </section>
             <Dialog open={showModal}>

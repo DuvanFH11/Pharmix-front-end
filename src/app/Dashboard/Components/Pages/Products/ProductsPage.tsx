@@ -3,7 +3,7 @@ import LoadingComponent from "../../../../../components/LoadingComponent/Loading
 import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 import type { ProductInterface } from "../../../../../interfaces/ProductInterface";
 import { useEffect, useState } from "react";
-import { Dialog, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
+import { Dialog, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
 import { index } from "../../../../../services/product.service";
 import NoteAdd from '@mui/icons-material/NoteAdd';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
@@ -116,13 +116,13 @@ const ProductsPage = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <TablePagination
-                    component="div"
-                    page={currentPage - 1}
-                    rowsPerPage={pagination.per_page}
+                <Pagination
+                    shape="circular"
+                    page={currentPage}
                     count={pagination.total}
-                    rowsPerPageOptions={[]}
-                    onPageChange={(event, newPage) => setCurrentPage(newPage + 1)}
+                    color='primary'
+                    onChange={(event, newPage) => setCurrentPage(newPage)}
+                    size="large"
                 />
             </section >
             <Dialog open={showModal}>
