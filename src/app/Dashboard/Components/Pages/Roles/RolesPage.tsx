@@ -4,7 +4,7 @@ import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
 import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
 import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
-import { Dialog, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
+import { Dialog, Pagination, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
 import { index } from "../../../../../services/role.service";
 import NoteAdd from '@mui/icons-material/NoteAdd';
 import RolesForm from "../Forms/RolesForm";
@@ -63,7 +63,7 @@ const RolesPage = () => {
                         <input
                             className={style.pagesInputSearch}
                             type="search"
-                            placeholder="Buscar roles por código"
+                            placeholder="Buscar código"
                             onChange={(e) => setTerm(e.target.value)}
                         />
                     </div>
@@ -73,10 +73,10 @@ const RolesPage = () => {
                         <TableHead>
                             <TableRow>
                                 <TableCell>Id</TableCell>
-                                <TableCell>Code</TableCell>
-                                <TableCell>Name</TableCell>
-                                <TableCell>Description</TableCell>
-                                <TableCell>Edit</TableCell>
+                                <TableCell>Código</TableCell>
+                                <TableCell>Nombre</TableCell>
+                                <TableCell>Descripción</TableCell>
+                                <TableCell>Editar</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -98,13 +98,13 @@ const RolesPage = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <TablePagination
-                    component="div"
-                    page={currentPage - 1}
-                    rowsPerPage={pagination.per_page}
+                <Pagination
+                    shape="circular"
+                    page={currentPage}
                     count={pagination.total}
-                    rowsPerPageOptions={[]}
-                    onPageChange={(event, newPage) => setCurrentPage(newPage + 1)}
+                    color='primary'
+                    onChange={(event, newPage) => setCurrentPage(newPage)}
+                    size="large"
                 />
             </section>
             <Dialog open={showModal}>

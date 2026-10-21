@@ -61,14 +61,24 @@
     color : var(--tercery-color);
     text-align:center;
 }
-
+@media (max-width : 780px){
+    .sideMenu{
+        width: 40%;
+        padding: 10px;
+    }
+}
 @media(max-width: 480px){
     .sideMenu{
         width: 50%;
         padding : 10px;
+        font-size: 0rem;
     }
     .listActions{
         flex-direction: column;
     }
-    
+}
+@media(max-width: 360px ){
+    .sideMenu{
+        padding: 5px;
+    }
 }
