@@ -1,4 +1,4 @@
-import { Dialog, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
+import { Dialog, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import type { JobTitleInterface } from "../../../../../interfaces/JobTitleInterface";
 import { useEffect, useState } from "react";
 import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";

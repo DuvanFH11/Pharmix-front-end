@@ -3,7 +3,7 @@ import LoadingComponent from "../../../../../components/LoadingComponent/Loading
 import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 import type { ProductInterface } from "../../../../../interfaces/ProductInterface";
 import { useEffect, useState } from "react";
-import { Dialog, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from "@mui/material";
+import { Dialog, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { index } from "../../../../../services/product.service";
 import NoteAdd from '@mui/icons-material/NoteAdd';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';

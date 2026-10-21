@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { UserType } from "../../../../../interfaces/UserInterface";
 import { index } from "../../../../../services/user.service";
-import { Dialog, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography } from "@mui/material";
+import { Dialog, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import useHandleFormsPages from "../../../../../hooks/useHandleFormsPages";
 import AlertMessage from "../../../../../components/AlertMessage/AlertMessage";
 import LoadingComponent from "../../../../../components/LoadingComponent/LoadingComponent";
