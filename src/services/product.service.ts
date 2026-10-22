@@ -1,7 +1,7 @@
 import type { productStoreInterface } from "../interfaces/ProductInterface";
 import api from "../plugins/axios"
 
-export const index = async (page: number, termSearch?: string) => {
+export const index = async (page?: number, termSearch?: string) => {
     const response = await api.get('/products', { params: { page: page, value: termSearch } });
     return response.data;
 }

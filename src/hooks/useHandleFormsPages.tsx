@@ -23,7 +23,7 @@ const useHandleFormsPages = () => {
     const [isLoading, setLoading] = useState<boolean>(false);
     const [alertMessage, setAlertMessage] = useState<{ message: string, success: boolean, time: number } | null>(null);
 
-    const handleIndex = useCallback(async (service: (page: number, term?: string) => Promise<PaginationResponse>, page: number, term?: string) => {
+    const handleIndex = useCallback(async (service: (page: number, term?: string) => Promise<PaginationResponse>, page?: number, term?: string) => {
         setLoading(true);
         try {
             const { data } = await service(page, term);
