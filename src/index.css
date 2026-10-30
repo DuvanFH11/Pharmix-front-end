@@ -35,7 +35,6 @@ h1, h2, h3, h4, h5, h6{
     color : var(--primary-color);
     font-family: var(--header-font-family);
     font-weight: 300;
-    text-align: center;
 }
 form{
     background-color: var(--secondary-color);
