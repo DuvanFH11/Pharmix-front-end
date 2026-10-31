@@ -3,22 +3,28 @@
     font-weight: 400;
 
     color-scheme: light;
-
-    --header-font-family : "Cinzel";
+    --font-family : "IBM Plex Sans", sans-serif;
+    --font-family-bold : 700;
+    --font-family-regular : 200;
     --content-font-family : "Montserrat";
 
-    --primary-background-color : #bebcbc;
-    --secondary-background-color : #605e5e;
-    --tercery-background-color :   #afafaf;
-
+    /*COLOR DE FONDO, Y COLOR DE LETRA QUE RESALTE*/
+    --primary-background-color : #F8FAFC;
     --primary-color :#041f50;
-    --primary-color-main-variant: #000b20;
+    --text-color: #000000;
+    /*COLOR PARA CONTRASTE EN EL FONDO, Y COLOR DE LETRA PARA RESALTAR*/
+    --secondary-background-color : #041f50;
+    --secondary-color : #e2e8f0;
+    
+    /*COLOR PARA RESALTAR CAJAS*/
+    --tercery-background-color: #EAEFF8;
 
-    --secondary-color : #E2E8F0;
-    --tercery-color :  #fdfdfe;
-    /*Para resaltar*/
-    --important-color: #2F7DF6;
-    --light-important-color: #80DEEA;
+
+    --btn-primary-color: #000000;
+    --btn-primary-hover-color:#041f50;
+    
+    --btn-secondary-color:  #F8FAFC;
+    --btn-secondary-hover-color: transparent;
 
     /* Para mensajes y alertas */
     --alert-color : #ff0000;
@@ -26,15 +32,14 @@
     
 }
 body{
-    font-family : var(--content-font-family);
-    font-weight: 200;
+    font-family : var(--font-family);
+    font-weight: var(--font-family-regular);
     background-color: var(--primary-background-color);
     color : var(--secondary-color);
 }
 h1, h2, h3, h4, h5, h6{
     color : var(--primary-color);
-    font-family: var(--header-font-family);
-    font-weight: 300;
+    font-weight: var(--font-family-bold);
 }
 form{
     background-color: var(--secondary-color);
@@ -93,12 +98,12 @@ textarea:focus{
 }
 
 button{
+    font-family: var(--font-family-bold);
     border: 1px solid transparent;
     background-color:transparent;
     padding: 5px 15px 5px 15px;
     margin : 5px;
-    color : var(--primary-color);
-    transition: all 650ms;
+    transition: all 800ms;
 }
 ul{
     list-style: none;
