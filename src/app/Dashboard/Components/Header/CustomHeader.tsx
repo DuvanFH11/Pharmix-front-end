@@ -17,7 +17,7 @@ const CustomHeader = () => {
             {<SideMenu isOpen={showMenu} handleClose={() => setShowMenu(false)} />}
             <header className={style.header}>
                 <div className={style.headerContainer}>
-                    <h1>DISTRIBUIDORA Tleyn</h1>
+                    <h1>Distribuidora Pharmix</h1>
                 </div>
                 <div className={style.headerContainer}>
                     <button data-primary="true" data-icon="true" onClick={() => { handleShowMenu() }}>{showMenu ? <ArrowRightIcon /> : <MenuOutlinedIcon />}</button>

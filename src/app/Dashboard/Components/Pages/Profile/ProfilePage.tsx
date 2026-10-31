@@ -44,29 +44,29 @@ const ProfilePage = () => {
             <div className={style.profileContent}>
                 <div className={style.profileContainer} data-container-info="true">
                     <h4>Información del usuario</h4>
-                    <div className={style.profileSubContainer} data-info="true">
+                    <div className={style.profileSubContainer}>
                         <h6>Nombre</h6>
-                        <p>{user && user.name}</p>
+                        <p className={style.optionContent}>{user && user.name}</p>
                     </div>
-                    <div className={style.profileSubContainer} data-info="true">
+                    <div className={style.profileSubContainer}>
                         <h6>Email</h6>
-                        <p>{user && user.email}</p>
+                        <p className={style.optionContent}>{user && user.email}</p>
                     </div>
                     <h4>Información de la cuenta</h4>
-                    <div className={style.profileSubContainer} data-info="true">
+                    <div className={style.profileSubContainer}>
                         <h6>Cargo</h6>
-                        <p>{user && user.user_job_title.name}</p>
+                        <p className={style.optionContent}>{user && user.user_job_title.name}</p>
                     </div>
-                    <div className={style.profileSubContainer} data-info="true">
+                    <div className={style.profileSubContainer}>
                         <h6>Rol en el sistema</h6>
-                        <p>{user && user.user_role.name}</p>
+                        <p className={style.optionContent}>{user && user.user_role.name}</p>
                     </div>
                 </div>
                 <div className={style.profileContainer} data-container-options="true">
-                    <h4>opciones</h4>
-                    <div className={style.profileSubContainer} data-options="true">
+                    <h4>Opciones</h4>
+                    <div className={style.profileSubContainer}>
                         <div>
-                            <h5 className={style.optionTitle}>Modificar información del usuario</h5>
+                            <h5>Modificar información del usuario</h5>
                             <p className={style.optionContent}>
                                 La actualización de sus datos se hará de forma inmediata en este procedimiento,
                                 Se cerrará la sesión para conservar la seguridad de la cuenta y deberá volver a iniciarla.
@@ -76,9 +76,9 @@ const ProfilePage = () => {
                             <button id="change_info" type="button" data-primary="true" data-icon="true" onClick={showFormsOption}><OpenInNewIcon /></button>
                         </div>
                     </div>
-                    <div className={style.profileSubContainer} data-options="true">
+                    <div className={style.profileSubContainer}>
                         <div>
-                            <h5 className={style.optionTitle}>Cambiar contraseña</h5>
+                            <h5>Cambiar contraseña</h5>
                             <p className={style.optionContent}>
                                 Al momento de hacer el primer ingreso, es necesario realizar esta acción para mantener la seguridad de su cuenta ya
                                 que al crearla se asigna una contraseña temporal.<br />

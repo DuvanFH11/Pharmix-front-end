@@ -51,9 +51,9 @@ const SideMenu = ({ isOpen, handleClose }: SideMenuProps,) => {
 
             <nav className={style.sideMenu} data-open={showMenu}>
                 <div className={style.menuContainer}>
-                    <h4 className={style.subtitle}>Incio</h4>
+                    <h4 className={style.subtitle}>Inicio</h4>
                     <ul className={style.listActions}>
-                        <Link to='/dashboard' onClick={handleClose}><h6 className={style.actionItems}>Dashboard</h6></Link>
+                        <Link to='/dashboard' onClick={handleClose}><span className={style.actionItems}>Dashboard</span></Link>
                     </ul>
                 </div>
                 <div className={style.menuContainer}>
@@ -61,7 +61,7 @@ const SideMenu = ({ isOpen, handleClose }: SideMenuProps,) => {
                     <ul className={style.listActions}>
                         {
                             categories ? categories.map((category) => (
-                                <Link key={category.id} to={`${category.path}`} onClick={handleClose}><h6 className={style.actionItems}>{category.name}</h6></Link>
+                                <Link key={category.id} to={`${category.path}`} onClick={handleClose}><span className={style.actionItems}>{category.name}</span></Link>
                             ))
                                 : <span>No hay categorías para mostrar</span>
                         }
@@ -70,11 +70,11 @@ const SideMenu = ({ isOpen, handleClose }: SideMenuProps,) => {
                 <div className={style.menuContainer}>
                     <h4 className={style.subtitle}>Ajustes</h4>
                     <ul className={style.listActions}>
-                        <Link to='profile_page' onClick={handleClose}><h6 className={style.actionItems}>Perfil</h6></Link>
+                        <Link to='profile_page' onClick={handleClose}><span className={style.actionItems}>Perfil</span></Link>
                     </ul>
                 </div>
                 <div className={style.menuContainer}>
-                    <button data-secondary="true" data-icon="true" className={style.btnLogout} onClick={handleLogout}><LogoutIcon /></button>
+                    <button data-secondary="true" className={style.btnLogout} onClick={handleLogout}><LogoutIcon /></button>
                 </div>
             </nav >
         </>

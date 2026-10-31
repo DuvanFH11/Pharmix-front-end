@@ -27,7 +27,7 @@ const Login = () => {
             <div className="d-flex  flex-column align-items-center justify-content-center vh-100 ">
                 <form className={style.access} onSubmit={handleSubmit((data) => { submitFormLogin(data) })}>
                     <div className={style.accessContainer}>
-                        <h1>INICIO DE SESIÓN</h1>
+                        <h1>Ingresar</h1>
                     </div>
 
                     <div className={style.accessContainer}>
