@@ -70,8 +70,10 @@ const themes = createTheme({
             },
             styleOverrides: {
                 select: {
+                    textAlign: 'left',
                     fontStyle: 'italic',
                     color: '#041f50',
+                    width: '80%'
                 },
                 icon: {
                     color: '#041f50',
