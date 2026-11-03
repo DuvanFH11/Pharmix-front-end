@@ -14,6 +14,7 @@
     transform: translateX(-400px);
     transition: transform 0.3s ease-in-out;
     z-index:4;
+    box-shadow: 0px 10px 40px 2px #000000;
 }
 .sideMenu[data-open="is-open"]{
     transform: translateX(0);
@@ -40,16 +41,21 @@
     text-align: left;
     transition: transform 300ms ease-out;
     transform: translateX(0);
+    margin:5px;
+    font-size: 0.9rem;
 }
 .actionItems:hover{
     transform: translateX(15px);
 }
 .btnLogout{
     width: 100%;
-    background-color:var(--secondary-color) ;
-    color : var(--primary-color);
-    border-radius: 10px;
-    text-align:center;
+    background-color: transparent;
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+}
+.btnLogout:hover{
+    background-color: var(--btn-ghost-hover-color);  
+    color: var(--primary-color);
 }
 @media (max-width : 780px){
     .sideMenu{

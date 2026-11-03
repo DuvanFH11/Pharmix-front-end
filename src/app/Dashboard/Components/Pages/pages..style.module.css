@@ -31,8 +31,15 @@
     border-radius: 10px;
 }
 .pagesInputSearch{
-    width: 500px;
+    display: flex;
+    width: 400px;
+    border-radius: 10px;
+    border: 1px solid var(--primary-color);
+    padding: 5px;
+    margin: 5px 0px 5px 0px;
 }
+.pagesInputSearch>:last-child{margin:0px; border:none}
+.pagesInputSearch>:first-child{color: var(--primary-color)}
 @media (max-width:780px){
     .pagesContent{
         grid-template-columns: repeat(2, 1fr);

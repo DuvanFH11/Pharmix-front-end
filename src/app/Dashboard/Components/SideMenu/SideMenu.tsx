@@ -53,7 +53,7 @@ const SideMenu = ({ isOpen, handleClose }: SideMenuProps,) => {
                 <div className={style.menuContainer}>
                     <h4 className={style.subtitle}>Inicio</h4>
                     <ul className={style.listActions}>
-                        <Link to='/dashboard' onClick={handleClose}><span className={style.actionItems}>Dashboard</span></Link>
+                        <Link to='/dashboard' onClick={handleClose}><p className={style.actionItems}>Dashboard</p></Link>
                     </ul>
                 </div>
                 <div className={style.menuContainer}>
@@ -61,7 +61,7 @@ const SideMenu = ({ isOpen, handleClose }: SideMenuProps,) => {
                     <ul className={style.listActions}>
                         {
                             categories ? categories.map((category) => (
-                                <Link key={category.id} to={`${category.path}`} onClick={handleClose}><span className={style.actionItems}>{category.name}</span></Link>
+                                <Link key={category.id} to={`${category.path}`} onClick={handleClose}><p className={style.actionItems}>{category.name}</p></Link>
                             ))
                                 : <span>No hay categorías para mostrar</span>
                         }
@@ -70,11 +70,11 @@ const SideMenu = ({ isOpen, handleClose }: SideMenuProps,) => {
                 <div className={style.menuContainer}>
                     <h4 className={style.subtitle}>Ajustes</h4>
                     <ul className={style.listActions}>
-                        <Link to='profile_page' onClick={handleClose}><span className={style.actionItems}>Perfil</span></Link>
+                        <Link to='profile_page' onClick={handleClose}><p className={style.actionItems}>Perfil</p></Link>
                     </ul>
                 </div>
                 <div className={style.menuContainer}>
-                    <button data-secondary="true" className={style.btnLogout} onClick={handleLogout}><LogoutIcon /></button>
+                    <button className={style.btnLogout} onClick={handleLogout}><LogoutIcon /></button>
                 </div>
             </nav >
         </>

@@ -57,8 +57,8 @@ const JobTitlesForm = ({ id, handleClose, handleSuccess }: FormsProps) => {
                     <textarea maxLength={250} minLength={5} {...register('description')} placeholder="Descripción" />
                 </div>
                 <div className={style.formsContainer} data-container-buttons="true">
-                    <button type="submit" className={style.formsSubmit} data-primary="true" data-icon="true">{id ? "Modificar" : "Crear"}</button>
-                    <button type="button" className={style.formsExit} data-secondary="true" data-icon="true" onClick={handleClose}>Cerrar</button>
+                    <button type="submit" className={style.formsSubmit} button-type="primary">{id ? "Modificar" : "Crear"}</button>
+                    <button type="button" className={style.formsExit} button-type="ghost" onClick={handleClose}>Cerrar</button>
                 </div>
             </form>
         </>

@@ -1,9 +1,12 @@
 .forms{
+    background-color: var(--primary-background-color);
+    border: 1px solid var(--primary-color);
     display:flex;
     flex-direction:  column;
     justify-content: space-around;
     height: 574px;
     padding : 10px;
+    border: none;
 }
 .formsTitle{
     color : var(--secondary-background-color);
@@ -13,19 +16,6 @@
 }
 .formsSubContainer{
     margin: 5px;
-}
-.formsSubmit{
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    border-color :var(--primary-color);
-    border-radius: 5px;
-}
-.formsExit{
-    background-color : var(--secondary-background-color);
-    color : var(--secondary-color);
-    border-color: var(--secondary-color);
-    border-radius: 5px;
-    transition: all 150ms ease-out;
 }
 .formsContainer[data-container-buttons="true"]{
     display:flex;
@@ -43,11 +33,18 @@
 }
 .formsRequestCode{
     transition: all 300ms ease;
+    padding:0px;
+    color: var(--primary-color);
+    font-weight: 900;
+    border-radius: 0px;
+    border-bottom: 1px solid var(--primary-color);
 }
-
-.formsRequestCode[disabled="true"]{
-    color : var(--secondary-color);
-    
+.formsRequestCode:disabled{
+    color : #595959;
+    font-weight: var(--font-family-regular);
+    border: none;
+    font-style: italic;
+    cursor:text;
 }
 .formsInputCode{
     border-radius: 10px;
@@ -56,14 +53,17 @@
     font-size: 2rem;
     transition: all 500ms ease;
     letter-spacing: 1.2rem;
-    background-color: var(--tercery-color);
+    text-align: center;
+    border: 1px solid var(--primary-color);
+    background-color: var(--tercery-background-color);
     transform: translateY(0);
-    font-family : var(--header-font-family);
 }
 .formsInputCode:focus{
     transform: translateY(-10px);
     border-color: var(--message-color);
+    color: var(--primary-color);
     border-radius: 20px;
+    text-align: center;
 }
 
 @media(max-width: 480px){

@@ -4,7 +4,8 @@
 
     color-scheme: light;
     --font-family : "IBM Plex Sans", sans-serif;
-    --font-family-bold : 700;
+    --font-family-bold : 800;
+    --font-family-semibold : 700;
     --font-family-regular : 200;
     --content-font-family : "Montserrat";
 
@@ -20,11 +21,11 @@
     --tercery-background-color: #EAEFF8;
 
 
-    --btn-primary-color: #000000;
-    --btn-primary-hover-color:#041f50;
+    --btn-primary-color: #041f50;
+    --btn-primary-hover-color:#02112b;
     
     --btn-ghost-color:  #F8FAFC;
-    --btn-ghost-hover-color: transparent;
+    --btn-ghost-hover-color: #cfdef1;
 
     --btn-icon-hover-color: #c0d5f1; 
     /* Para mensajes y alertas */
@@ -38,10 +39,10 @@ body{
     background-color: var(--primary-background-color);
     color : var(--secondary-color);
 }
-h1, h2, h3, h4, h5, h6{
-    color : var(--primary-color);
-    font-weight: var(--font-family-bold);
-}
+
+h1, h2{color : var(--primary-color);font-weight: var(--font-family-bold);}
+h3,h4,h5,h6{color: var(--primary-color);font-weight:var(--font-family-semibold)}
+
 form{
     background-color: var(--secondary-color);
     color : var(--secondary-color);
@@ -56,19 +57,19 @@ label{
     color : var(--secondary-color);
 }
 input{
-    width: 100%;
+    width: 90%;
     background-color: transparent;
     border: 1px solid transparent;
-    color: var(--secondary-background-color);
+    color: var(--text-color);
+    border-bottom: 1px solid var(--primary-color);
     font-style: italic;
     font-size:1rem;
-    text-align: center;
+    text-align: left;
     margin-top: 10px;
     transition: 500ms all;
 }
 input:focus{
     outline: none;
-    border-bottom: 1px solid var(--primary-color);
     color: var(--primary-color) !important;
 }
 input[type="number"]::-webkit-inner-spin-button,
@@ -104,7 +105,9 @@ button{
     background-color:transparent;
     padding: 5px 15px 5px 15px;
     margin : 5px;
-    transition: all 800ms;
+    border-radius: 10px;
+    font-weight: var(--font-family-semibold);
+    transition: all 200ms ease-in-out;
 }
 ul{
     list-style: none;

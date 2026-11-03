@@ -12,12 +12,12 @@ const DashboardPage = () => {
                     <div className={style.dashboardContainer}>
                         <h4>Ventas</h4>
                         <span>50</span>
-                        <button data-primary="true">Nuevo pedido</button>
+                        <button button-type="primary">Nuevo pedido</button>
                     </div>
                     <div className={style.dashboardContainer}>
                         <h4>Egresos</h4>
                         <span>50</span>
-                        <button data-primary="true">Gestionar pedidos</button>
+                        <button button-type="primary">Gestionar pedidos</button>
                     </div>
                 </div>
             </section>
@@ -28,6 +28,7 @@ const DashboardPage = () => {
                     </div>
                     <div className={style.dashboardContainer}>
                         <h4>Pedidos activos</h4>
+                        <button ></button>
                     </div>
                 </div>
             </section>

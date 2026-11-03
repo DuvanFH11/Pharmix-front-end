@@ -27,9 +27,9 @@ const Login = () => {
             <div className="d-flex  flex-column align-items-center justify-content-center vh-100 ">
                 <form className={style.access} onSubmit={handleSubmit((data) => { submitFormLogin(data) })}>
                     <div className={style.accessContainer}>
-                        <h1>Ingresar</h1>
+                        <h1>PHARMIX</h1>
+                        <h3>Ingresar</h3>
                     </div>
-
                     <div className={style.accessContainer}>
                         <span className="alert__">{errors.email?.message}</span><br />
                         <input type="email" placeholder="Ingrese su email" {...register("email")} />
@@ -41,8 +41,7 @@ const Login = () => {
                     </div >
 
                     <div className={style.accessContainer} data-container-btn="true">
-                        <button data-primary="true" type="submit" data-icon="true"><LoginIcon /></button>
-                        {/* <Link to="/"><button data-secondary="true">Regresar</button></Link> */}
+                        <button button-type="primary" type="submit"><LoginIcon /></button>
                     </div >
                 </form >
             </div >

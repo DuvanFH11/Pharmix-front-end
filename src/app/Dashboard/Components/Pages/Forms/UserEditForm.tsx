@@ -40,7 +40,7 @@ const UserEditForm = ({ id, handleSuccess, handleClose }: FormsProps) => {
             {isLoading && <LoadingComponent />}
             {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
             <form className={style.forms} onSubmit={onSubmitForm}>
-                <h1>{id && "Editar Información del usuario"}</h1>
+                <h1>{id && "Editar información"}</h1>
 
                 <div className={style.formsContainer}>
                     <span className="alert__">{errors.name && errors.name.message}</span>
@@ -51,8 +51,8 @@ const UserEditForm = ({ id, handleSuccess, handleClose }: FormsProps) => {
                     <input type="email" placeholder="Modifique el email" {...register('email')} />
                 </div>
                 <div className={style.formsContainer} data-container-buttons="true">
-                    <button type="submit" data-primary="true" data-icon="true" className={style.formsSubmit} onClick={handleSuccess}>Modificar</button>
-                    <button type="button" data-secondary="true" data-icon="true" className={style.formsExit} onClick={handleClose}>Cerrar</button>
+                    <button type="submit" button-type="primary" className={style.formsSubmit} onClick={handleSuccess}>Modificar</button>
+                    <button type="button" button-type="ghost" className={style.formsExit} onClick={handleClose}>Cerrar</button>
                 </div>
             </form >
         </>

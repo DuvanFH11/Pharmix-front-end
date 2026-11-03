@@ -35,8 +35,8 @@ const ChangePasswordForm = ({ id, handleSuccess, handleClose }: FormsProps) => {
                     <input type="password" placeholder="Confirmar contraseña" {...register('confirm_pass')} />
                 </div>
                 <div className={style.formsContainer} data-container-buttons="true">
-                    <button type="submit" data-primary="true" data-icon="true" className={style.formsSubmit} onClick={onSubmitFormPass}>Cambiar Contraseña</button>
-                    <button type="button" data-secondary="true" data-icon="true" className={style.formsExit} onClick={() => { handleClose() }}>Cerrar</button>
+                    <button type="submit" button-type="primary" className={style.formsSubmit} onClick={onSubmitFormPass}>Cambiar Contraseña</button>
+                    <button type="button" button-type="ghost" className={style.formsExit} onClick={() => { handleClose() }}>Cerrar</button>
                 </div>
             </form >
         </>

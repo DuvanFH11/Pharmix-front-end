@@ -9,6 +9,7 @@ import PersonAddAltRoundedIcon from '@mui/icons-material/PersonAddAltRounded';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
 import UsersForm from "../Forms/UsersForm";
 import style from "../pages..style.module.css";
+import SearchIcon from '@mui/icons-material/Search';
 
 const UsersPages = () => {
     const [users, setUsers] = useState<UserType[] | null>(null);
@@ -54,13 +55,13 @@ const UsersPages = () => {
                     <h1>Usuarios</h1>
                 </div>
                 <div className={style.pagesContainer} data-container-buttons="true">
-                    <button data-primary="true" data-icon="true" onClick={() => { handleShowForm(undefined) }}>
+                    <button button-type="primary" onClick={() => { handleShowForm(undefined) }}>
                         <PersonAddAltRoundedIcon />
                         <span>Agregar usuario</span>
                     </button>
-                    <div>
+                    <div className={style.pagesInputSearch}>
+                        <SearchIcon />
                         <input
-                            className={style.pagesInputSearch}
                             type="search"
                             placeholder="Buscar E-mail"
                             onChange={(e) => setTerm(e.target.value)}
@@ -106,7 +107,7 @@ const UsersPages = () => {
                     onChange={(event, newPage) => setCurrentPage(newPage)}
                     size="large"
                 />
-            </section>
+            </section >
             <Dialog open={showModal}>
                 {showModal && <UsersForm id={id} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess() }} />}
             </Dialog>

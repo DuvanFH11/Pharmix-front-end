@@ -6,26 +6,19 @@
     color : var(--alert-color);
 }
 button[button-type="primary"]{
-    background-color:transparent;
-    color: var(--primary-color);
-    border-radius: 10px;
-    transition: all 150ms ease-out;
+    background-color:var(--btn-primary-color);
+    color: var(--secondary-color);
 }
 button[button-type="primary"]:hover{
-    background-color: var(--btn-primary-color);
-    color: var(--secondary-color);
-    transform: translateY(-5px);
+    background-color: var(--btn-primary-hover-color);
 }
 button[button-type="ghost"]{
     background-color : var(--btn-ghost-color);
+    border: 2px solid var(--primary-color);
     color : var(--primary-color);
-    border-radius: 10px;
 }
 button[button-type="ghost"]:hover{
-    background-color:var(--btn-ghost-hover-color);
-    color : var(--text-color);
-    transition: all 150ms ease-out;
-    
+    background-color: var(--btn-ghost-hover-color);
 }
 button[button-type="icon"]{
     background-color: transparent;
