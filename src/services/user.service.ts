@@ -3,7 +3,7 @@ import api from "../plugins/axios"
 
 //PETICIONES GET//
 /*traer todos los usuarios*/
-export const index = async (page: number, termSearch?: string) => {
+export const index = async (page?: number, termSearch?: string) => {
     const response = await api.get('/users', { params: { page: page, email: termSearch } });
     return response.data;
 }

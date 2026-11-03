@@ -8,6 +8,7 @@ import { Dialog, Pagination, Table, TableBody, TableCell, TableContainer, TableH
 import { index } from "../../../../../services/role.service";
 import NoteAdd from '@mui/icons-material/NoteAdd';
 import RolesForm from "../Forms/RolesForm";
+import SearchIcon from '@mui/icons-material/Search';
 import style from "../pages..style.module.css";
 
 const RolesPage = () => {
@@ -55,13 +56,13 @@ const RolesPage = () => {
                     <h1>Roles</h1>
                 </div>
                 <div className={style.pagesContainer} data-container-buttons="true">
-                    <button data-primary="true" data-icon="true" onClick={() => { handleShowForm(undefined) }}>
+                    <button button-type="primary" onClick={() => { handleShowForm(undefined) }}>
                         <NoteAdd />
                         <span>Agregar Rol</span>
                     </button>
-                    <div>
+                    <div className={style.pagesInputSearch}>
+                        <SearchIcon />
                         <input
-                            className={style.pagesInputSearch}
                             type="search"
                             placeholder="Buscar código"
                             onChange={(e) => setTerm(e.target.value)}
@@ -87,7 +88,7 @@ const RolesPage = () => {
                                         <TableCell>{role.code}</TableCell>
                                         <TableCell>{role.name}</TableCell>
                                         <TableCell>{role.description}</TableCell>
-                                        <TableCell><button data-secondary="true" data-icon="true" onClick={() => { handleShowForm(role.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
+                                        <TableCell><button button-type="icon" onClick={() => { handleShowForm(role.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
                                     </TableRow>
                                 )) : (
                                     <TableRow key="no-role-row">

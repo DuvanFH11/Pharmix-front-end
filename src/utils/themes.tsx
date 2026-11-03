@@ -23,25 +23,32 @@ const themes = createTheme({
         MuiTableContainer: {
             styleOverrides: {
                 root: {
-                    boxShadow: 'none',
+                    boxShadow: '0 30px 25px -5px rgba(0, 0, 0, 0.12), 0 20px 15px -5px rgba(0, 0, 0, 0.06)',
                     borderRadius: '10px',
+                    border: '1px solid #dcdcdc',
                     padding: '10px',
                     marginBottom: '20px',
                     marginTop: '20px',
                     overflow: 'x-scroll',
-                    backgroundColor: '#e2e8f0',
+                    backgroundColor: '#EAEFF8',
                 }
             }
         },
         MuiTableCell: {
             styleOverrides: {
+                root: {
+                    fontFamily: 'IBM Plex Sans, sans-serif',
+                    borderTop: '2px solid #dcdcdc',
+                    borderBottom: 'none'
+                },
                 head: {
                     color: '#041f50',
-                    fontFamily: 'Cinzel',
-                    textAlign: 'center'
+                    fontWeight: '700',
+                    textAlign: 'center',
+                    borderTop: 'none'
                 },
                 body: {
-                    color: '#605e5e',
+                    color: '#00000',
                     textAlign: 'center'
                 },
                 footer: {
@@ -52,7 +59,7 @@ const themes = createTheme({
         MuiDialog: {
             styleOverrides: {
                 paper: {
-                    backgroundColor: '#E2E8F0',
+                    backgroundColor: '#F8FAFC',
                     borderRadius: '20px',
                 }
             }

@@ -8,8 +8,8 @@ import { index } from "../../../../../services/job.title.service";
 import NoteAdd from '@mui/icons-material/NoteAdd';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
 import JobTitlesForm from "../Forms/JobTitlesForm";
+import SearchIcon from '@mui/icons-material/Search';
 import style from "../pages..style.module.css";
-
 const JobTitlesPage = () => {
     const [jobTitles, setJobTitles] = useState<JobTitleInterface[] | null>(null);
     const [pagination, setPagination] = useState<{ total: number, per_page: number }>({ total: 0, per_page: 4 });
@@ -58,13 +58,13 @@ const JobTitlesPage = () => {
                     <h1>Cargos</h1>
                 </div>
                 <div className={style.pagesContainer} data-container-buttons="true">
-                    <button data-primary="true" data-icon="true" onClick={() => { handleShowForm(undefined) }}>
+                    <button button-type="primary" onClick={() => { handleShowForm(undefined) }}>
                         <NoteAdd />
                         <span>Agregar Cargo</span>
                     </button>
-                    <div>
+                    <div className={style.pagesInputSearch}>
+                        <SearchIcon />
                         <input
-                            className={style.pagesInputSearch}
                             type="search"
                             placeholder="Buscar código"
                             onChange={(e) => setTerm(e.target.value)}
@@ -89,7 +89,7 @@ const JobTitlesPage = () => {
                                     <TableCell>{jobTitle.code}</TableCell>
                                     <TableCell>{jobTitle.name}</TableCell>
                                     <TableCell>{jobTitle.description}</TableCell>
-                                    <TableCell><button data-secondary="true" data-icon="true" onClick={() => { handleShowForm(jobTitle.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
+                                    <TableCell><button button-type="icon" onClick={() => { handleShowForm(jobTitle.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
                                 </TableRow>
                             )) : (
                                 <TableRow key="no-job-titles-row">
@@ -107,7 +107,7 @@ const JobTitlesPage = () => {
                     onChange={(event, newPage) => setCurrentPage(newPage)}
                     size="large"
                 />
-            </section>
+            </section >
             <Dialog open={showModal}>
                 <JobTitlesForm id={id} handleClose={() => setShowModal(false)} handleSuccess={() => showSuccess()} />
             </Dialog>

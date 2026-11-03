@@ -5,28 +5,33 @@
     font-size: 0.9rem;
     color : var(--alert-color);
 }
-button[data-primary="true"]:hover{
-    background-color: var(--primary-color);
+button[button-type="primary"]{
+    background-color:var(--btn-primary-color);
     color: var(--secondary-color);
-    border-color :var(--primary-color);
+}
+button[button-type="primary"]:hover{
+    background-color: var(--btn-primary-hover-color);
+}
+button[button-type="ghost"]{
+    background-color : var(--btn-ghost-color);
+    border: 2px solid var(--primary-color);
+    color : var(--primary-color);
+}
+button[button-type="ghost"]:hover{
+    background-color: var(--btn-ghost-hover-color);
+}
+button[button-type="icon"]{
+    background-color: transparent;
     border-radius: 5px;
+    color: var(--primary-color);
     transition: all 150ms ease-out;
 }
-button[data-secondary="true"]:hover{
-    background-color : var(--secondary-background-color);
-    color : var(--secondary-color);
-    border-color: var(--secondary-color);
-    border-radius: 5px;
-    transition: all 150ms ease-out;
-    /* transform: translateY(0); */
-}
-button[data-icon="true"]:hover{
-    transform: translateY(-5px);
+button[button-type="icon"]:hover{
+    transform: translateY(-2px);
+    background-color: var(--btn-icon-hover-color);
 }
 .section__{
-    background-color: var(--tercery-background-color);
-    padding: 20px;
-    margin: 30px 0px 30px 0px;
+    margin: 20px;
 }
 
 

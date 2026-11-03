@@ -2,7 +2,7 @@
 import type { roleStoreInterface } from "../interfaces/RoleInterface";
 import api from "../plugins/axios"
 
-export const index = async (page: number, termSearch?: string) => {
+export const index = async (page?: number, termSearch?: string) => {
     const response = await api.get("/roles", { params: { page: page, code: termSearch } });
     return response.data;
 }

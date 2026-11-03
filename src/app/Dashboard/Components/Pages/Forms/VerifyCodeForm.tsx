@@ -48,14 +48,14 @@ const VerifyCodeForm = ({ id, email, handleSuccess, handleClose }: FormsProps) =
                     <div>
                         <span className="alert__">{errorsCode.code && errorsCode.code.message}</span>
                     </div>
-                    <div className={style.formsContainer} data-container-buttons="true">
+                    <div className={style.formsContainer}>
                         <button className={style.formsRequestCode} type="button" onClick={requestCode} disabled={timeOutCode ? true : false}>
                             {timeOutCode ? `Nuevo código en : ${timeOutCode}` : 'Solicitar código'}
                         </button>
                     </div>
                     <div className={style.formsContainer} data-container-buttons="true">
-                        <button className={style.formsSubmit} data-icon="true" data-primary="true" onClick={onSubmitFormCode}>Enviar Código</button>
-                        {!timeOutCode ? < button type="button" className={style.formsExit} data-secondary="true" data-icon="true" onClick={handleClose}>Cerrar</button> : null}
+                        <button className={style.formsSubmit} button-type="primary" onClick={onSubmitFormCode}>Enviar Código</button>
+                        {!timeOutCode ? < button type="button" className={style.formsExit} button-type="ghost" onClick={handleClose}>Cerrar</button> : null}
                     </div>
                 </form >
                 : (

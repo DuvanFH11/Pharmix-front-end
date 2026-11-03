@@ -8,13 +8,13 @@
     color: var(--secondary-color);
     display: flex;
     flex-direction: column;
-    justify-content:  space-evenly;
+    justify-content:  center;
     padding : 30px;
     text-align: left;
     transform: translateX(-400px);
     transition: transform 0.3s ease-in-out;
     z-index:4;
-
+    box-shadow: 0px 10px 40px 2px #000000;
 }
 .sideMenu[data-open="is-open"]{
     transform: translateX(0);
@@ -23,19 +23,8 @@
     color : var(--secondary-color);
     font-size:small;
 }
-.userInformation{
-    border-radius: 10px;
-    background-color : var(--secondary-background-color);
-    padding: 5px 15px 5px 15px;
-    text-align: center;
-    font-weight:800;
-    font-family: var(--header-font-family);
-    text-transform: uppercase;
-    color: var(--primary-color);
-    
-}
 .subtitle{
-    color : var(--secondary-background-color);
+    color : var(--secondary-color);
     text-align: left;
     margin: 0px;
     font-weight: 600;
@@ -52,14 +41,21 @@
     text-align: left;
     transition: transform 300ms ease-out;
     transform: translateX(0);
+    margin:5px;
+    font-size: 0.9rem;
 }
 .actionItems:hover{
     transform: translateX(15px);
 }
 .btnLogout{
     width: 100%;
-    color : var(--tercery-color);
-    text-align:center;
+    background-color: transparent;
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+}
+.btnLogout:hover{
+    background-color: var(--btn-ghost-hover-color);  
+    color: var(--primary-color);
 }
 @media (max-width : 780px){
     .sideMenu{

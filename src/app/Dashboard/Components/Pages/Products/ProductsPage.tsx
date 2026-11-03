@@ -9,6 +9,7 @@ import NoteAdd from '@mui/icons-material/NoteAdd';
 import ModeEditOutlineRoundedIcon from '@mui/icons-material/ModeEditOutlineRounded';
 import ProductsForm from "../Forms/ProductsForms";
 import style from "../pages..style.module.css";
+import SearchIcon from '@mui/icons-material/Search';
 
 const ProductsPage = () => {
     const { isLoading, alertMessage, handleIndex, setAlertMessage } = useHandleFormsPages();
@@ -56,13 +57,13 @@ const ProductsPage = () => {
                     <h1>Productos</h1>
                 </div>
                 <div className={style.pagesContainer} data-container-buttons="true">
-                    <button data-primary="true" data-icon="true" onClick={() => { handleShowForm(undefined) }}>
+                    <button button-type="primary" onClick={() => { handleShowForm(undefined) }}>
                         <NoteAdd />
                         <span>Agregar producto</span>
                     </button>
-                    <div>
+                    <div className={style.pagesInputSearch}>
+                        <SearchIcon />
                         <input
-                            className={style.pagesInputSearch}
                             type="search"
                             placeholder="Buscar nombre o registro"
                             onChange={(e) => setTerm(e.target.value)}
@@ -106,7 +107,7 @@ const ProductsPage = () => {
                                         </TableCell>
                                         <TableCell>{product.invima_registration}</TableCell>
                                         <TableCell>{Number(product.strength)}{product.unit}</TableCell>
-                                        <TableCell><button data-secondary="true" data-icon="true" onClick={() => { handleShowForm(product.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
+                                        <TableCell><button button-type="icon" onClick={() => { handleShowForm(product.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
                                     </TableRow>
                                 )) :
                                     <TableRow key="no-products-row">
