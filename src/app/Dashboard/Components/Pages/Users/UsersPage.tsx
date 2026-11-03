@@ -88,7 +88,7 @@ const UsersPages = () => {
                                         <TableCell>{user.email}</TableCell>
                                         <TableCell>{user.user_job_title.name}</TableCell>
                                         <TableCell>{user.user_role.name}</TableCell>
-                                        <TableCell><button data-secondary="true" data-icon="true" onClick={() => { handleShowForm(user.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
+                                        <TableCell><button button-type="icon" onClick={() => { handleShowForm(user.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
                                     </TableRow>
                                 )) :
                                     <TableRow key='no-users-row'>

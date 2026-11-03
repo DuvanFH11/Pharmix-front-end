@@ -5,27 +5,37 @@
     font-size: 0.9rem;
     color : var(--alert-color);
 }
-button[data-primary="true"]{
+button[button-type="primary"]{
     background-color:transparent;
     color: var(--primary-color);
     border-radius: 10px;
+    transition: all 150ms ease-out;
 }
-button[data-primary="true"]:hover{
+button[button-type="primary"]:hover{
     background-color: var(--btn-primary-color);
     color: var(--secondary-color);
-    transition: all 150ms ease-out;
     transform: translateY(-5px);
 }
-button[data-secondary="true"]{
-    background-color : var(--btn-secondary-color);
+button[button-type="ghost"]{
+    background-color : var(--btn-ghost-color);
     color : var(--primary-color);
     border-radius: 10px;
 }
-button[data-secondary="true"]:hover{
-    background-color:var(--secondary-color);
+button[button-type="ghost"]:hover{
+    background-color:var(--btn-ghost-hover-color);
     color : var(--text-color);
     transition: all 150ms ease-out;
     
+}
+button[button-type="icon"]{
+    background-color: transparent;
+    border-radius: 5px;
+    color: var(--primary-color);
+    transition: all 150ms ease-out;
+}
+button[button-type="icon"]:hover{
+    transform: translateY(-2px);
+    background-color: var(--btn-icon-hover-color);
 }
 .section__{
     margin: 20px;

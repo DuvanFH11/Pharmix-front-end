@@ -106,7 +106,7 @@ const ProductsPage = () => {
                                         </TableCell>
                                         <TableCell>{product.invima_registration}</TableCell>
                                         <TableCell>{Number(product.strength)}{product.unit}</TableCell>
-                                        <TableCell><button data-secondary="true" data-icon="true" onClick={() => { handleShowForm(product.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
+                                        <TableCell><button button-type="icon" onClick={() => { handleShowForm(product.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
                                     </TableRow>
                                 )) :
                                     <TableRow key="no-products-row">

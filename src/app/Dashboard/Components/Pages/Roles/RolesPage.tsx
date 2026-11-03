@@ -87,7 +87,7 @@ const RolesPage = () => {
                                         <TableCell>{role.code}</TableCell>
                                         <TableCell>{role.name}</TableCell>
                                         <TableCell>{role.description}</TableCell>
-                                        <TableCell><button data-secondary="true" data-icon="true" onClick={() => { handleShowForm(role.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
+                                        <TableCell><button button-type="icon" onClick={() => { handleShowForm(role.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
                                     </TableRow>
                                 )) : (
                                     <TableRow key="no-role-row">

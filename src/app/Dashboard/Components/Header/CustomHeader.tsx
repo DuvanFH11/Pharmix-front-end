@@ -20,7 +20,7 @@ const CustomHeader = () => {
                     <h1>Distribuidora Pharmix</h1>
                 </div>
                 <div className={style.headerContainer}>
-                    <button data-primary="true" data-icon="true" onClick={() => { handleShowMenu() }}>{showMenu ? <ArrowRightIcon /> : <MenuOutlinedIcon />}</button>
+                    <button button-type="icon" onClick={() => { handleShowMenu() }}>{showMenu ? <ArrowRightIcon /> : <MenuOutlinedIcon />}</button>
                 </div>
             </header>
 

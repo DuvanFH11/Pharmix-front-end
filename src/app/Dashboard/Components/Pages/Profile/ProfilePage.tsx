@@ -73,7 +73,7 @@ const ProfilePage = () => {
                             </p>
                         </div>
                         <div>
-                            <button id="change_info" type="button" data-primary="true" data-icon="true" onClick={showFormsOption}><OpenInNewIcon /></button>
+                            <button id="change_info" type="button" button-type="icon" onClick={showFormsOption}><OpenInNewIcon /></button>
                         </div>
                     </div>
                     <div className={style.profileSubContainer}>
@@ -87,7 +87,7 @@ const ProfilePage = () => {
                             </p>
                         </div>
                         <div>
-                            <button id="change_pass" type="button" data-primary="true" data-icon="true" onClick={showFormsOption}><OpenInNewIcon /></button>
+                            <button id="change_pass" type="button" button-type="icon" onClick={showFormsOption}><OpenInNewIcon /></button>
                         </div>
                     </div>
                 </div>

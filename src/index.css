@@ -23,9 +23,10 @@
     --btn-primary-color: #000000;
     --btn-primary-hover-color:#041f50;
     
-    --btn-secondary-color:  #F8FAFC;
-    --btn-secondary-hover-color: transparent;
+    --btn-ghost-color:  #F8FAFC;
+    --btn-ghost-hover-color: transparent;
 
+    --btn-icon-hover-color: #c0d5f1; 
     /* Para mensajes y alertas */
     --alert-color : #ff0000;
     --message-color : #00ff2f;

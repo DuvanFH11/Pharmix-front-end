@@ -89,7 +89,7 @@ const JobTitlesPage = () => {
                                     <TableCell>{jobTitle.code}</TableCell>
                                     <TableCell>{jobTitle.name}</TableCell>
                                     <TableCell>{jobTitle.description}</TableCell>
-                                    <TableCell><button data-secondary="true" data-icon="true" onClick={() => { handleShowForm(jobTitle.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
+                                    <TableCell><button button-type="icon" onClick={() => { handleShowForm(jobTitle.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
                                 </TableRow>
                             )) : (
                                 <TableRow key="no-job-titles-row">
