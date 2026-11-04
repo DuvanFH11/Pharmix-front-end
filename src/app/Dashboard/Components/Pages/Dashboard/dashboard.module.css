@@ -3,6 +3,7 @@
     flex-direction: row;
     justify-content: space-evenly;
     padding: 0px 10px 0px 10px;
+    border-radius: 5px;
     background-color: var(--secondary-background-color);    
 }
 .menuNavigationIcon{
@@ -11,11 +12,11 @@
     transition: all 250ms ease-out;
     padding: 7px;
     cursor: pointer;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
 }
 .menuNavigationIcon:hover{
-    transform: translateY(-10px);
-    border:1px solid  var(--secondary-color);
+    transform: translateY(-15px);
+    border:2px solid  var(--secondary-color);
 }
 .icon{
     width: 30px;
