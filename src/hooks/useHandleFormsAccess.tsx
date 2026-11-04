@@ -18,7 +18,7 @@ export const useHandleFormAccess = () => {
             setAlertMessage({ message, success, time: Date.now() });
             if (checkAuth) await checkAuth();
             setTimeout(() => {
-                navigate('/dashboard', { replace: true });
+                navigate('/dashboard/content', { replace: true });
             }, 3000);
         } catch (error: unknown) {
             handleErrorResponse(error, "Error en el inicio de sesión", setAlertMessage);
