@@ -7,6 +7,12 @@ const DashboardInventory = () => {
             <h4>Filtrar productos por tipo</h4>
             <h5>Buscar productos</h5>
             <h6>Desactivas productos</h6>
+
+
+
+
+
+
         </>
     )
 }
