@@ -69,6 +69,7 @@ const DashboardHome = () => {
                                 data: dataMonths,
                                 label: 'Cantidad de pedidos realizados y exitosos.',
                                 color: '#041f50',
+                                curve: 'linear',
                                 showMark: true
                             }
                         ]}
