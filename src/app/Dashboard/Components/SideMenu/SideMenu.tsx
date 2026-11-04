@@ -53,7 +53,7 @@ const SideMenu = ({ isOpen, handleClose }: SideMenuProps,) => {
                 <div className={style.menuContainer}>
                     <h4 className={style.subtitle}>Inicio</h4>
                     <ul className={style.listActions}>
-                        <Link to='/dashboard' onClick={handleClose}><p className={style.actionItems}>Dashboard</p></Link>
+                        <Link to='/dashboard/content' onClick={handleClose}><p className={style.actionItems}>Dashboard</p></Link>
                     </ul>
                 </div>
                 <div className={style.menuContainer}>

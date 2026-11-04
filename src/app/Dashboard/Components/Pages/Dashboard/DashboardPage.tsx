@@ -1,37 +1,27 @@
-import style from "./dashboard.module.css"
-
+import RoofingOutlinedIcon from '@mui/icons-material/RoofingOutlined';
+import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
+import InventoryOutlinedIcon from '@mui/icons-material/InventoryOutlined';
+import style from "./dashboard.module.css";
+import { Link, Outlet } from 'react-router-dom';
 const DashboardPage = () => {
+
     return (
         <>
-            <section className="section__">
-                <div className={style.dashboardContent}>
-                    <div className={style.dashboardContainer}>
-                        <h4>Usuarios totales</h4>
-                        <span>Este es el contenido de mi target</span>
-                    </div>
-                    <div className={style.dashboardContainer}>
-                        <h4>Ventas</h4>
-                        <span>50</span>
-                        <button button-type="primary">Nuevo pedido</button>
-                    </div>
-                    <div className={style.dashboardContainer}>
-                        <h4>Egresos</h4>
-                        <span>50</span>
-                        <button button-type="primary">Gestionar pedidos</button>
-                    </div>
+            <nav className={style.menuNavigation}>
+                <div className={style.menuNavigationIcon}>
+                    <Link to="request"><InventoryOutlinedIcon className={style.icon} /></Link>
                 </div>
-            </section>
-            <section className="section__">
-                <div className={style.dashboardContent}>
-                    <div className={style.dashboardContainer}>
-                        <h4>Productos en Stock</h4>
-                    </div>
-                    <div className={style.dashboardContainer}>
-                        <h4>Pedidos activos</h4>
-                        <button ></button>
-                    </div>
+                <div className={style.menuNavigationIcon}>
+                    <Link to="."><RoofingOutlinedIcon className={style.icon} /></Link>
                 </div>
-            </section>
+                <div className={style.menuNavigationIcon}>
+                    <Link to="invoices"><InsertDriveFileOutlinedIcon className={style.icon} /></Link>
+                </div>
+            </nav>
+            <section className="section__">
+                {/* Se cargan las páginas del Dashboard */}
+                <Outlet />
+            </section >
         </>
     )
 }

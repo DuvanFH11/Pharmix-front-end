@@ -1,13 +1,24 @@
-.dashboardContent{
-    display:grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
-    column-gap: 1.5rem;
-}
-.dashboardContainer{
+.menuNavigation{
     display:flex;
-    flex-direction: column;
-    padding: 20px;
-    border-radius: 20px;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 0px 10px 0px 10px;
+    background-color: var(--secondary-background-color);    
 }
+.menuNavigationIcon{
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    transition: all 250ms ease-out;
+    padding: 7px;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+.menuNavigationIcon:hover{
+    transform: translateY(-10px);
+    border:1px solid  var(--secondary-color);
+}
+.icon{
+    width: 30px;
+    height: 30px;
+}
+
