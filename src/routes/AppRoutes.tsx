@@ -11,6 +11,7 @@ import RolesPage from "../app/Dashboard/Components/Pages/Roles/RolesPage";
 import DashboardHome from "../app/Dashboard/Components/Pages/Dashboard/Content/Home/DashboardHome";
 import DashboardRequest from "../app/Dashboard/Components/Pages/Dashboard/Content/Request/DashboardRequest";
 import DashboardInvoices from "../app/Dashboard/Components/Pages/Dashboard/Content/Invoices/DashboardInvoices";
+import DashboardInventory from "../app/Dashboard/Components/Pages/Dashboard/Content/Inventory/DashboardInventory";
 const AppRoutes = () => {
     return (
         <>
@@ -23,6 +24,7 @@ const AppRoutes = () => {
                             <Route index={true} element={<DashboardHome />} />
                             <Route path="request" element={<DashboardRequest />} />
                             <Route path="invoices" element={<DashboardInvoices />} />
+                            <Route path="inventory" element={<DashboardInventory />} />
                         </Route>
                         <Route path="users_page" element={<UsersPages />} />
                         <Route path="products_page" element={<ProductsPage />} />
@@ -35,5 +37,4 @@ const AppRoutes = () => {
         </>
     )
 }
-
 export default AppRoutes;

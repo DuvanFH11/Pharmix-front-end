@@ -11,15 +11,15 @@
     border-radius: 50%;
     transition: all 250ms ease-out;
     padding: 7px;
-    cursor: pointer;
     border: 2px solid transparent;
 }
 .menuNavigationIcon:hover{
     transform: translateY(-15px);
     border:2px solid  var(--secondary-color);
 }
-.icon{
+.icons{
     width: 30px;
     height: 30px;
+    cursor: pointer;
 }
 
