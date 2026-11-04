@@ -10,10 +10,10 @@ const DashboardPage = () => {
         <>
             <nav className={style.menuNavigation}>
                 <div className={style.menuNavigationIcon}>
-                    <Link to="request"><InventoryOutlinedIcon className={style.icons} /></Link>
+                    <Link to="."><RoofingOutlinedIcon className={style.icons} /></Link>
                 </div>
                 <div className={style.menuNavigationIcon}>
-                    <Link to="."><RoofingOutlinedIcon className={style.icons} /></Link>
+                    <Link to="request"><InventoryOutlinedIcon className={style.icons} /></Link>
                 </div>
                 <div className={style.menuNavigationIcon}>
                     <Link to="invoices"><InsertDriveFileOutlinedIcon className={style.icons} /></Link>
@@ -21,7 +21,7 @@ const DashboardPage = () => {
                 <div className={style.menuNavigationIcon}>
                     <Link to="inventory"><Inventory2OutlinedIcon className={style.icons} /></Link>
                 </div>
-            </nav>
+            </nav >
             <section className="section__">
                 {/* Se cargan las páginas del Dashboard */}
                 <Outlet />
