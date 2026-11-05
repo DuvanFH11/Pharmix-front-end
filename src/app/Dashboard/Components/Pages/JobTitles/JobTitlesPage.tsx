@@ -53,61 +53,59 @@ const JobTitlesPage = () => {
             {isLoading && <LoadingComponent />}
             {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
 
-            <section className="section__">
-                <div className={style.pagesContainer} data-title="true">
-                    <h1>Cargos</h1>
+            <div className={style.pagesContainer} data-title="true">
+                <h1>Cargos</h1>
+            </div>
+            <div className={style.pagesContainer} data-container-buttons="true">
+                <button button-type="primary" onClick={() => { handleShowForm(undefined) }}>
+                    <NoteAdd />
+                    <span>Agregar Cargo</span>
+                </button>
+                <div className={style.pagesInputSearch}>
+                    <SearchIcon />
+                    <input
+                        type="search"
+                        placeholder="Buscar código"
+                        onChange={(e) => setTerm(e.target.value)}
+                    />
                 </div>
-                <div className={style.pagesContainer} data-container-buttons="true">
-                    <button button-type="primary" onClick={() => { handleShowForm(undefined) }}>
-                        <NoteAdd />
-                        <span>Agregar Cargo</span>
-                    </button>
-                    <div className={style.pagesInputSearch}>
-                        <SearchIcon />
-                        <input
-                            type="search"
-                            placeholder="Buscar código"
-                            onChange={(e) => setTerm(e.target.value)}
-                        />
-                    </div>
-                </div>
-                <TableContainer component={Paper}>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Id</TableCell>
-                                <TableCell>Código</TableCell>
-                                <TableCell>Nombre</TableCell>
-                                <TableCell>Descripción</TableCell>
-                                <TableCell>Editar</TableCell>
+            </div>
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Id</TableCell>
+                            <TableCell>Código</TableCell>
+                            <TableCell>Nombre</TableCell>
+                            <TableCell>Descripción</TableCell>
+                            <TableCell>Editar</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {jobTitles ? jobTitles.map((jobTitle) => (
+                            <TableRow key={jobTitle.id}>
+                                <TableCell>{jobTitle.id}</TableCell>
+                                <TableCell>{jobTitle.code}</TableCell>
+                                <TableCell>{jobTitle.name}</TableCell>
+                                <TableCell>{jobTitle.description}</TableCell>
+                                <TableCell><button button-type="icon" onClick={() => { handleShowForm(jobTitle.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
                             </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {jobTitles ? jobTitles.map((jobTitle) => (
-                                <TableRow key={jobTitle.id}>
-                                    <TableCell>{jobTitle.id}</TableCell>
-                                    <TableCell>{jobTitle.code}</TableCell>
-                                    <TableCell>{jobTitle.name}</TableCell>
-                                    <TableCell>{jobTitle.description}</TableCell>
-                                    <TableCell><button button-type="icon" onClick={() => { handleShowForm(jobTitle.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
-                                </TableRow>
-                            )) : (
-                                <TableRow key="no-job-titles-row">
-                                    <TableCell colSpan={5}><h6>No hay cargos</h6></TableCell>
-                                </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <Pagination
-                    shape="circular"
-                    page={currentPage}
-                    count={pagination.total}
-                    color='primary'
-                    onChange={(event, newPage) => setCurrentPage(newPage)}
-                    size="large"
-                />
-            </section >
+                        )) : (
+                            <TableRow key="no-job-titles-row">
+                                <TableCell colSpan={5}><h6>No hay cargos</h6></TableCell>
+                            </TableRow>
+                        )}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <Pagination
+                shape="circular"
+                page={currentPage}
+                count={pagination.total}
+                color='primary'
+                onChange={(event, newPage) => setCurrentPage(newPage)}
+                size="large"
+            />
             <Dialog open={showModal}>
                 <JobTitlesForm id={id} handleClose={() => setShowModal(false)} handleSuccess={() => showSuccess()} />
             </Dialog>

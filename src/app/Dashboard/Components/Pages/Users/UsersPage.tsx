@@ -50,64 +50,62 @@ const UsersPages = () => {
         <>
             {isLoading && <LoadingComponent />}
             {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
-            <section className="section__">
-                <div className={style.pagesContainer} data-title="true">
-                    <h1>Usuarios</h1>
+            <div className={style.pagesContainer} data-title="true">
+                <h1>Usuarios</h1>
+            </div>
+            <div className={style.pagesContainer} data-container-buttons="true">
+                <button button-type="primary" onClick={() => { handleShowForm(undefined) }}>
+                    <PersonAddAltRoundedIcon />
+                    <span>Agregar usuario</span>
+                </button>
+                <div className={style.pagesInputSearch}>
+                    <SearchIcon />
+                    <input
+                        type="search"
+                        placeholder="Buscar E-mail"
+                        onChange={(e) => setTerm(e.target.value)}
+                    />
                 </div>
-                <div className={style.pagesContainer} data-container-buttons="true">
-                    <button button-type="primary" onClick={() => { handleShowForm(undefined) }}>
-                        <PersonAddAltRoundedIcon />
-                        <span>Agregar usuario</span>
-                    </button>
-                    <div className={style.pagesInputSearch}>
-                        <SearchIcon />
-                        <input
-                            type="search"
-                            placeholder="Buscar E-mail"
-                            onChange={(e) => setTerm(e.target.value)}
-                        />
-                    </div>
-                </div>
-                <TableContainer component={Paper}>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Id</TableCell>
-                                <TableCell>Nombre</TableCell>
-                                <TableCell>Email</TableCell>
-                                <TableCell>Cargo</TableCell>
-                                <TableCell>Role</TableCell>
-                                <TableCell>Editar</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {
-                                users ? users.map((user) => (
-                                    <TableRow key={user.id}>
-                                        <TableCell>{user.id}</TableCell>
-                                        <TableCell>{user.name}</TableCell>
-                                        <TableCell>{user.email}</TableCell>
-                                        <TableCell>{user.user_job_title.name}</TableCell>
-                                        <TableCell>{user.user_role.name}</TableCell>
-                                        <TableCell><button button-type="icon" onClick={() => { handleShowForm(user.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
-                                    </TableRow>
-                                )) :
-                                    <TableRow key='no-users-row'>
-                                        <TableCell colSpan={7}><h6>No hay usuarios</h6></TableCell>
-                                    </TableRow>
-                            }
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <Pagination
-                    shape="circular"
-                    page={currentPage}
-                    count={pagination.total}
-                    color='primary'
-                    onChange={(event, newPage) => setCurrentPage(newPage)}
-                    size="large"
-                />
-            </section >
+            </div>
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Id</TableCell>
+                            <TableCell>Nombre</TableCell>
+                            <TableCell>Email</TableCell>
+                            <TableCell>Cargo</TableCell>
+                            <TableCell>Role</TableCell>
+                            <TableCell>Editar</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {
+                            users ? users.map((user) => (
+                                <TableRow key={user.id}>
+                                    <TableCell>{user.id}</TableCell>
+                                    <TableCell>{user.name}</TableCell>
+                                    <TableCell>{user.email}</TableCell>
+                                    <TableCell>{user.user_job_title.name}</TableCell>
+                                    <TableCell>{user.user_role.name}</TableCell>
+                                    <TableCell><button button-type="icon" onClick={() => { handleShowForm(user.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
+                                </TableRow>
+                            )) :
+                                <TableRow key='no-users-row'>
+                                    <TableCell colSpan={7}><h6>No hay usuarios</h6></TableCell>
+                                </TableRow>
+                        }
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <Pagination
+                shape="circular"
+                page={currentPage}
+                count={pagination.total}
+                color='primary'
+                onChange={(event, newPage) => setCurrentPage(newPage)}
+                size="large"
+            />
             <Dialog open={showModal}>
                 {showModal && <UsersForm id={id} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess() }} />}
             </Dialog>

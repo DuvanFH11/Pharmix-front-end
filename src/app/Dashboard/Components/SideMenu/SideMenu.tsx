@@ -6,6 +6,11 @@ import { Link } from "react-router-dom";
 import { index } from "../../../../services/category.service";
 import { useHandleFormAccess } from "../../../../hooks/useHandleFormsAccess";
 import LogoutIcon from '@mui/icons-material/Logout';
+import RoofingOutlinedIcon from '@mui/icons-material/RoofingOutlined';
+import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
+import InventoryOutlinedIcon from '@mui/icons-material/InventoryOutlined';
+import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 export interface SideMenuProps {
     isOpen: boolean;
@@ -17,8 +22,6 @@ interface CategoryInterfaces {
     path: string;
     table_name: string;
 }
-
-
 const SideMenu = ({ isOpen, handleClose }: SideMenuProps,) => {
 
     const { handleLogout, isLoading, alertMessage } = useHandleFormAccess();
@@ -51,26 +54,29 @@ const SideMenu = ({ isOpen, handleClose }: SideMenuProps,) => {
 
             <nav className={style.sideMenu} data-open={showMenu}>
                 <div className={style.menuContainer}>
-                    <h4 className={style.subtitle}>Inicio</h4>
+                    <h5 className={style.subtitle}>Dashboard</h5>
                     <ul className={style.listActions}>
-                        <Link to='/dashboard/content' onClick={handleClose}><p className={style.actionItems}>Dashboard</p></Link>
+                        <Link className={style.itemsContent} to='/dashboard/' onClick={handleClose}><RoofingOutlinedIcon /><p className={style.actionItems}>Home</p></Link>
+                        <Link className={style.itemsContent} to='/dashboard/request' onClick={handleClose}><InsertDriveFileOutlinedIcon /><p className={style.actionItems}>Pedidos</p></Link>
+                        <Link className={style.itemsContent} to='/dashboard/inventory' onClick={handleClose}><InventoryOutlinedIcon /><p className={style.actionItems}>Inventario</p></Link>
+                        <Link className={style.itemsContent} to='/dashboard/invoices' onClick={handleClose}><Inventory2OutlinedIcon /><p className={style.actionItems}>Facturas</p></Link>
                     </ul>
                 </div>
                 <div className={style.menuContainer}>
-                    <h4 className={style.subtitle}>Gestionar</h4>
+                    <h5 className={style.subtitle}>Gestionar</h5>
                     <ul className={style.listActions}>
                         {
                             categories ? categories.map((category) => (
-                                <Link key={category.id} to={`${category.path}`} onClick={handleClose}><p className={style.actionItems}>{category.name}</p></Link>
+                                <Link className={style.itemsContent} key={category.id} to={`${category.path}`} onClick={handleClose}><p className={style.actionItems}>{category.name}</p></Link>
                             ))
                                 : <span>No hay categorías para mostrar</span>
                         }
                     </ul>
                 </div >
                 <div className={style.menuContainer}>
-                    <h4 className={style.subtitle}>Ajustes</h4>
+                    <h5 className={style.subtitle}>Ajustes</h5>
                     <ul className={style.listActions}>
-                        <Link to='profile_page' onClick={handleClose}><p className={style.actionItems}>Perfil</p></Link>
+                        <Link className={style.itemsContent} to='profile_page' onClick={handleClose}><AccountCircleOutlinedIcon /><p className={style.actionItems}>Perfil</p></Link>
                     </ul>
                 </div>
                 <div className={style.menuContainer}>

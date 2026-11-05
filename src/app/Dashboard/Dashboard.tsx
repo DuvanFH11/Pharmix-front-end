@@ -19,7 +19,9 @@ const Dashboard = () => {
 
             {/* Main Content */}
             <main>
-                <Outlet />
+                <section className="section__">
+                    <Outlet />
+                </section>
             </main>
 
             {/* Footer */}

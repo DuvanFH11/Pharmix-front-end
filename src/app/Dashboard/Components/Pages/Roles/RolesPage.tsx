@@ -51,63 +51,61 @@ const RolesPage = () => {
         <>
             {isLoading && <LoadingComponent />}
             {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
-            <section className="section__">
-                <div className={style.pagesContainer} data-title="true">
-                    <h1>Roles</h1>
+            <div className={style.pagesContainer} data-title="true">
+                <h1>Roles</h1>
+            </div>
+            <div className={style.pagesContainer} data-container-buttons="true">
+                <button button-type="primary" onClick={() => { handleShowForm(undefined) }}>
+                    <NoteAdd />
+                    <span>Agregar Rol</span>
+                </button>
+                <div className={style.pagesInputSearch}>
+                    <SearchIcon />
+                    <input
+                        type="search"
+                        placeholder="Buscar código"
+                        onChange={(e) => setTerm(e.target.value)}
+                    />
                 </div>
-                <div className={style.pagesContainer} data-container-buttons="true">
-                    <button button-type="primary" onClick={() => { handleShowForm(undefined) }}>
-                        <NoteAdd />
-                        <span>Agregar Rol</span>
-                    </button>
-                    <div className={style.pagesInputSearch}>
-                        <SearchIcon />
-                        <input
-                            type="search"
-                            placeholder="Buscar código"
-                            onChange={(e) => setTerm(e.target.value)}
-                        />
-                    </div>
-                </div>
-                <TableContainer>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Id</TableCell>
-                                <TableCell>Código</TableCell>
-                                <TableCell>Nombre</TableCell>
-                                <TableCell>Descripción</TableCell>
-                                <TableCell>Editar</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {
-                                roles ? roles.map((role) => (
-                                    <TableRow key={role.id}>
-                                        <TableCell>{role.id}</TableCell>
-                                        <TableCell>{role.code}</TableCell>
-                                        <TableCell>{role.name}</TableCell>
-                                        <TableCell>{role.description}</TableCell>
-                                        <TableCell><button button-type="icon" onClick={() => { handleShowForm(role.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
-                                    </TableRow>
-                                )) : (
-                                    <TableRow key="no-role-row">
-                                        <TableCell colSpan={5}><h6>No hay roles</h6></TableCell>
-                                    </TableRow>
-                                )
-                            }
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <Pagination
-                    shape="circular"
-                    page={currentPage}
-                    count={pagination.total}
-                    color='primary'
-                    onChange={(event, newPage) => setCurrentPage(newPage)}
-                    size="large"
-                />
-            </section>
+            </div>
+            <TableContainer>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Id</TableCell>
+                            <TableCell>Código</TableCell>
+                            <TableCell>Nombre</TableCell>
+                            <TableCell>Descripción</TableCell>
+                            <TableCell>Editar</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {
+                            roles ? roles.map((role) => (
+                                <TableRow key={role.id}>
+                                    <TableCell>{role.id}</TableCell>
+                                    <TableCell>{role.code}</TableCell>
+                                    <TableCell>{role.name}</TableCell>
+                                    <TableCell>{role.description}</TableCell>
+                                    <TableCell><button button-type="icon" onClick={() => { handleShowForm(role.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
+                                </TableRow>
+                            )) : (
+                                <TableRow key="no-role-row">
+                                    <TableCell colSpan={5}><h6>No hay roles</h6></TableCell>
+                                </TableRow>
+                            )
+                        }
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <Pagination
+                shape="circular"
+                page={currentPage}
+                count={pagination.total}
+                color='primary'
+                onChange={(event, newPage) => setCurrentPage(newPage)}
+                size="large"
+            />
             <Dialog open={showModal}>
                 {showModal && <RolesForm id={id} handleClose={() => { setShowModal(false) }} handleSuccess={() => { showSuccess() }} />}
             </Dialog>
