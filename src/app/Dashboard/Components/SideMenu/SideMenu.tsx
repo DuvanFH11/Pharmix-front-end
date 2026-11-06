@@ -56,12 +56,6 @@ const SideMenu = ({ isOpen, handleClose }: SideMenuProps,) => {
                         <Link className={style.itemsContent} to='products_page' onClick={handleClose}><LocalOfferOutlinedIcon /><p className={style.actionItems}>Productos</p></Link>
                         <Link className={style.itemsContent} to='roles_page' onClick={handleClose}><KeyOutlinedIcon /><p className={style.actionItems}>Roles</p></Link>
                         <Link className={style.itemsContent} to='job_titles_page' onClick={handleClose}><BusinessCenterOutlinedIcon /><p className={style.actionItems}>Cargos</p></Link>
-                        {/* {
-                            categories ? categories.map((category) => (
-                                <Link className={style.itemsContent} key={category.id} to={`${category.path}`} onClick={handleClose}><p className={style.actionItems}>{category.name}</p></Link>
-                            ))
-                                : <span>No hay categorías para mostrar</span>
-                        } */}
                     </ul>
                 </div >
                 <div className={style.menuContainer}>
