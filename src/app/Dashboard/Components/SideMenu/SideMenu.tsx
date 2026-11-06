@@ -52,10 +52,10 @@ const SideMenu = ({ isOpen, handleClose }: SideMenuProps,) => {
                 <div className={style.menuContainer}>
                     <h5 className={style.subtitle}>Gestión</h5>
                     <ul className={style.listActions}>
-                        <Link className={style.itemsContent} to='users_page'><GroupOutlinedIcon /><p className={style.actionItems}>Usuarios</p></Link>
-                        <Link className={style.itemsContent} to='products_page'><LocalOfferOutlinedIcon /><p className={style.actionItems}>Productos</p></Link>
-                        <Link className={style.itemsContent} to='roles_page'><KeyOutlinedIcon /><p className={style.actionItems}>Roles</p></Link>
-                        <Link className={style.itemsContent} to='job_titles_page'><BusinessCenterOutlinedIcon /><p className={style.actionItems}>Cargos</p></Link>
+                        <Link className={style.itemsContent} to='users_page' onClick={handleClose}><GroupOutlinedIcon /><p className={style.actionItems}>Usuarios</p></Link>
+                        <Link className={style.itemsContent} to='products_page' onClick={handleClose}><LocalOfferOutlinedIcon /><p className={style.actionItems}>Productos</p></Link>
+                        <Link className={style.itemsContent} to='roles_page' onClick={handleClose}><KeyOutlinedIcon /><p className={style.actionItems}>Roles</p></Link>
+                        <Link className={style.itemsContent} to='job_titles_page' onClick={handleClose}><BusinessCenterOutlinedIcon /><p className={style.actionItems}>Cargos</p></Link>
                         {/* {
                             categories ? categories.map((category) => (
                                 <Link className={style.itemsContent} key={category.id} to={`${category.path}`} onClick={handleClose}><p className={style.actionItems}>{category.name}</p></Link>
