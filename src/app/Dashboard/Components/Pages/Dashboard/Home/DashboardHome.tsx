@@ -1,6 +1,6 @@
 import { Badge } from "@mui/material";
 import { LineChart } from '@mui/x-charts/LineChart'
-import style from "./dashboardhome.module.css";
+import style from "./dashboard.home.module.css";
 import { useState } from "react";
 
 const DashboardHome = () => {
@@ -14,8 +14,6 @@ const DashboardHome = () => {
             setDataMonths([180, 160, 120, 200, 500, 120, 114, 80, 114, 800, 126, 123]);
         }
     }
-
-
     return (
         <>
             {/* SECCIÓN 1 DEL CONTENIDO DEL DASHBOARD */}
@@ -69,6 +67,7 @@ const DashboardHome = () => {
                                 data: dataMonths,
                                 label: 'Cantidad de pedidos realizados y exitosos.',
                                 color: '#041f50',
+                                curve: 'linear',
                                 showMark: true
                             }
                         ]}

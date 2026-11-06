@@ -52,80 +52,78 @@ const ProductsPage = () => {
             {isLoading && <LoadingComponent />}
             {alertMessage && <AlertMessage message={alertMessage.message} success={alertMessage.success} time={alertMessage.time} />}
 
-            <section className="section__">
-                <div className={style.pagesContainer} data-title="true">
-                    <h1>Productos</h1>
+            <div className={style.pagesContainer} data-title="true">
+                <h1>Productos</h1>
+            </div>
+            <div className={style.pagesContainer} data-container-buttons="true">
+                <button button-type="primary" onClick={() => { handleShowForm(undefined) }}>
+                    <NoteAdd />
+                    <span>Agregar producto</span>
+                </button>
+                <div className={style.pagesInputSearch}>
+                    <SearchIcon />
+                    <input
+                        type="search"
+                        placeholder="Buscar nombre o registro"
+                        onChange={(e) => setTerm(e.target.value)}
+                    />
                 </div>
-                <div className={style.pagesContainer} data-container-buttons="true">
-                    <button button-type="primary" onClick={() => { handleShowForm(undefined) }}>
-                        <NoteAdd />
-                        <span>Agregar producto</span>
-                    </button>
-                    <div className={style.pagesInputSearch}>
-                        <SearchIcon />
-                        <input
-                            type="search"
-                            placeholder="Buscar nombre o registro"
-                            onChange={(e) => setTerm(e.target.value)}
-                        />
-                    </div>
-                </div>
-                <TableContainer component={Paper}>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Id</TableCell>
-                                <TableCell>Nombre</TableCell>
-                                <TableCell>Laboratorio</TableCell>
-                                <TableCell>Precio Unidad</TableCell>
-                                <TableCell>Precio Paquete</TableCell>
-                                <TableCell>Registro Invima</TableCell>
-                                <TableCell>Pricipio Activo</TableCell>
-                                <TableCell>Editar</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {
-                                products ? products.map((product) => (
-                                    <TableRow key={product.id}>
-                                        <TableCell>{product.id}</TableCell>
-                                        <TableCell>{product.name}</TableCell>
-                                        <TableCell>{product.brand}</TableCell>
-                                        <TableCell>
-                                            {new Intl.NumberFormat('es-CO', {
-                                                style: 'currency',
-                                                currency: 'COP',
-                                                minimumFractionDigits: 0
-                                            }).format(product.unit_price)}
-                                        </TableCell>
-                                        <TableCell>
-                                            {new Intl.NumberFormat('es-CO', {
-                                                style: 'currency',
-                                                currency: 'COP',
-                                                minimumFractionDigits: 0
-                                            }).format(product.package_price)}
-                                        </TableCell>
-                                        <TableCell>{product.invima_registration}</TableCell>
-                                        <TableCell>{Number(product.strength)}{product.unit}</TableCell>
-                                        <TableCell><button button-type="icon" onClick={() => { handleShowForm(product.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
-                                    </TableRow>
-                                )) :
-                                    <TableRow key="no-products-row">
-                                        <TableCell colSpan={9}><h6>No hay productos</h6></TableCell>
-                                    </TableRow>
-                            }
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <Pagination
-                    shape="circular"
-                    page={currentPage}
-                    count={pagination.total}
-                    color='primary'
-                    onChange={(event, newPage) => setCurrentPage(newPage)}
-                    size="large"
-                />
-            </section >
+            </div>
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Id</TableCell>
+                            <TableCell>Nombre</TableCell>
+                            <TableCell>Laboratorio</TableCell>
+                            <TableCell>Precio Unidad</TableCell>
+                            <TableCell>Precio Paquete</TableCell>
+                            <TableCell>Registro Invima</TableCell>
+                            <TableCell>Pricipio Activo</TableCell>
+                            <TableCell>Editar</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {
+                            products ? products.map((product) => (
+                                <TableRow key={product.id}>
+                                    <TableCell>{product.id}</TableCell>
+                                    <TableCell>{product.name}</TableCell>
+                                    <TableCell>{product.brand}</TableCell>
+                                    <TableCell>
+                                        {new Intl.NumberFormat('es-CO', {
+                                            style: 'currency',
+                                            currency: 'COP',
+                                            minimumFractionDigits: 0
+                                        }).format(product.unit_price)}
+                                    </TableCell>
+                                    <TableCell>
+                                        {new Intl.NumberFormat('es-CO', {
+                                            style: 'currency',
+                                            currency: 'COP',
+                                            minimumFractionDigits: 0
+                                        }).format(product.package_price)}
+                                    </TableCell>
+                                    <TableCell>{product.invima_registration}</TableCell>
+                                    <TableCell>{Number(product.strength)}{product.unit}</TableCell>
+                                    <TableCell><button button-type="icon" onClick={() => { handleShowForm(product.id) }}><ModeEditOutlineRoundedIcon /></button></TableCell>
+                                </TableRow>
+                            )) :
+                                <TableRow key="no-products-row">
+                                    <TableCell colSpan={9}><h6>No hay productos</h6></TableCell>
+                                </TableRow>
+                        }
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <Pagination
+                shape="circular"
+                page={currentPage}
+                count={pagination.total}
+                color='primary'
+                onChange={(event, newPage) => setCurrentPage(newPage)}
+                size="large"
+            />
             <Dialog open={showModal}>
                 {showModal && <ProductsForm id={id} handleClose={() => setShowModal(false)} handleSuccess={() => showSuccess()} />}
             </Dialog>
