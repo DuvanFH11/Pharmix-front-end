@@ -17,9 +17,11 @@
 .formsSubContainer{
     margin: 5px;
 }
-.formsContainer[data-container-buttons="true"]{
+.formsContainer[container-type="buttons"]{
     display:flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: flex-end;
+    
 }
 .formsContainer[data-container-duo="true"]{
     display:flex;
