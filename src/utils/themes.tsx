@@ -190,7 +190,7 @@ const themes = createTheme({
                     width: '100%',
                     color: '#0f172a',
                     fontStyle: 'normal',
-                    textAlign: 'left'
+                    textAlign: 'center'
                 },
                 icon: {
                     color: '#64748b'
