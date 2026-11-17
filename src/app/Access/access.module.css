@@ -1,26 +1,86 @@
-.access{
-    padding: 50px;
-    margin : 20px;
-    box-shadow: 0px 10px 20px 0px #888585;
-    border: 1px solid var(--primary-color);
-}
-.accessContainer{
-    padding: 10px;
-    margin: 10px;
-}
-.accessContainer[data-container-btn="true"]{
-    display: flex;
-    flex-direction: column;
+.access {
+    position: relative;
+    width: min(92vw, 420px);
+    max-width: 420px;
+    padding: 44px 40px 36px;
+    margin: 20px;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(14px);
+    animation: accessRise 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@media(max-width:480px){
-    .access{
-        border: none;
-        margin:10px;
-        padding:20px;
-        width: 270px;
+.access::before {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 5px;
+    content: "";
+    background-image: linear-gradient(90deg, #0f766e, #14b8a6, #2563eb);
+}
+
+.access h1 {
+    margin-bottom: 4px;
+    color: var(--primary-color);
+    font-size: clamp(1.9rem, 4vw, 2.4rem);
+    letter-spacing: 0.08em;
+}
+
+.access h3 {
+    margin-bottom: 18px;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    font-weight: 500;
+}
+
+.accessContainer {
+    padding: 0;
+    margin: 0 0 14px;
+}
+
+.accessContainer:first-child {
+    margin-bottom: 22px;
+    text-align: center;
+}
+
+.accessContainer[data-container-btn="true"] {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+}
+
+.accessContainer[data-container-btn="true"] button {
+    justify-content: center;
+    width: 100%;
+    padding: 0.85rem 1rem;
+}
+
+.accessContainer[data-container-btn="true"] svg {
+    font-size: 1.4rem;
+}
+
+@keyframes accessRise {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.985);
     }
-    .accessContainer{
-        margin: 5px;
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 480px) {
+    .access {
+        padding: 32px 22px 26px;
+        margin: 12px;
+        border-radius: 20px;
+    }
+
+    .accessContainer {
+        margin-bottom: 12px;
     }
 }
