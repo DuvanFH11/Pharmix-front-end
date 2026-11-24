@@ -1,0 +1,58 @@
+.inventoryContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 780px;
+}
+
+.inventoryContainer h1 {
+    margin-bottom: 10px;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+}
+
+.inventoryContainer h1::after {
+    display: block;
+    width: 52px;
+    height: 4px;
+    margin-top: 8px;
+    content: "";
+    background-image: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: 999px;
+}
+
+.inventoryContainer h2,
+.inventoryContainer h3,
+.inventoryContainer h4,
+.inventoryContainer h5,
+.inventoryContainer h6 {
+    padding: 14px 18px;
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 600;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: border-color 200ms ease, transform 200ms ease;
+}
+
+.inventoryContainer h2:hover,
+.inventoryContainer h3:hover,
+.inventoryContainer h4:hover,
+.inventoryContainer h5:hover,
+.inventoryContainer h6:hover {
+    border-color: rgba(15, 118, 110, 0.3);
+    transform: translateX(3px);
+}
+
+@media (max-width: 480px) {
+    .inventoryContainer h2,
+    .inventoryContainer h3,
+    .inventoryContainer h4,
+    .inventoryContainer h5,
+    .inventoryContainer h6 {
+        padding: 12px 14px;
+    }
+}

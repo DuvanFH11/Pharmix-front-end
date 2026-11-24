@@ -121,7 +121,7 @@ const ProductsPage = () => {
                 page={currentPage}
                 count={pagination.total}
                 color='primary'
-                onChange={(event, newPage) => setCurrentPage(newPage)}
+                onChange={(_event, newPage) => setCurrentPage(newPage)}
                 size="large"
             />
             <Dialog open={showModal}>

@@ -1,6 +1,8 @@
+import style from "./dashboard.inventory.module.css";
+
 const DashboardInventory = () => {
     return (
-        <>
+        <div className={style.inventoryContainer}>
             <h1>Inventario</h1>
             <h2>Total productos</h2>
             <h3>Total tipos de productos</h3>
@@ -13,7 +15,7 @@ const DashboardInventory = () => {
 
 
 
-        </>
+        </div>
     )
 }
 export default DashboardInventory; 

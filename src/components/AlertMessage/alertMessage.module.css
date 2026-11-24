@@ -1,39 +1,59 @@
 @keyframes aparecer {
     0% {
         opacity: 0;
-        transform: translateX(200px);
+        transform: translate3d(24px, -8px, 0) scale(0.98);
     }
 
     100% {
         opacity: 1;
-        transform: translateX(0px)
+        transform: translate3d(0, 0, 0) scale(1);
     }
 }
 
 @keyframes desaparecer {
-    100% {
-        opacity: 0;
-        transform: translateX(200px);
-    }
-
     0% {
         opacity: 1;
-        transform: translateX(0px);
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate3d(24px, -8px, 0) scale(0.98);
     }
 }
-.alertMessage{
-    top: 50px;
+
+.alertMessage {
     position: fixed;
-    padding: 20px;
-    color: var(--secondary-color);
+    top: 24px;
+    right: 24px;
     z-index: 14000;
-    right: 0px;
+    max-width: min(360px, calc(100vw - 32px));
+    padding: 14px 20px;
+    color: #ffffff;
+    font-weight: 500;
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(0, 0, 0, 0.12));
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
 }
 
-.alertMessage[data-open="target-on"]{
-    animation: aparecer 1s ease-in-out 0s forwards;
+.alertMessage p {
+    margin: 0;
 }
 
-.alertMessage[data-open="target-off"]{
-    animation: desaparecer 1s ease-in-out 0s forwards;
+.alertMessage[data-open="target-on"] {
+    animation: aparecer 450ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.alertMessage[data-open="target-off"] {
+    animation: desaparecer 350ms ease-in forwards;
+}
+
+@media (max-width: 480px) {
+    .alertMessage {
+        top: 16px;
+        right: 16px;
+        left: 16px;
+        max-width: none;
+        text-align: center;
+    }
 }

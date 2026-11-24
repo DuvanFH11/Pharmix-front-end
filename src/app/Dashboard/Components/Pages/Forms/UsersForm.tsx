@@ -106,9 +106,9 @@ const UsersForm = ({ id, handleClose, handleSuccess }: FormsProps) => {
                         />
                     </FormControl>
                 </div>
-                <div className={style.formsContainer} data-container-buttons="true">
-                    <button type="submit" className={style.formsSubmit} button-type="primary" >{id ? 'Modificar' : 'Crear'}</button>
+                <div className={style.formsContainer} container-type="buttons">
                     <button type="button" className={style.formsExit} button-type="ghost" onClick={handleClose}>Cerrar</button>
+                    <button type="submit" className={style.formsSubmit} button-type="primary" >{id ? 'Modificar' : 'Crear'}</button>
                 </div>
             </form>
         </>

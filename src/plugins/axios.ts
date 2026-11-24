@@ -11,7 +11,7 @@ const api = axios.create({
 });
 
 export const tokenCSRF = async (): Promise<void> => {
-    const response = await axios.get('http://localhost:8000/sanctum/csrf-cookie');
+    await axios.get('http://localhost:8000/sanctum/csrf-cookie');
 }
 
 export default api;

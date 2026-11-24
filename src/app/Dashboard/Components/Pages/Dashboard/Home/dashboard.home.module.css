@@ -1,64 +1,119 @@
-.dashboardContainer{
-    margin: 10px 0px 10px 0px;
+.dashboardContainer {
+    margin: 0 0 20px;
 }
-.dashboardContainer[section-number="1"]{
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 10px;
-    row-gap: 10px;
-}
-.dashboardContainer[section-number="2"]{
-    display:flex;
-    flex-direction: row;
-    column-gap: 10px;
-    row-gap: 10px;
-}
-.dashboardContainer[section-number="2"]>:first-child{flex:1}
 
-.dashboardContent{
-    background-color: var(--secondary-color);
-    padding: 20px;
-    border-radius: 10px;
-    text-align: left;
+.dashboardContainer[section-number="1"] {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+}
+
+.dashboardContainer[section-number="2"] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: flex-start;
+}
+
+.dashboardContainer[section-number="2"]>:first-child {
+    flex: 1 1 560px;
+    min-width: 0;
+}
+
+.dashboardContainer[section-number="2"]>button {
+    align-self: center;
+}
+
+.dashboardContent {
+    display: flex;
+    flex-direction: column;
+    padding: 22px;
     color: var(--text-color);
-    
-    transition: all 250ms ease-in;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
 }
-.dashboardContent[section-number="1"]:hover{
-    transform: translateY(-5px);
-    box-shadow: 0px 30px 30px 10px rgba(0, 0, 0, 0.12), 0px 20px 30px 10px rgba(0, 0, 0, 0.12);
-}
-.dashboardContent[section-number="1"]{
-    max-height: 250px;
-    overflow-y: scroll; 
-}
-.dashboardContent>:first-child{text-align: center;}
-/* ESTILOS DEL CONTENIDO */
-.dashboardListItem{
-    display:flex;
-    padding: 0px 10px 0px 10px;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: var(--font-family-semibold);
-}
-.dashboardCountUsers{
-    font-style: italic;
-    font-size: 5rem;
+
+.dashboardContent>:first-child {
     text-align: center;
-    font-weight: var(--font-family-semibold);
 }
-@media(max-width:768px){
-    .dashboardContainer[section-number="1"]{
-        grid-template-columns: repeat(2, 1fr);
+
+.dashboardContent h3 {
+    margin-bottom: 14px;
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.dashboardContent[section-number="1"] {
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.dashboardContent[section-number="1"]:hover {
+    border-color: rgba(15, 118, 110, 0.3);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+}
+
+.dashboardContent[section-number="2"] {
+    padding: 24px;
+}
+
+.dashboardContent[section-number="2"] h3 {
+    color: var(--text-color);
+    font-size: 1.05rem;
+    text-align: left;
+}
+
+/* ESTILOS DEL CONTENIDO */
+.dashboardListItem {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: background-color 200ms ease;
+}
+
+.dashboardListItem+.dashboardListItem {
+    margin-top: 4px;
+}
+
+.dashboardListItem:hover {
+    background-color: var(--tercery-background-color);
+}
+
+.dashboardCountUsers {
+    margin: auto 0;
+    color: var(--primary-color);
+    font-size: clamp(3.2rem, 7vw, 5rem);
+    font-weight: 800;
+    line-height: 1;
+    text-align: center;
+    letter-spacing: -0.04em;
+}
+
+@media (max-width: 768px) {
+    .dashboardContainer[section-number="1"] {
+        grid-template-columns: 1fr;
     }
-    .dashboardContainer[section-number="2"]{
+
+    .dashboardContainer[section-number="2"] {
         flex-direction: column;
     }
+
+    .dashboardContainer[section-number="2"]>:first-child {
+        width: 100%;
+    }
 }
 
-@media(max-width: 480px){
-    .dashboardContainer[section-number="1"]{
-        grid-template-columns: repeat(1, 1fr);    
+@media (max-width: 480px) {
+    .dashboardContent {
+        padding: 18px;
     }
 }
